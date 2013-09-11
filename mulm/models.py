@@ -8,10 +8,8 @@ Created on Tue Jun 25 13:25:41 2013
 import scipy
 import numpy as np
 from sklearn.utils import safe_asarray
-from mulm.ols import ols_stats_tcon
-from mulm.ols import ols_stats_fcon
-from mulm.ols import ols
-
+from sklearn.utils import array2d
+from scipy import stats
 
 class MUOLS:
     """Mass-univariate linear modeling based Ordinary Least Squares.
@@ -165,21 +163,24 @@ from epac.configuration import conf
 
 
 class MULMColSlicer(Slicer):
-    """Row-wise reslicing of the downstream blocs.
-
-    Parameters
-    ----------
-    name: string
-
-    apply_on: string or list of strings (or None)
-        The name(s) of the downstream blocs to be rescliced. If
-        None, all downstream blocs are rescliced.
+    """Collum-sampling for mulm
     """
 
     def __init__(self, signature_name, nb, apply_on):
+        """
+        Parameters
+        ----------
+        signature_name: string
+
+        nb: integer
+            nb is used for the key value that distinguishs thier sibling node
+
+        apply_on: string or list of strings (or None)
+            The name(s) of the downstream blocs to be re-slicing. If
+            None, all downstream blocs are sampling (slicing).
+        """
         super(self.__class__, self).__init__(signature_name, nb)
         self.slices = None
-        self.n = 0  # the dimension of that array in ds should respect
         if not apply_on:  # None is an acceptable value here
             self.apply_on = apply_on
         elif isinstance(apply_on, list):
@@ -191,16 +192,16 @@ class MULMColSlicer(Slicer):
                 "list of strings or None")
 
     def set_sclices(self, slices):
+        """
+        """
         # convert as a list if required
         if isinstance(slices, dict):
             self.slices =\
                 {k: slices[k].tolist() if isinstance(slices[k], np.ndarray)
                 else slices[k] for k in slices}
-            self.n = np.sum([len(v) for v in self.slices.values()])
         else:
             self.slices = \
                 slices.tolist() if isinstance(slices, np.ndarray) else slices
-            self.n = len(self.slices)
 
     def transform(self, **Xy):
         if not self.slices:
@@ -226,29 +227,15 @@ class MULM(BaseNodeSplitter):
         Estimator: should implement fit/predict/score function
         Node: Pipe | Par*
 
-    n_folds: int
-        Number of folds. (Default 5)
+    x_group_indices: integer list
+        gourp index of X matrix
 
-    cv_type: string
-        Values: "stratified", "random", "loo". Default "stratified".
-
-    random_state : int or RandomState
-        Pseudo-random number generator state used for random sampling.
-
-    reducer: Reducer
-        A Reducer should implement the reduce(node, key2, val) method.
-        Default ClassificationReport() with default arguments.
-    
-    Example
-    -------
-    >>> from sklearn import datasets
-    >>> from sklearn.svm import SVC
-    >>> from epac import Methods
-    >>> from epac.workflow.splitters import CVBestSearchRefitParallel
+    y_group_indices: integer list
+        gourp index of Y matrix
 
     """
 
-    def __init__(self, node, x_group_indices, y_group_indices, **kwargs):
+    def __init__(self, node, x_group_indices, y_group_indices):
         super(self.__class__, self).__init__()
 
         self.x_group_indices = x_group_indices
@@ -257,13 +244,11 @@ class MULM(BaseNodeSplitter):
             signature_name=self.__class__.__name__,\
             nb=0,\
             apply_on=None)
-
         self.x_uni_group_indices = set(x_group_indices)
         self.y_uni_group_indices = set(y_group_indices)
         size = len(self.x_uni_group_indices) * len(self.y_uni_group_indices)
         self.children = VirtualList(size=size, parent=self)
         self.slicer.parent = self
-
         subtree = NodeFactory.build(node)
         # subtree = node if isinstance(node, BaseNode) else LeafEstimator(node)
         self.slicer.add_child(subtree)
@@ -311,6 +296,7 @@ if __name__ == "__main__":
     from sklearn.svm import SVC
     from epac import Methods
     from epac.workflow.splitters import CVBestSearchRefitParallel
+    from epac.map_reduce.engine import LocalEngine
 
     n_samples = 10
     n_xfeatures = 20
@@ -326,68 +312,14 @@ if __name__ == "__main__":
         for i in xrange(n_yfeatures)])
 
     mulm = MULM(MUOLS(), x_group_indices, y_group_indices)
-    ret_XY = mulm.run(X=X, Y=Y)
-    print "==================ret_XY======================"
-    print ret_XY
+    # mulm.run(X=X, Y=Y)
+    
+    local_engine = LocalEngine(tree_root=mulm, num_processes=2)
+    mulm = local_engine.run(X=X, Y=Y)
+
     for leaf in mulm.walk_leaves():
         print "===============leaf.load_results()================="
         print "key =", leaf.get_key()
         print leaf.load_results()
 
-#class OLSRegression:
-#    def __init__(self):
-#        pass
-#
-#    def transform(self, Y, y_group_indices, X, x_group_indices):
-#        """
-#
-#        Example
-#        -------
-#        import numpy as np
-#        import random
-#        from mulm.models import OLSRegression
-#        n_samples = 10
-#        n_xfeatures = 20
-#        n_yfeatures = 15
-#        x_n_groups = 3
-#        y_n_groups = 2
-#
-#        X = np.random.randn(n_samples, n_xfeatures)
-#        Y = np.random.randn(n_samples, n_yfeatures)
-#        x_group_indices = np.array([randint(0, x_n_groups)\
-#            for i in xrange(n_xfeatures)])
-#        y_group_indices = np.array([randint(0, y_n_groups)\
-#            for i in xrange(n_yfeatures)])
-#
-#        regression = OLSRegression()
-#        print regression.transform(Y, y_group_indices, X, x_group_indices)
-#
-#        """
-#        ret = {}
-#        y_uni_group_indices = set(y_group_indices)
-#        x_uni_group_indices = set(x_group_indices)
-#        for y_uni_group_index in y_uni_group_indices:
-#            for x_uni_group_index in x_uni_group_indices:
-#                if y_uni_group_index == -1 or x_uni_group_index == -1:
-#                    continue
-#                # y_uni_group_index = y_uni_group_indices.pop()
-#                # x_uni_group_index = x_uni_group_indices.pop()
-#                gY = Y[:, y_group_indices == y_uni_group_index]
-#                gX = X[:, x_group_indices == x_uni_group_index]
-#                betas, ss_errors = ols(gX, gY)
-#                contrast = np.zeros(gX.shape[1])
-#                contrast[0] = 1
-#                tp, t = ols_stats_tcon(gX, betas, ss_errors,\
-#                    contrast=contrast, pval=True)
-#                fp, f = ols_stats_fcon(gX, betas, ss_errors,\
-#                    contrast=contrast, pval=True)
-#                key = "gy_%s_gx_%s" % (y_uni_group_index, x_uni_group_index)
-#                key_t = key + "_t"
-#                key_tp = key + "_tp"
-#                key_f = key + "_f"
-#                key_fp = key + "_fp"
-#                ret[key_t] = t
-#                ret[key_tp] = tp
-#                ret[key_f] = f
-#                ret[key_fp] = fp
-#        return ret
+    
