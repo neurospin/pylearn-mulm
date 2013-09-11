@@ -51,18 +51,18 @@ def ols_stats_tcon(X, betas, ss_errors, contrast, pval=False):
     >>> p, t = mulm.ols_stats_tcon(X, betas, ss_errors, contrast=[1, 0, 0, 0, 0], pval=True)
     >>> p, f = mulm.ols_stats_fcon(X, betas, ss_errors, contrast=[1, 0, 0, 0, 0], pval=True)
     """
-    c = np.asarray(contrast)
+    ccontrast = np.asarray(contrast)
     n = X.shape[0]
     # t = c'beta / std(c'beta)
     # std(c'beta) = sqrt(var_err (c'X+)(X+'c))
     Xpinv = scipy.linalg.pinv(X)
-    cXpinv = np.dot(c, Xpinv)
+    cXpinv = np.dot(ccontrast, Xpinv)
     R = np.eye(n) - np.dot(X, Xpinv)
     df = np.trace(R)
     ## Broadcast over ss errors
     var_errors = ss_errors / df
     std_cbeta = np.sqrt(var_errors * np.dot(cXpinv, cXpinv.T))
-    t_stats = np.dot(c, betas) / std_cbeta
+    t_stats = np.dot(ccontrast, betas) / std_cbeta
     if not pval:
         return (t_stats, None)
     else:
