@@ -6,5 +6,7 @@ Created on Fri Jun 14 19:38:46 2013
 """
 
 from .models import MUOLS
+from .models import MUOLSStats
 
-__all__ = ['MUOLS']
+__all__ = ['MUOLS',
+           'MUOLSStats']
