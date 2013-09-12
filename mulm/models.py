@@ -162,8 +162,8 @@ from epac.workflow.factory import NodeFactory
 from epac.configuration import conf
 
 
-class MULMColSlicer(Slicer):
-    """Collum-sampling for mulm
+class ColumnSlicer(Slicer):
+    """Collum-sampling
     """
 
     def __init__(self, signature_name, nb, apply_on):
@@ -218,8 +218,8 @@ class MULMColSlicer(Slicer):
         return Xy
 
 
-class MULM(BaseNodeSplitter):
-    """Cross-validation parallelization.
+class ColumnSplitter(BaseNodeSplitter):
+    """Column Splitter parallelization.
 
     Parameters
     ----------
@@ -237,10 +237,9 @@ class MULM(BaseNodeSplitter):
 
     def __init__(self, node, x_group_indices, y_group_indices):
         super(self.__class__, self).__init__()
-
         self.x_group_indices = x_group_indices
         self.y_group_indices = y_group_indices
-        self.slicer = MULMColSlicer(
+        self.slicer = ColumnSlicer(
             signature_name=self.__class__.__name__,\
             nb=0,\
             apply_on=None)
@@ -288,10 +287,29 @@ class MULM(BaseNodeSplitter):
         return dict(n_folds=self.n_folds)
 
 
+class MUOLSStats:
+    def transform(self, X, Y):
+        #X = np.random.randn(100, 2)
+        #Y = np.hstack([np.dot(X, [1, 2])[:, np.newaxis], np.random.randn(100, 3)])
+        muols = MUOLS()
+        muols.fit(X, Y)
+        pvals = list()
+        tvals = list()
+        for j in xrange(X.shape[1]):
+            contrast = np.zeros(X.shape[1])
+            contrast[j] += 1
+            t, p = muols.t_stats(X, Y, contrast=contrast, pval=True)
+            tvals.append(t)
+            pvals.append(p)
+        pvals = np.asarray(pvals)
+        tvals = np.asarray(tvals)
+        # "transform" should return a dictionary
+        return {"tvals": tvals, "pvals": pvals}
+
 if __name__ == "__main__":
     import numpy as np
     import random
-    from mulm.models import MULM
+    from mulm.models import ColumnSplitter
     from sklearn import datasets
     from sklearn.svm import SVC
     from epac import Methods
@@ -308,10 +326,12 @@ if __name__ == "__main__":
     Y = np.random.randn(n_samples, n_yfeatures)
     x_group_indices = np.array([random.randint(0, x_n_groups)\
         for i in xrange(n_xfeatures)])
-    y_group_indices = np.array([random.randint(0, y_n_groups)\
-        for i in xrange(n_yfeatures)])
-
-    mulm = MULM(MUOLS(), x_group_indices, y_group_indices)
+#    y_group_indices = np.array([random.randint(0, y_n_groups)\
+#        for i in xrange(n_yfeatures)]) 
+    y_group_indices = np.zeros(n_yfeatures)
+    
+    # 1) Prediction for each X block return a n_samples x n_yfeatures
+    mulm = ColumnSplitter(MUOLS(), x_group_indices, y_group_indices)
     # mulm.run(X=X, Y=Y)
     
     local_engine = LocalEngine(tree_root=mulm, num_processes=2)
@@ -320,6 +340,16 @@ if __name__ == "__main__":
     for leaf in mulm.walk_leaves():
         print "===============leaf.load_results()================="
         print "key =", leaf.get_key()
-        print leaf.load_results()
-
+        tab = leaf.load_results()
+        print tab["MUOLS"]['Y/pred']
     
+    # 1) Prediction for each X block return a n_samples x n_yfeatures
+    mulm_stats = ColumnSplitter(MUOLSStats(), x_group_indices, y_group_indices)
+    #mulm_stats.run(X=X, Y=Y)
+    local_engine = LocalEngine(tree_root=mulm_stats, num_processes=2)
+    mulm_stats = local_engine.run(X=X, Y=Y)
+    for leaf in mulm_stats.walk_leaves():
+        print "===============leaf.load_results()================="
+        print "key =", leaf.get_key()
+        tab = leaf.load_results()
+        print tab["MUOLSStats"]
