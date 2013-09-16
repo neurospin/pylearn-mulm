@@ -5,11 +5,6 @@ Created on Tue Jun 25 13:25:41 2013
 @author: ed203246
 """
 
-import scipy
-import numpy as np
-from sklearn.utils import safe_asarray
-from sklearn.utils import array2d
-from scipy import stats
 
 class MUOLS:
     """Mass-univariate linear modeling based Ordinary Least Squares.
@@ -35,6 +30,9 @@ class MUOLS:
         self.coef_ = None
 
     def fit(self, X, Y):
+        from sklearn.utils import safe_asarray
+        import scipy
+        import numpy as np
         X = safe_asarray(X)
         Y = safe_asarray(Y)
         self.coef_ = np.dot(np.linalg.pinv(X), Y)
@@ -43,6 +41,8 @@ class MUOLS:
         return self
 
     def predict(self, X):
+        from sklearn.utils import safe_asarray
+        import numpy as np
         X = safe_asarray(X)
         pred_y = np.dot(X, self.coef_)
         return pred_y
@@ -86,6 +86,8 @@ class MUOLS:
         >>> p, t = mulm.ols_stats_tcon(X, betas, ss_errors, contrast=[1, 0, 0, 0, 0], pval=True)
         >>> p, f = mulm.ols_stats_fcon(X, betas, ss_errors, contrast=[1, 0, 0, 0, 0], pval=True)
         """
+        import scipy
+        from scipy import stats
         Ypred = self.predict(X)
         betas = self.coef_
         ss_errors = np.sum((Y - Ypred) ** 2, axis=0)
@@ -109,6 +111,10 @@ class MUOLS:
 
 
     def f_stats(self, X, Y, contrast, pval=False):
+        import numpy as np
+        from sklearn.utils import array2d
+        import scipy
+        from scipy import stats
         Ypred = self.predict(X)
         betas = self.coef_
         ss_errors = np.sum((Y - Ypred) ** 2, axis=0)
@@ -146,7 +152,7 @@ class MUOLS:
 class MURidgeLM:
     """Mass-univariate linear modeling based on Ridge regression.
     Fit independant Ridge models for each columns of Y."""
-    
+
     def __init__(self, **kwargs):
         self.coef_ = None
 
@@ -154,22 +160,26 @@ class MURidgeLM:
         pass
 
     def predict(self, X):
+        from sklearn.utils import safe_asarray
+        import numpy as np
         X = safe_asarray(X)
         return np.dot(X, self.coef_)
 
 
 class MUOLSStats:
+    def __init__(self):
+        self.muols = MUOLS()
     def transform(self, X, Y):
+        import numpy as np
         #X = np.random.randn(100, 2)
         #Y = np.hstack([np.dot(X, [1, 2])[:, np.newaxis], np.random.randn(100, 3)])
-        muols = MUOLS()
-        muols.fit(X, Y)
+        self.muols.fit(X, Y)
         pvals = list()
         tvals = list()
         for j in xrange(X.shape[1]):
             contrast = np.zeros(X.shape[1])
             contrast[j] += 1
-            t, p = muols.t_stats(X, Y, contrast=contrast, pval=True)
+            t, p = self.muols.t_stats(X, Y, contrast=contrast, pval=True)
             tvals.append(t)
             pvals.append(p)
         pvals = np.asarray(pvals)
@@ -177,12 +187,12 @@ class MUOLSStats:
         # "transform" should return a dictionary
         return {"tvals": tvals, "pvals": pvals}
 
+
 if __name__ == "__main__":
     import numpy as np
     import random
-    from epac import LocalEngine
+    from epac import LocalEngine, SomaWorkflowEngine
     from epac import ColumnSplitter
-    from mulm import MUOLS
     from mulm import MUOLSStats
 
 
@@ -203,8 +213,14 @@ if __name__ == "__main__":
     # 1) Prediction for each X block return a n_samples x n_yfeatures
     mulm = ColumnSplitter(MUOLS(), x_group_indices, y_group_indices)
     # mulm.run(X=X, Y=Y)
-    local_engine = LocalEngine(tree_root=mulm, num_processes=2)
-    mulm = local_engine.run(X=X, Y=Y)
+    # local_engine = LocalEngine(tree_root=mulm, num_processes=2)
+    # mulm = local_engine.run(X=X, Y=Y)
+
+    sfw_engine = SomaWorkflowEngine(tree_root=mulm,
+                                    num_processes=2,
+                                    remove_finished_wf=False,
+                                    remove_local_tree=False)
+    mulm = sfw_engine.run(X=X, Y=Y)
 
     for leaf in mulm.walk_leaves():
         print "===============leaf.load_results()================="
