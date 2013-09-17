@@ -7,6 +7,8 @@ Created on Fri Jun 14 19:38:46 2013
 
 from .models import MUOLS
 from .models import MUOLSStats
+from .models import MUOLSYR2
 
 __all__ = ['MUOLS',
-           'MUOLSStats']
+           'MUOLSStats',
+           'MUOLSYR2']

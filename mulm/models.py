@@ -188,13 +188,24 @@ class MUOLSStats:
         return {"tvals": tvals, "pvals": pvals}
 
 
+class MUOLSYR2:
+    def __init__(self):
+        self.muols = MUOLS()
+
+    def transform(self, X, Y):
+        import numpy as np
+        self.muols.fit(X, Y)
+        Ypred = self.muols.predict(X)
+        ss_errors = np.sum((Y - Ypred) ** 2, axis=0)
+        return {"r2": ss_errors}
+
+
 if __name__ == "__main__":
     import numpy as np
     import random
     from epac import LocalEngine, SomaWorkflowEngine
-    from epac import ColumnSplitter
-    from mulm import MUOLSStats
-
+    from epac import CRSplitter
+    from mulm import MUOLS, MUOLSStats, MUOLSYR2
 
     n_samples = 10
     n_xfeatures = 20
@@ -210,31 +221,29 @@ if __name__ == "__main__":
 #        for i in xrange(n_yfeatures)]) 
     y_group_indices = np.zeros(n_yfeatures)
 
-    # 1) Prediction for each X block return a n_samples x n_yfeatures
-    mulm = ColumnSplitter(MUOLS(), x_group_indices, y_group_indices)
-    # mulm.run(X=X, Y=Y)
-    # local_engine = LocalEngine(tree_root=mulm, num_processes=2)
-    # mulm = local_engine.run(X=X, Y=Y)
+#    # 1) Prediction for each X block return a n_samples x n_yfeatures
+#    mulm = CRSplitter(MUOLS(), {"X": x_group_indices})
+#    mulm.run(X=X, Y=Y)
+#    for leaf in mulm.walk_leaves():
+#        print "===============leaf.load_results()================="
+#        print "key =", leaf.get_key()
+#        tab = leaf.load_results()
+#        print tab["MUOLS"]['Y/pred']
 
-    sfw_engine = SomaWorkflowEngine(tree_root=mulm,
-                                    num_processes=2,
-                                    remove_finished_wf=False,
-                                    remove_local_tree=False)
-    mulm = sfw_engine.run(X=X, Y=Y)
+#    # 2) Prediction for each X block return a n_samples x n_yfeatures
+#    mulm_stats = CRSplitter(MUOLSStats(), {"X": x_group_indices})
+#    mulm_stats.run(X=X, Y=Y)
+#    for leaf in mulm_stats.walk_leaves():
+#        print "===============leaf.load_results()================="
+#        print "key =", leaf.get_key()
+#        tab = leaf.load_results()
+#        print tab["MUOLSStats"]
 
-    for leaf in mulm.walk_leaves():
+    # 3) Prediction for each X block return a n_samples x n_yfeatures
+    mulm_r2 = CRSplitter(MUOLSYR2(), {"X": x_group_indices})
+    mulm_r2.run(X=X, Y=Y)
+    for leaf in mulm_r2.walk_leaves():
         print "===============leaf.load_results()================="
         print "key =", leaf.get_key()
         tab = leaf.load_results()
-        print tab["MUOLS"]['Y/pred']
-
-    # 1) Prediction for each X block return a n_samples x n_yfeatures
-    mulm_stats = ColumnSplitter(MUOLSStats(), x_group_indices, y_group_indices)
-    mulm_stats.run(X=X, Y=Y)
-#    local_engine = LocalEngine(tree_root=mulm_stats, num_processes=2)
-#    mulm_stats = local_engine.run(X=X, Y=Y)
-    for leaf in mulm_stats.walk_leaves():
-        print "===============leaf.load_results()================="
-        print "key =", leaf.get_key()
-        tab = leaf.load_results()
-        print tab["MUOLSStats"]
+        print tab["MUOLSYR2"]
