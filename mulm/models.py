@@ -87,6 +87,7 @@ class MUOLS:
         >>> p, f = mulm.ols_stats_fcon(X, betas, ss_errors, contrast=[1, 0, 0, 0, 0], pval=True)
         """
         import scipy
+        import numpy as np
         from scipy import stats
         Ypred = self.predict(X)
         betas = self.coef_
