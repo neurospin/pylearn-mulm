@@ -88,6 +88,7 @@ class MUOLS:
         """
         import scipy
         from scipy import stats
+        import numpy as np
         Ypred = self.predict(X)
         betas = self.coef_
         ss_errors = np.sum((Y - Ypred) ** 2, axis=0)
@@ -193,17 +194,17 @@ class MUOLSYR2:
     See example in ./examples/permutations.py
     """
     def __init__(self):
-        from mulm.utils import variance
         self.muols = MUOLS()
-        self.func_variance = variance
 
     def transform(self, X, Y):
+        # http://www.stat.columbia.edu/~gelman/research/published/rsquared.pdf
         import numpy as np
+        import scipy
         self.muols.fit(X, Y)
         Ypred = self.muols.predict(X)
-        ss_errors = np.sum((Y - Ypred) ** 2, axis=0)
-        ss_errors_var = self.func_variance(ss_errors)
-        r2 = 1.0 - ss_errors/ss_errors_var
+        var_epsilon = scipy.var(Y - Ypred, axis=0)
+        var_Y = scipy.var(Y, axis=0)
+        r2 = 1.0 - var_epsilon/var_Y
         return {"r2": r2}
 
 
@@ -224,33 +225,21 @@ if __name__ == "__main__":
     Y = np.random.randn(n_samples, n_yfeatures)
     x_group_indices = np.array([random.randint(0, x_n_groups)\
         for i in xrange(n_xfeatures)])
-#    y_group_indices = np.array([random.randint(0, y_n_groups)\
-#        for i in xrange(n_yfeatures)])
-    y_group_indices = np.zeros(n_yfeatures)
 
-#    # 1) Prediction for each X block return a n_samples x n_yfeatures
-#    mulm = CRSplitter(MUOLS(), {"X": x_group_indices})
-#    mulm.run(X=X, Y=Y)
-#    for leaf in mulm.walk_leaves():
-#        print "===============leaf.load_results()================="
-#        print "key =", leaf.get_key()
-#        tab = leaf.load_results()
-#        print tab["MUOLS"]['Y/pred']
-
-#    # 2) Prediction for each X block return a n_samples x n_yfeatures
-#    mulm_stats = CRSplitter(MUOLSStats(), {"X": x_group_indices})
-#    mulm_stats.run(X=X, Y=Y)
-#    for leaf in mulm_stats.walk_leaves():
-#        print "===============leaf.load_results()================="
-#        print "key =", leaf.get_key()
-#        tab = leaf.load_results()
-#        print tab["MUOLSStats"]
-
-    # 3) Prediction for each X block return a n_samples x n_yfeatures
-    mulm_r2 = CRSplitter(MUOLSYR2(), {"X": x_group_indices})
-    mulm_r2.run(X=X, Y=Y)
-    for leaf in mulm_r2.walk_leaves():
+    # 1) Prediction for each X block return a n_samples x n_yfeatures
+    mulm = CRSplitter(MUOLS(), {"X": x_group_indices})
+    mulm.run(X=X, Y=Y)
+    for leaf in mulm.walk_leaves():
         print "===============leaf.load_results()================="
         print "key =", leaf.get_key()
         tab = leaf.load_results()
-        print tab["MUOLSYR2"]
+        print tab["MUOLS"]['Y/pred']
+
+    # 2) Prediction for each X block return a n_samples x n_yfeatures
+    mulm_stats = CRSplitter(MUOLSStats(), {"X": x_group_indices})
+    mulm_stats.run(X=X, Y=Y)
+    for leaf in mulm_stats.walk_leaves():
+        print "===============leaf.load_results()================="
+        print "key =", leaf.get_key()
+        tab = leaf.load_results()
+        print tab["MUOLSStats"]
