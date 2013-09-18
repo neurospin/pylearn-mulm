@@ -189,15 +189,22 @@ class MUOLSStats:
 
 
 class MUOLSYR2:
+    """Compute r2 (explain variance)
+    See example in ./examples/permutations.py
+    """
     def __init__(self):
+        from mulm.utils import variance
         self.muols = MUOLS()
+        self.func_variance = variance
 
     def transform(self, X, Y):
         import numpy as np
         self.muols.fit(X, Y)
         Ypred = self.muols.predict(X)
         ss_errors = np.sum((Y - Ypred) ** 2, axis=0)
-        return {"r2": ss_errors}
+        ss_errors_var = self.func_variance(ss_errors)
+        r2 = 1.0 - ss_errors/ss_errors_var
+        return {"r2": r2}
 
 
 if __name__ == "__main__":
@@ -218,7 +225,7 @@ if __name__ == "__main__":
     x_group_indices = np.array([random.randint(0, x_n_groups)\
         for i in xrange(n_xfeatures)])
 #    y_group_indices = np.array([random.randint(0, y_n_groups)\
-#        for i in xrange(n_yfeatures)]) 
+#        for i in xrange(n_yfeatures)])
     y_group_indices = np.zeros(n_yfeatures)
 
 #    # 1) Prediction for each X block return a n_samples x n_yfeatures
