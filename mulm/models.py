@@ -197,6 +197,7 @@ class MUOLSYR2:
         self.muols = MUOLS()
 
     def transform(self, X, Y):
+        # definition of Explained Variation of R2
         # http://www.stat.columbia.edu/~gelman/research/published/rsquared.pdf
         import numpy as np
         import scipy

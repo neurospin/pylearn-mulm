@@ -41,12 +41,12 @@ if __name__ == "__main__":
                             col_or_row=True)
     # ========================================
     # Signle process
-    # mulm_stats.run(X=X, Y=Y)
+    mulm_stats.run(X=X, Y=Y)
     # ========================================
     # To use local-multi porcessing
-    local_engine = LocalEngine(tree_root=mulm_stats,
-                               num_processes=2)
-    mulm_stats = local_engine.run(X=X, Y=Y)
+#    local_engine = LocalEngine(tree_root=mulm_stats,
+#                               num_processes=2)
+#    mulm_stats = local_engine.run(X=X, Y=Y)
     # ========================================
     # To use soma-workflow
 #    swf_engine = SomaWorkflowEngine(tree_root=mulm_stats,
