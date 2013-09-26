@@ -9,7 +9,7 @@ import numpy as np
 import random
 from epac import LocalEngine, SomaWorkflowEngine
 from epac import Perms
-from epac import CRSplitter
+from epac import ColumnSplitter
 from mulm import MUOLSYR2
 from mulm import PValR2Reducer
 
@@ -27,9 +27,8 @@ if __name__ == "__main__":
     X_group_indices = np.array([random.randint(0, x_n_groups)\
         for i in xrange(n_xfeatures)])
 
-    col_splitter = CRSplitter(MUOLSYR2(),
-                              {"X": X_group_indices},
-                              col_or_row=True)
+    col_splitter = ColumnSplitter(MUOLSYR2(),
+                              {"X": X_group_indices})
 #    col_splitter.run(X=X, Y=Y)
 #    print col_splitter.reduce()
     row_perms = Perms(col_splitter,
