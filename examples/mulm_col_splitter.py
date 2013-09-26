@@ -9,7 +9,7 @@ Created on Wed Sep 18 14:06:51 2013
 import numpy as np
 import random
 from epac import LocalEngine, SomaWorkflowEngine
-from epac import CRSplitter
+from epac import ColumnSplitter
 from mulm import MUOLS, MUOLSStats
 
 if __name__ == "__main__":
@@ -25,9 +25,8 @@ if __name__ == "__main__":
         for i in xrange(n_xfeatures)])
 
     # 1) Prediction for each X block return a n_samples x n_yfeatures
-    mulm = CRSplitter(MUOLS(),
-                      {"X": x_group_indices},
-                      col_or_row=True)
+    mulm = ColumnSplitter(MUOLS(),
+                          {"X": x_group_indices})
     mulm.run(X=X, Y=Y)
     for leaf in mulm.walk_leaves():
         print "===============leaf.load_results()================="
@@ -36,9 +35,8 @@ if __name__ == "__main__":
         print tab["MUOLS"]['Y/pred']
 
     # 2) Prediction for each X block return a n_samples x n_yfeatures
-    mulm_stats = CRSplitter(MUOLSStats(),
-                            {"X": x_group_indices},
-                            col_or_row=True)
+    mulm_stats = ColumnSplitter(MUOLSStats(),
+                                {"X": x_group_indices})
     # ========================================
     # Signle process
     mulm_stats.run(X=X, Y=Y)
