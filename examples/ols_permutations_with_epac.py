@@ -10,7 +10,7 @@ import random
 from epac import LocalEngine, SomaWorkflowEngine
 from epac import Perms
 from epac import ColumnSplitter
-from mulm import MUOLSYR2
+from mulm import MUOLSStatsPredictions
 from mulm import PValR2Reducer
 
 
@@ -27,10 +27,10 @@ if __name__ == "__main__":
     X_group_indices = np.array([random.randint(0, x_n_groups)\
         for i in xrange(n_xfeatures)])
 
-    col_splitter = ColumnSplitter(MUOLSYR2(),
+    col_splitter = ColumnSplitter(MUOLSStatsPredictions(),
                               {"X": X_group_indices})
-#    col_splitter.run(X=X, Y=Y)
-#    print col_splitter.reduce()
+    #    col_splitter.run(X=X, Y=Y)
+    #    print col_splitter.reduce()
     row_perms = Perms(col_splitter,
                   n_perms=10,
                   reducer=PValR2Reducer(),

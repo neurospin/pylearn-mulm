@@ -6,11 +6,11 @@ Created on Fri Jun 14 19:38:46 2013
 """
 
 from .models import MUOLS
-from .models import MUOLSStats
-from .models import MUOLSYR2
+from .models import MUOLSStatsCoefficients
+from .models import MUOLSStatsPredictions
 from .reducers import PValR2Reducer
 
 __all__ = ['MUOLS',
-           'MUOLSStats',
-           'MUOLSYR2',
+           'MUOLSStatsCoefficients',
+           'MUOLSStatsPredictions',
            'PValR2Reducer']

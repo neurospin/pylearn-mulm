@@ -5,9 +5,29 @@ Created on Tue Jun 25 13:25:41 2013
 @author: ed203246
 """
 
+class MUPairwiseCorr:
+    """Mass-univariate pairwise correlations. Given two arrays X [n_samples x p]
+    and Y [n_samples x q]. Fit p x q independent linear models. Prediction
+    and stats return [p x q] array.
+    """ 
+    def __init__(self, **kwargs):
+        self.coef_ = None
+    def fit(self, X, Y):
+       pass
+
+    def predict(self, X):
+        pass
+
+    def stats(self, X, Y, contrast, pval=True):
+        pass
+
+    def t_stats(self, X, Y, contrast, pval=False):
+        pass
 
 class MUOLS:
     """Mass-univariate linear modeling based Ordinary Least Squares.
+    Given two arrays X [n_samples x p] and Y [n_samples x q].
+    Fit q independent linear models. Prediction and stats return [p x q] array.
     Fit independant OLS models for each columns of Y.
 
     Example
@@ -21,10 +41,11 @@ class MUOLS:
     >>> betas = np.array([1, 2, 2, 0, 3])
     >>> Y[:, 0] += np.dot(X, betas)
     >>> Y[:, 1] += np.dot(X, betas)
-    >>> linreg = mulm.LinearRegression()
+    >>> linreg = mulm.MUOLS()
     >>> linreg.fit(X, Y)
     >>> Ypred = linreg.predict(X)
     >>> ss_errors = np.sum((Y - Ypred) ** 2, axis=0)
+    linreg.stats_f_coefficients(X, Y)
     """
     def __init__(self, **kwargs):
         self.coef_ = None
@@ -35,7 +56,8 @@ class MUOLS:
         import numpy as np
         X = safe_asarray(X)
         Y = safe_asarray(Y)
-        self.coef_ = np.dot(np.linalg.pinv(X), Y)
+        self.coef_ = np.dot(np.linalg.pinv(X), Y)  # USE SCIPY ??
+        # Ypred = self.predict(X)
         # self.coef_ = np.dot(scipy.linalg.pinv(X), Y)
         # self.coef_ = np.ones(X.shape[1])
         return self
@@ -47,14 +69,15 @@ class MUOLS:
         pred_y = np.dot(X, self.coef_)
         return pred_y
 
-    def stats(self, X, Y, contrast, pval=True):
-        Ypred = self.predict(X)
-        ss_errors = np.sum((Y - Ypred) ** 2, axis=0)
-        tval, pvalt = self.ols_stats_tcon(X, ss_errors, contrast,
-                                          pval)
-        return tval, pvalt
+#    def stats_t_predictions(self, X, contrast, pval=True):
+#        """Return Two array tvales and pvalues of shape []"""
+#        ##Ypred = self.predict(X)
+#        #ss_errors = np.sum((Y - Ypred) ** 2, axis=0)
+#        tval, pvalt = self.ols_stats_tcon(X, self.ss_errors_, contrast,
+#                                          pval)
+#        return tval, pvalt
 
-    def t_stats(self, X, Y, contrast, pval=False):
+    def stats_t_coefficients(self, X, Y, contrast, pval=False):
         """Compute statistics (t-scores and p-value associated to contrast)
 
         Parameters
@@ -62,9 +85,7 @@ class MUOLS:
 
         X 2-d array
 
-        betas  2-d array
-
-        ss_errors  2-d array
+        Y 2-d array
 
         contrast  1-d array
 
@@ -73,7 +94,6 @@ class MUOLS:
         Example
         -------
         >>> import numpy as np
-        >>> import mulm
         >>> n_samples = 10
         >>> X = np.random.randn(n_samples, 5)
         >>> X[:, -1] = 1  # Add intercept
@@ -112,7 +132,7 @@ class MUOLS:
             return t_stats, p_vals
 
 
-    def f_stats(self, X, Y, contrast, pval=False):
+    def stats_f_coefficients(self, X, Y, contrast, pval=False):
         import numpy as np
         from sklearn.utils import array2d
         import scipy
@@ -151,24 +171,9 @@ class MUOLS:
             return f_stats, p_vals
 
 
-class MURidgeLM:
-    """Mass-univariate linear modeling based on Ridge regression.
-    Fit independant Ridge models for each columns of Y."""
-
-    def __init__(self, **kwargs):
-        self.coef_ = None
-
-    def fit(self, X, Y):
-        pass
-
-    def predict(self, X):
-        from sklearn.utils import safe_asarray
-        import numpy as np
-        X = safe_asarray(X)
-        return np.dot(X, self.coef_)
-
-
-class MUOLSStats:
+class MUOLSStatsCoefficients:
+    """Statistics on coefficients of MUOLS models. for each OLS fitted model compute
+    t-scores and p-values for fitted coeficients"""
     def __init__(self):
         self.muols = MUOLS()
     def transform(self, X, Y):
@@ -181,7 +186,7 @@ class MUOLSStats:
         for j in xrange(X.shape[1]):
             contrast = np.zeros(X.shape[1])
             contrast[j] += 1
-            t, p = self.muols.t_stats(X, Y, contrast=contrast, pval=True)
+            t, p = self.muols.stats_t_coefficients(X, Y, contrast=contrast, pval=True)
             tvals.append(t)
             pvals.append(p)
         pvals = np.asarray(pvals)
@@ -190,22 +195,36 @@ class MUOLSStats:
         return {"tvals": tvals, "pvals": pvals}
 
 
-class MUOLSYR2:
-    """Compute r2 (explain variance)
+class MUOLSStatsPredictions:
+    """Statistics on coefficients of MUOLS models. for each OLS fitted model compute
+    r2-score (explain variance) and p-values for prediction.
     See example in ./examples/permutations.py
     """
+
     def __init__(self):
         self.muols = MUOLS()
 
     def transform(self, X, Y):
         # definition of Explained Variation of R2
         # http://www.stat.columbia.edu/~gelman/research/published/rsquared.pdf
-        import numpy as np
         import scipy
         self.muols.fit(X, Y)
         Ypred = self.muols.predict(X)
         var_epsilon = scipy.var(Y - Ypred, axis=0)
         var_Y = scipy.var(Y, axis=0)
-        r2 = 1.0 - var_epsilon/var_Y
+        r2 = 1.0 - var_epsilon / var_Y
         return {"r2": r2}
 
+
+class MURidgeLM:
+    """Mass-univariate linear modeling based on Ridge regression.
+    Fit independant Ridge models for each columns of Y."""
+
+    def __init__(self, **kwargs):
+        pass
+
+    def fit(self, X, Y):
+        pass
+
+    def predict(self, X):
+        pass
