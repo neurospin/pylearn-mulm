@@ -4,6 +4,9 @@ Created on Tue Jun 25 13:25:41 2013
 
 @author: ed203246
 """
+import scipy
+import numpy as np
+
 
 class MUPairwiseCorr:
     """Mass-univariate pairwise correlations. Given two arrays X [n_samples x p]
@@ -11,18 +14,25 @@ class MUPairwiseCorr:
     and stats return [p x q] array.
     """ 
     def __init__(self, **kwargs):
-        self.coef_ = None
+        pass
+
     def fit(self, X, Y):
-       pass
+        Xs = X - X.mean(axis=0)
+        Xs /= X.std(axis=0)
+        Ys = Y - Y.mean(axis=0)
+        Ys /= Y.std(axis=0)
+        self.Corr_ = np.dot(Xs.T, Ys)
+        return self
 
     def predict(self, X):
         pass
 
-    def stats(self, X, Y, contrast, pval=True):
-        pass
+    def stats_f(self, X, Y, pval=True):
+        R2 = self.Corr_ ** 2
+        adjdf = X.shape[0] - 2
+        fstat = R2 * adjdf / (1 - R2)
+        return fstat
 
-    def t_stats(self, X, Y, contrast, pval=False):
-        pass
 
 class MUOLS:
     """Mass-univariate linear modeling based Ordinary Least Squares.
@@ -52,8 +62,6 @@ class MUOLS:
 
     def fit(self, X, Y):
         from sklearn.utils import safe_asarray
-        import scipy
-        import numpy as np
         X = safe_asarray(X)
         Y = safe_asarray(Y)
         self.coef_ = np.dot(np.linalg.pinv(X), Y)  # USE SCIPY ??
@@ -106,8 +114,6 @@ class MUOLS:
         >>> p, t = mulm.ols_stats_tcon(X, betas, ss_errors, contrast=[1, 0, 0, 0, 0], pval=True)
         >>> p, f = mulm.ols_stats_fcon(X, betas, ss_errors, contrast=[1, 0, 0, 0, 0], pval=True)
         """
-        import scipy
-        import numpy as np
         from scipy import stats
         import numpy as np
         Ypred = self.predict(X)
