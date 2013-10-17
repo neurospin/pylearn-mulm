@@ -109,7 +109,6 @@ class MUOLS:
         import scipy
         import numpy as np
         from scipy import stats
-        import numpy as np
         Ypred = self.predict(X)
         betas = self.coef_
         ss_errors = np.sum((Y - Ypred) ** 2, axis=0)
