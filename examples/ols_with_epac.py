@@ -21,11 +21,11 @@ if __name__ == "__main__":
 
     X = np.random.randn(n_samples, n_xfeatures)
     Y = np.random.randn(n_samples, n_yfeatures)
-    x_group_indices = [1, 1, 3, 2, 2, 2, 2]
-    x_group_indices = np.array([random.randint(0, x_n_groups)\
-        for i in xrange(n_xfeatures)])
+    x_group_indices = [0, 0, 0, 1, 1, 1, 2, 2, 2, 2, 3, 3, 3,
+                       4, 4, 4, 4, 5, 5, 5]
 
-    blocks_size = [np.sum(lev == x_group_indices) for lev in set(x_group_indices)]
+    blocks_size = [np.sum(lev == x_group_indices)
+                          for lev in set(x_group_indices)]
     print "Blocks size", blocks_size
 
     # 1) Prediction for each X block return a n_samples x n_yfeatures
@@ -50,11 +50,12 @@ if __name__ == "__main__":
         print "key =", leaf.get_key()
         tab = leaf.load_results()
         print "p-values shape: == (k, n_yfeatures) ?:",\
-            tab["MUOLSStatsCoefficients"]['pvals'].shape == (blocks_size[k], n_yfeatures)
+            tab["MUOLSStatsCoefficients"]['pvals'].shape == (blocks_size[k],
+                                                             n_yfeatures)
         k += 1
 
     # 3) Prediction statistics for each block (of size k) return
-    # a block_size x n_yfeatures array of t-values and p-values
+    # a block_size x n_yfeatures array of r2
     mulm_stats_predictions = ColumnSplitter(MUOLSStatsPredictions(),
                                 {"X": x_group_indices})
     mulm_stats_predictions.run(X=X, Y=Y)
