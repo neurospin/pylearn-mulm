@@ -6,22 +6,41 @@ Created on Tue Jun 25 13:25:41 2013
 """
 import scipy
 import numpy as np
+from sklearn.preprocessing import scale
+from scipy import stats
 
 
 class MUPairwiseCorr:
     """Mass-univariate pairwise correlations. Given two arrays X [n_samples x p]
     and Y [n_samples x q]. Fit p x q independent linear models. Prediction
     and stats return [p x q] array.
-    """ 
+
+
+    Example
+    -------
+    >>> import numpy as np
+    >>> from mulm import MUPairwiseCorr
+    >>> X = np.random.randn(10, 5)
+    >>> Y = np.random.randn(10, 3)
+    >>> corr = MUPairwiseCorr()
+    >>> corr.fit(X, Y)
+    <mulm.models.MUPairwiseCorr instance at 0x30da878>
+    >>> f, p = corr.stats_f(X, Y)
+    >>> print f.shape
+    (5, 3)
+    """
     def __init__(self, **kwargs):
         pass
 
     def fit(self, X, Y):
-        Xs = X - X.mean(axis=0)
-        Xs /= X.std(axis=0)
-        Ys = Y - Y.mean(axis=0)
-        Ys /= Y.std(axis=0)
-        self.Corr_ = np.dot(Xs.T, Ys)
+        Xs = scale(X, copy=True)
+        Ys = scale(Y, copy=True)
+        self.n_samples = X.shape[0]
+        #Xs = X - X.mean(axis=0)
+        #Xs /= X.std(axis=0)
+        #Ys = Y - Y.mean(axis=0)
+        #Ys /= Y.std(axis=0)
+        self.Corr_ = np.dot(Xs.T, Ys) / self.n_samples
         return self
 
     def predict(self, X):
@@ -29,10 +48,13 @@ class MUPairwiseCorr:
 
     def stats_f(self, X, Y, pval=True):
         R2 = self.Corr_ ** 2
-        adjdf = X.shape[0] - 2
-        fstat = R2 * adjdf / (1 - R2)
-        return fstat
-
+        df_res = self.n_samples - 2
+        f_stats = R2 * df_res / (1 - R2)
+        if not pval:
+            return (f_stats, None)
+        else:
+            p_vals = stats.f.sf(f_stats, 1, df_res)
+            return f_stats, p_vals
 
 class MUOLS:
     """Mass-univariate linear modeling based Ordinary Least Squares.
@@ -115,6 +137,7 @@ class MUOLS:
         >>> p, f = mulm.ols_stats_fcon(X, betas, ss_errors, contrast=[1, 0, 0, 0, 0], pval=True)
         """
         from scipy import stats
+        import numpy as np
         Ypred = self.predict(X)
         betas = self.coef_
         ss_errors = np.sum((Y - Ypred) ** 2, axis=0)
@@ -138,10 +161,7 @@ class MUOLS:
 
 
     def stats_f_coefficients(self, X, Y, contrast, pval=False):
-        import numpy as np
         from sklearn.utils import array2d
-        import scipy
-        from scipy import stats
         Ypred = self.predict(X)
         betas = self.coef_
         ss_errors = np.sum((Y - Ypred) ** 2, axis=0)
