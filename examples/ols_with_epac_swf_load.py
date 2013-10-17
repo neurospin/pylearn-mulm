@@ -7,6 +7,7 @@ Created on Wed Sep 18 14:06:51 2013
 
 from epac import SomaWorkflowEngine
 import joblib
+import numpy as np
 
 if __name__ == "__main__":
     n_samples = 10
