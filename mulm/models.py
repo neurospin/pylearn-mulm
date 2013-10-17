@@ -36,17 +36,13 @@ class MUPairwiseCorr:
         Xs = scale(X, copy=True)
         Ys = scale(Y, copy=True)
         self.n_samples = X.shape[0]
-        #Xs = X - X.mean(axis=0)
-        #Xs /= X.std(axis=0)
-        #Ys = Y - Y.mean(axis=0)
-        #Ys /= Y.std(axis=0)
         self.Corr_ = np.dot(Xs.T, Ys) / self.n_samples
         return self
 
     def predict(self, X):
         pass
 
-    def stats_f(self, X, Y, pval=True):
+    def stats_f(self, pval=True):
         R2 = self.Corr_ ** 2
         df_res = self.n_samples - 2
         f_stats = R2 * df_res / (1 - R2)
