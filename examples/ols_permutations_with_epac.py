@@ -28,15 +28,15 @@ if __name__ == "__main__":
         for i in xrange(n_xfeatures)])
 
     # =============================================================================
-    # Build EPAC Workflow in two steps
-    col_splitter = ColumnSplitter(MUOLSStatsPredictions(),
+    # EPAC Workflow (2 steps)
+    col_splitter = ColumnSplitter(MUOLSStatsPredictions(), # columns spliter
                               {"X": X_group_indices})
-    row_perms = Perms(col_splitter,
+    row_perms = Perms(col_splitter,                        # permutations
                   n_perms=10,
                   reducer=PValR2Reducer(),
                   permute="X",
                   col_or_row=False,
                   need_group_key=False)
-    row_perms.run(X=X, Y=Y)            # map
-    results = row_perms.reduce()       # reduce
+    row_perms.run(X=X, Y=Y)                                # map
+    results = row_perms.reduce()                           # reduce
     print results
