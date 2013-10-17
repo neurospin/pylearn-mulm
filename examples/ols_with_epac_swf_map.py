@@ -28,10 +28,15 @@ class ExampleConfig:
 #            for i in xrange(self.n_xfeatures)])
 
 if __name__ == "__main__":
+    path_config = "/tmp/example_config"
+    path_mulm = "/tmp/mulm"
+    path_mulm_stats_coefficients = "/tmp/mulm_stats_coefficients"
+    path_mulm_stats_predictions = "/tmp/mulm_stats_predictions"
+
     ols_config = ExampleConfig()
     X = np.random.randn(ols_config.n_samples, ols_config.n_xfeatures)
     Y = np.random.randn(ols_config.n_samples, ols_config.n_yfeatures)
-    joblib.dump(ols_config, "/tmp/example_config")
+    joblib.dump(ols_config, path_config)
 
     blocks_size = [np.sum(lev == ols_config.x_group_indices)
                     for lev in set(ols_config.x_group_indices)]
@@ -42,7 +47,7 @@ if __name__ == "__main__":
                           {"X": ols_config.x_group_indices})
     swf_engine = SomaWorkflowEngine(tree_root=mulm,
                                     num_processes=2)
-    swf_engine.export_to_gui("/tmp/mulm", X=X, Y=Y)
+    swf_engine.export_to_gui(path_mulm, X=X, Y=Y)
 
     # 2) coeficient Statistics for each block (of size k) return
     # a block_size x n_yfeatures array of t-values and p-values
@@ -50,12 +55,12 @@ if __name__ == "__main__":
                                 {"X": ols_config.x_group_indices})
     swf_engine = SomaWorkflowEngine(tree_root=mulm_stats_coefficients,
                                     num_processes=2)
-    swf_engine.export_to_gui("/tmp/mulm_stats_coefficients", X=X, Y=Y)
+    swf_engine.export_to_gui(path_mulm_stats_coefficients, X=X, Y=Y)
 
     # 3) Prediction statistics for each block (of size k) return
-    # a block_size x n_yfeatures array of t-values and p-values
+    # a block_size x n_yfeatures array of r2
     mulm_stats_predictions = ColumnSplitter(MUOLSStatsPredictions(),
                                 {"X": ols_config.x_group_indices})
     swf_engine = SomaWorkflowEngine(tree_root=mulm_stats_predictions,
                                     num_processes=2)
-    swf_engine.export_to_gui("/tmp/mulm_stats_predictions", X=X, Y=Y)
+    swf_engine.export_to_gui(path_mulm_stats_predictions, X=X, Y=Y)

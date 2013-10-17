@@ -39,7 +39,7 @@ if __name__ == "__main__":
         k += 1
 
     # 3) Prediction statistics for each block (of size k) return
-    # a block_size x n_yfeatures array of t-values and p-values
+    # a block_size x n_yfeatures array of r2
     mulm_stats_predictions = \
         SomaWorkflowEngine.load_from_gui("/tmp/mulm_stats_predictions")
     res_tab = mulm_stats_predictions.reduce()
