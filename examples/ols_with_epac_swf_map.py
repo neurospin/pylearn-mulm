@@ -38,7 +38,7 @@ if __name__ == "__main__":
     Y = np.random.randn(ols_config.n_samples, ols_config.n_yfeatures)
     joblib.dump(ols_config, path_config)
 
-    blocks_size = [np.sum(lev == ols_config.x_group_indices)
+    blocks_size = [np.sum(lev == np.asarray(ols_config.x_group_indices))
                     for lev in set(ols_config.x_group_indices)]
     print "Blocks size", blocks_size
 
