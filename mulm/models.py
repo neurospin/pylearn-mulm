@@ -192,60 +192,61 @@ class MUOLS:
             return f_stats, p_vals
 
 
-class MUOLSStatsCoefficients:
+class MUOLSStatsCoefficients(MUOLS):
     """Statistics on coefficients of MUOLS models. for each OLS fitted model compute
     t-scores and p-values for fitted coeficients"""
-    def __init__(self):
-        self.muols = MUOLS()
-    def transform(self, X, Y):
-        import numpy as np
+    def __init__(self, **kwargs):
+        MUOLS.__init__(self)#**kwargs)
+
+    def stats(self, X, Y):
+        if self.coef_ is None:
+            raise ValueError("Model has not been fitted yet, call fit(X, Y)")
         #X = np.random.randn(100, 2)
         #Y = np.hstack([np.dot(X, [1, 2])[:, np.newaxis], np.random.randn(100, 3)])
-        self.muols.fit(X, Y)
         pvals = list()
         tvals = list()
         for j in xrange(X.shape[1]):
             contrast = np.zeros(X.shape[1])
             contrast[j] += 1
-            t, p = self.muols.stats_t_coefficients(X, Y, contrast=contrast, pval=True)
+            t, p = self.stats_t_coefficients(X, Y, contrast=contrast, pval=True)
             tvals.append(t)
             pvals.append(p)
         pvals = np.asarray(pvals)
         tvals = np.asarray(tvals)
         # "transform" should return a dictionary
-        return {"tvals": tvals, "pvals": pvals}
+        return tvals, pvals
 
 
-class MUOLSStatsPredictions:
-    """Statistics on coefficients of MUOLS models. for each OLS fitted model compute
-    r2-score (explain variance) and p-values for prediction.
-    See example in ./examples/permutations.py
-    """
-
-    def __init__(self):
-        self.muols = MUOLS()
-
-    def transform(self, X, Y):
-        # definition of Explained Variation of R2
-        # http://www.stat.columbia.edu/~gelman/research/published/rsquared.pdf
-        import scipy
-        self.muols.fit(X, Y)
-        Ypred = self.muols.predict(X)
-        var_epsilon = scipy.var(Y - Ypred, axis=0)
-        var_Y = scipy.var(Y, axis=0)
-        r2 = 1.0 - var_epsilon / var_Y
-        return {"r2": r2}
-
-
-class MURidgeLM:
-    """Mass-univariate linear modeling based on Ridge regression.
-    Fit independant Ridge models for each columns of Y."""
-
-    def __init__(self, **kwargs):
-        pass
-
-    def fit(self, X, Y):
-        pass
-
-    def predict(self, X):
-        pass
+#class MUOLSStatsPredictions:
+#    """Statistics on coefficients of MUOLS models. for each OLS fitted model compute
+#    r2-score (explain variance) and p-values for prediction.
+#    See example in ./examples/permutations.py
+#    """
+#
+#    def __init__(self):
+#        self.muols = MUOLS()
+#
+#    def transform(self, X, Y):
+#        # definition of Explained Variation of R2
+#        # http://www.stat.columbia.edu/~gelman/research/published/rsquared.pdf
+#        import scipy
+#        self.muols.fit(X, Y)
+#        Ypred = self.muols.predict(X)
+#        var_epsilon = scipy.var(Y - Ypred, axis=0)
+#        var_Y = scipy.var(Y, axis=0)
+#        r2 = 1.0 - var_epsilon / var_Y
+#        return {"r2": r2}
+#
+#
+#class MURidgeLM:
+#    """Mass-univariate linear modeling based on Ridge regression.
+#    Fit independant Ridge models for each columns of Y."""
+#
+#    def __init__(self, **kwargs):
+#        pass
+#
+#    def fit(self, X, Y):
+#        pass
+#
+#    def predict(self, X):
+#        pass
