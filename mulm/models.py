@@ -116,6 +116,14 @@ class MUOLS:
         contrast  1-d array
 
         pval: boolean
+            compute pval
+
+        ret_df: boolean
+            return pval
+
+        Return
+        ------
+        tstats, pvals, df
 
         Example
         -------
@@ -149,13 +157,9 @@ class MUOLS:
         var_errors = ss_errors / df
         std_cbeta = np.sqrt(var_errors * np.dot(cXpinv, cXpinv.T))
         t_stats = np.dot(ccontrast, betas) / std_cbeta
-        if not pval:
-            return (t_stats, None)
-        else:
-            p_vals = stats.t.sf(t_stats, df)
-            return t_stats, p_vals
-
-
+        p_vals = stats.t.sf(t_stats, df) if pval else None
+        return t_stats, p_vals, df
+        
     def stats_f_coefficients(self, X, Y, contrast, pval=False):
         from sklearn.utils import array2d
         Ypred = self.predict(X)
@@ -205,16 +209,19 @@ class MUOLSStatsCoefficients(MUOLS):
         #Y = np.hstack([np.dot(X, [1, 2])[:, np.newaxis], np.random.randn(100, 3)])
         pvals = list()
         tvals = list()
+        dfs = list()
         for j in xrange(X.shape[1]):
             contrast = np.zeros(X.shape[1])
             contrast[j] += 1
-            t, p = self.stats_t_coefficients(X, Y, contrast=contrast, pval=True)
+            t, p, df= self.stats_t_coefficients(X, Y, contrast=contrast, pval=True)
             tvals.append(t)
             pvals.append(p)
+            dfs.append(df)
         pvals = np.asarray(pvals)
         tvals = np.asarray(tvals)
+        dfs =  np.asarray(dfs)
         # "transform" should return a dictionary
-        return tvals, pvals
+        return tvals, pvals, dfs
 
 
 #class MUOLSStatsPredictions:
