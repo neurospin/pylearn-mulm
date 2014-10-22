@@ -103,7 +103,8 @@ class MUOLS:
 #                                          pval)
 #        return tval, pvalt
 
-    def stats_t_coefficients(self, X, Y, contrast, pval=False):
+
+    def stats_t(self, X, Y, contrast, pval=False):
         """Compute statistics (t-scores and p-value associated to contrast)
 
         Parameters
@@ -159,7 +160,24 @@ class MUOLS:
         t_stats = np.dot(ccontrast, betas) / std_cbeta
         p_vals = stats.t.sf(t_stats, df) if pval else None
         return t_stats, p_vals, df
-        
+
+    stats_t_coefficients = stats_t
+
+    def stats_t_permutations(self, X, Y, contrast, nperms=1000):
+        #contrast = [0, 1] + [0] * (X.shape[1] - 2)
+        tvals, _, _ = self.stats_t(X=X, Y=Y, contrast=contrast, pval=False)
+        max_t = list()
+        muols = MUOLSStatsCoefficients()
+        for i in xrange(nperms):
+            perm_idx = np.random.permutation(X.shape[0])
+            Xp = X[perm_idx, ]
+            muols.fit(Xp, Y)
+            tvals_perm, _, df = muols.stats_t_coefficients(X=Xp, Y=Y, contrast=contrast, pval=False)
+            max_t.append(np.max(tvals_perm))
+        max_t = np.array(max_t)
+        pvalues = np.array([np.sum(max_t >= t) for t in tvals]) / float(nperms)
+        return tvals, pvalues, df
+
     def stats_f_coefficients(self, X, Y, contrast, pval=False):
         from sklearn.utils import array2d
         Ypred = self.predict(X)
