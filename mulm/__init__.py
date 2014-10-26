@@ -7,8 +7,6 @@ Created on Fri Jun 14 19:38:46 2013
 
 from .models import MUPairwiseCorr
 from .models import MUOLS
-from .models import MUOLSStatsCoefficients
 
 __all__ = ['MUPairwiseCorr',
-           'MUOLS',
-           'MUOLSStatsCoefficients']
+           'MUOLS']
