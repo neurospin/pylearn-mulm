@@ -1,7 +1,7 @@
 Massive univariate linear model
 ===============================
 
-Provides basic features of "statmodels" (like OLS) where Y is a matrix of
+Provide basic features similar to "statmodels" (like OLS) where Y is a matrix of
 many responses where many independant fit are requested.
 
 
@@ -10,13 +10,19 @@ Installation
 Unless you already have Numpy and Scipy installed, you need to install them:
 
 ```
-$ sudo apt-get install python-numpy python-scipy
+sudo apt-get install python-numpy python-scipy
 ```
+
+Clone the repository from github
+```
+git clone https://github.com/neurospin/pylearn-mulm.git
+```
+
+Add `pylearn-mulm` in your `$PYTHONPATH`
 
 T-tests
 -------
 
-Then simply put pylearn-mulm in your `$PYTHONPATH`
 
 ```python
 import numpy as np
@@ -46,8 +52,8 @@ sm_tvals = np.asarray(sm_tvals).T
 sm_pvals = np.asarray(sm_pvals).T
 
 ## OLS with MULM
-mod = mulm.MUOLS(Y, X).fit()
-mulm_tvals, mulm_pvals, mulm_df = mod.t_test(contrasts, pval=True, two_tailed=True)
+mod = mulm.MUOLS(Y, X)
+mulm_tvals, mulm_pvals, mulm_df = mod.fit().t_test(contrasts, pval=True, two_tailed=True)
 
 # Check that results ar similar
 np.allclose(mulm_tvals, sm_tvals)
@@ -77,8 +83,8 @@ Y[:, :py_info] += np.dot(X, beta)
 # t-test all the regressors (by default mulm and sm do two-tailed tests)
 contrasts = np.identity(X.shape[1])
 
-mod = mulm.MUOLS(Y, X).fit()
-tvals, rawp, df = mod.t_test(contrasts, pval=True, two_tailed=True)
+mod = mulm.MUOLS(Y, X)
+tvals, rawp, df = mod.fit().t_test(contrasts, pval=True, two_tailed=True)
 tvals, maxT, df2 = mod.t_test_maxT(contrasts, two_tailed=True)
 
 

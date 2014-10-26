@@ -30,8 +30,8 @@ Y[:, :py_info] += np.dot(X, beta)
 # t-test all the regressors (by default mulm and sm do two-tailed tests)
 contrasts = np.identity(X.shape[1])
 
-mod = mulm.MUOLS(Y, X).fit()
-tvals, rawp, df = mod.t_test(contrasts, pval=True, two_tailed=True)
+mod = mulm.MUOLS(Y, X)
+tvals, rawp, df = mod.fit().t_test(contrasts, pval=True, two_tailed=True)
 tvals, maxT, df2 = mod.t_test_maxT(contrasts, two_tailed=True)
 
 

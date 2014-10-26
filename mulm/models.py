@@ -143,6 +143,23 @@ class MUOLS:
         """Compute statistics (t-scores and p-value associated to contrasts)
         but p-values are corrected for multiple comparison and inferred using
         maxT procedure
+
+        Example
+        -------
+        >>> import numpy as np
+        >>> import mulm
+        >>> import pylab as plt
+        >>> n = 100
+        >>> px = 5
+        >>> py_info = 2
+        >>> py_noize = 100
+        >>> beta = np.array([1, 0, .5] + [0] * (px - 4) + [2]).reshape((px, 1))
+        >>> X = np.hstack([np.random.randn(n, px-1), np.ones((n, 1))]) # X with intercept
+        >>> Y = np.random.randn(n, py_info + py_noize)
+        >>> Y[:, :py_info] += np.dot(X, beta)
+        >>> contrasts = np.identity(X.shape[1])
+        >>> mod = mulm.MUOLS(Y, X)
+        >>> tvals, maxT, df = mod.t_test_maxT(contrasts, two_tailed=True)
         """
         #contrast = [0, 1] + [0] * (X.shape[1] - 2)
         tvals, _, df = self.t_test(contrasts=contrasts, pval=False, **kwargs)

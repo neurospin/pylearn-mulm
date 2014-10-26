@@ -36,8 +36,8 @@ sm_tvals = np.asarray(sm_tvals).T
 sm_pvals = np.asarray(sm_pvals).T
 
 ## OLS with MULM
-mod = mulm.MUOLS(Y, X).fit()
-mulm_tvals, mulm_pvals, mulm_df = mod.t_test(contrasts, pval=True, two_tailed=True)
+mod = mulm.MUOLS(Y, X)
+mulm_tvals, mulm_pvals, mulm_df = mod.fit().t_test(contrasts, pval=True, two_tailed=True)
 
 # Check that results ar similar
 np.allclose(mulm_tvals, sm_tvals)
