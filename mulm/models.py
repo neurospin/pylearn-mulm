@@ -111,7 +111,7 @@ class MUOLS:
         >>> mod = mulm.MUOLS(Y, X).fit()
         >>> tvals, pvals, df = mod.t_test(contrasts, pval=True, two_tailed=True)
         """
-        contrasts = np.asarray(contrasts)
+        contrasts = np.atleast_2d(np.asarray(contrasts))
         n = self.X.shape[0]
         t_stats_ = list()
         p_vals_ = list()
@@ -140,9 +140,8 @@ class MUOLS:
         return np.asarray(t_stats_), np.asarray(p_vals_), np.asarray(df_)
 
     def t_test_maxT(self, contrasts, nperms=1000, **kwargs):
-        """Compute statistics (t-scores and p-value associated to contrasts)
-        but p-values are corrected for multiple comparison and inferred using
-        maxT procedure
+        """Correct for multiple comparisons using maxT procedure. See t_test()
+        For all parameters.
 
         Example
         -------
@@ -182,8 +181,7 @@ class MUOLS:
         #betas = self.coef
         #ss_errors = np.sum((self.Y - self.y_hat) ** 2, axis=0)
         C1 = array2d(contrast).T
-        n = self.X.shape[0]
-        p = self.X.shape[1]
+        n, p = self.X.shape
         #Xpinv = scipy.linalg.pinv(X)
         rank_x = np.linalg.matrix_rank(self.pinv)
         C0 = np.eye(p) - np.dot(C1, scipy.linalg.pinv(C1))  # Ortho. cont. to C1
