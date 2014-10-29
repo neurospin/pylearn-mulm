@@ -19,7 +19,7 @@ class TestMULMOLS(unittest.TestCase):
         py_info = 2
         py_noize = 100
 
-        beta = np.array([1, 0, .5] + [0] * (px - 4) + [2]).reshape((px, 1))
+        beta = np.array([1, 0, -.5] + [0] * (px - 4) + [2]).reshape((px, 1))
         X = np.hstack([np.random.randn(n, px-1), np.ones((n, 1))]) # X with intercept
         Y = np.random.randn(n, py_info + py_noize)
         # Causal model: add X on the first py_info variable
@@ -40,7 +40,7 @@ class TestMULMOLS(unittest.TestCase):
         sm_tvals = np.asarray(sm_tvals).T
         sm_pvals = np.asarray(sm_pvals).T
 
-        ## OLS with MULM
+        ## OLS with MULM two-tailed
         mod = mulm.MUOLS(Y, X).fit()
         mulm_tvals, mulm_pvals, mulm_df = mod.t_test(contrasts, pval=True, two_tailed=True)
 
@@ -48,13 +48,25 @@ class TestMULMOLS(unittest.TestCase):
         assert_almost_equal(mulm_tvals, sm_tvals)
         assert_almost_equal(mulm_pvals, sm_pvals)
 
+#        ## OLS with MULM one-tailed
+#        mod = mulm.MUOLS(Y, X).fit()
+#        mulm_tvals, mulm_pvals, mulm_df = mod.t_test(contrasts, pval=True, two_tailed=False)
+#
+#        # Check that results ar similar
+#        assert_almost_equal(mulm_tvals, sm_tvals)
+#        sm_pvals /= 2
+#        #sm_pvals[sm_pvals > 1] = 1
+#        assert_almost_equal(mulm_pvals, sm_pvals)
+#        mulm_pvals -  np.min(sm_pvals*2,1)
+
+
     def test_maxT(self):
         n = 100
         px = 5
         py_info = 2
         py_noize = 100
 
-        beta = np.array([1, 0, .5] + [0] * (px - 4) + [2]).reshape((px, 1))
+        beta = np.array([1, 0, -.5] + [0] * (px - 4) + [2]).reshape((px, 1))
         np.random.seed(42)
         X = np.hstack([np.random.randn(n, px-1), np.ones((n, 1))])
         Y = np.random.randn(n, py_info + py_noize)

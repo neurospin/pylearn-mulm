@@ -139,7 +139,7 @@ class MUOLS:
             df_.append(df)
         return np.asarray(t_stats_), np.asarray(p_vals_), np.asarray(df_)
 
-    def t_test_maxT(self, contrasts, nperms=1000, **kwargs):
+    def t_test_maxT(self, contrasts, nperms=1000, two_tailed=True, **kwargs):
         """Correct for multiple comparisons using maxT procedure. See t_test()
         For all parameters.
 
@@ -167,11 +167,15 @@ class MUOLS:
             perm_idx = np.random.permutation(self.X.shape[0])
             Xp = self.X[perm_idx, :]
             muols = MUOLS(self.Y, Xp).fit()
-            tvals_perm, _, _ = muols.t_test(contrasts=contrasts, pval=False, **kwargs)
+            tvals_perm, _, _ = muols.t_test(contrasts=contrasts, pval=False,
+                                            two_tailed=two_tailed)
+            if two_tailed:
+                tvals_perm = np.abs(tvals_perm)
             max_t.append(np.max(tvals_perm, axis=1))
         max_t = np.array(max_t)
+        tvals_ = np.abs(tvals) if two_tailed else tvals
         pvalues = np.array(
-            [np.array([np.sum(max_t[:, con] >= t) for t in tvals[con, :]])\
+            [np.array([np.sum(max_t[:, con] >= t) for t in tvals_[con, :]])\
                 / float(nperms) for con in xrange(contrasts.shape[0])])
         return tvals, pvalues, df
 
