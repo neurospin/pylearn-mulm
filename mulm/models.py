@@ -179,6 +179,55 @@ class MUOLS:
                 / float(nperms) for con in xrange(contrasts.shape[0])])
         return tvals, pvalues, df
 
+    def t_test_minP(self, contrasts, nperms=10000, two_tailed=True, **kwargs):
+        """Correct for multiple comparisons using minP procedure.
+        For all parameters.
+
+        Example
+        -------
+        >>> import numpy as np
+        >>> import mulm
+        >>> import pylab as plt
+        >>> n = 100
+        >>> px = 5
+        >>> py_info = 2
+        >>> py_noize = 100
+        >>> beta = np.array([1, 0, .5] + [0] * (px - 4) + [2]).reshape((px, 1))
+        >>> X = np.hstack([np.random.randn(n, px-1), np.ones((n, 1))]) # X with intercept
+        >>> Y = np.random.randn(n, py_info + py_noize)
+        >>> Y[:, :py_info] += np.dot(X, beta)
+        >>> contrasts = np.identity(X.shape[1])
+        >>> tvals, maxT, df = mod.t_test_minP(contrasts, two_tailed=True)
+        """
+        tvals, pvals, df = self.t_test(contrasts=contrasts, pval=True, **kwargs)
+        min_p = np.ones((contrasts.shape[0], nperms))
+        perm_idx = np.zeros((self.X.shape[0], nperms + 1), dtype='int')
+        for i in xrange(self.Y.shape[1]):
+            Y_curr = self.Y[:, i]
+            Yp_curr = np.zeros((self.X.shape[0], nperms + 1))
+
+            for j in xrange(nperms + 1):
+                if i == 0:
+                    perm_idx[:, j] = np.random.permutation(self.X.shape[0])
+                Yp_curr[:, j] = Y_curr[perm_idx[:, j]]
+            muols = MUOLS(Yp_curr, self.X).fit()
+            tvals_perm, _, _ = muols.t_test(contrasts=contrasts, pval=False,
+                                            two_tailed=two_tailed)
+            if two_tailed:
+                tvals_perm = np.abs(tvals_perm)
+            pval_perm = np.array(
+               [np.array([((np.sum(tvals_perm[con, :] >= tvals_perm[con, k])) - 1) \
+                         for k in xrange(nperms)]) / float(nperms) \
+                             for con in xrange(contrasts.shape[0])])
+            min_p = np.array(
+               [(np.min(np.vstack((min_p[con, :], pval_perm[con, :])), axis=0)) \
+                         for con in xrange(contrasts.shape[0])])
+        pvalues = np.array(
+               [np.array([np.sum(min_p[con, :] <= p) \
+                         for p in pvals[con, :]]) / float(nperms) \
+                             for con in xrange(contrasts.shape[0])])
+        return tvals, pvalues, df
+
     def f_test(self, contrast, pval=False):
         from sklearn.utils import array2d
         #Ypred = self.predict(self.X)

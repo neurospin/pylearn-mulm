@@ -33,9 +33,10 @@ contrasts = np.identity(X.shape[1])
 mod = mulm.MUOLS(Y, X)
 tvals, rawp, df = mod.fit().t_test(contrasts, pval=True, two_tailed=True)
 tvals, maxT, df2 = mod.t_test_maxT(contrasts, two_tailed=True)
+tvals3, minP, df3 = mod.t_test_minP(contrasts, two_tailed=True)
 
-
-n, bins, patches = plt.hist([rawp[0,:], maxT[0,:]],
-                            color=['blue', 'red'], label=['rawp','maxT'])
+n, bins, patches = plt.hist([rawp[0,:], maxT[0,:], minP[0,:]],
+                            color=['blue', 'red', 'green'],
+                            label=['rawp','maxT', 'minP'])
 plt.legend()
 plt.show()
