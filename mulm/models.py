@@ -54,7 +54,7 @@ class MUPairwiseCorr:
 class MUOLS:
     """Mass-univariate linear modeling based Ordinary Least Squares.
     Given two arrays X (n_samples, p) and Y (n_samples, q).
-    Fit q independent linear models.
+    Fit q independent linear models, ie., for all y in Y fit: lm(y ~ X)
 
     Example
     -------
