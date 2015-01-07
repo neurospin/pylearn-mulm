@@ -8,7 +8,7 @@ Created on Sun Nov 16 12:09:43 2014
 import numpy as np
 import pandas as pd
 import statsmodels.api as sm
-from patsy import dmatrices, dmatrix
+from patsy import dmatrices
 from collections import OrderedDict
 
 class MULM:
