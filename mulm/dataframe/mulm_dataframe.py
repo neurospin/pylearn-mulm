@@ -10,6 +10,7 @@ import pandas as pd
 import statsmodels.api as sm
 from patsy import dmatrices
 from collections import OrderedDict
+from statsmodels.sandbox.stats.multicomp import multipletests
 
 class MULM:
     """ Massive (application) of Univariate Linear Model on panda DataFrame.
@@ -119,11 +120,12 @@ class MULM:
         o["df"] = res_df
         return pd.DataFrame(o)
 
-    def t_test_maxT(self, contrasts, nperm=100, alternative= "two_sided"):
-        alternatives = ["two_sided", "less", "greater"]
-        if not alternative in alternatives:
-            raise ValueError("Not a valid alternative")
-        data_ = self.data.copy()
+    def t_test_maxT(self, contrasts, nperm=100):#:, alternative= "two_sided"):
+        #alternatives = ["two_sided", "less", "greater", "one_sided_auto"]
+        #if not alternative in alternatives:
+        #    raise ValueError("Not a valid alternative")
+        data_ori = self.data
+        self.data = self.data.copy()
         stats = self.t_test(contrasts=contrasts, out_filemane=None)
         tmax = list()
         tmin = list()
@@ -136,17 +138,25 @@ class MULM:
             stats_p = self.t_test(contrasts=contrasts, out_filemane=None)
             tmax.append(np.max(stats_p.tvalue))
             tmin.append(np.min(stats_p.tvalue))
-        self.data = data_
+        self.data = data_ori
         self.tmax = np.array(tmax)
         self.tmin = np.array(tmin)
         self.tmax_2sided = np.max(np.abs(np.vstack([self.tmax, self.tmin])), axis=0)
-        if alternative == "two_sided":
-            pvalues = [np.sum(self.tmax_2sided >= t) / float(len(self.tmax)) for t in stats.tvalue]
-        if alternative == "less":
-            pvalues = [np.sum(self.tmin <= t) / float(len(self.tmax)) for t in stats.tvalue]
-        if alternative == "greater":
-            pvalues = [np.sum(self.tmax >= t) / float(len(self.tmax)) for t in stats.tvalue]
-        stats["pvalue_maxT"] = pvalues
+        pvalues_twosided_maxT = np.asarray([np.sum(self.tmax_2sided >= np.abs(t)) / float(len(self.tmax))
+                for t in stats.tvalue])
+        pvalues_onesided_maxT = list()
+        for t in stats.tvalue:
+            if t >= 0:
+                pvalues_onesided_maxT.append(np.sum(self.tmax >= t) / float(len(self.tmax)))
+            else:
+                pvalues_onesided_maxT.append(np.sum(self.tmin <= t) / float(len(self.tmin)))
+        pvalues_onesided_maxT = np.asarray(pvalues_onesided_maxT)
+        print "n pval two sided != one sided", \
+            np.sum(pvalues_onesided_maxT != pvalues_twosided_maxT)
+        assert np.all(pvalues_onesided_maxT <= pvalues_twosided_maxT)
+        stats["pvalues_onesided_maxT"] = pvalues_onesided_maxT
+        stats["pvalues_twosided_maxT"] = pvalues_twosided_maxT
+        stats["pvalue_fdr_bh"] = multipletests(stats.pvalue, method='fdr_bh')[1]
         return stats
 
 
