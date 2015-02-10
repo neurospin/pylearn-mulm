@@ -60,23 +60,22 @@ class MUOLS:
     -------
     """
     def __init__(self, Y, X):
-        from sklearn.utils import safe_asarray
         self.coef = None
-        self.X = safe_asarray(X)
-        self.Y = safe_asarray(Y)
+        self.X = X  # TODO PERFORM BASIC CHECK ARRAY
+        self.Y = Y  # TODO PERFORM BASIC CHECK ARRAY
 
     def fit(self):
         self.pinv = scipy.linalg.pinv(self.X)
         self.coef = np.dot(self.pinv, self.Y)
-        self.y_hat = self.predict(self.X)
-        self.err = self.Y - self.y_hat
-        self.err_ss = np.sum(self.err ** 2, axis=0)
+        y_hat = self.predict(self.X)
+        err = self.Y - y_hat
+        self.err_ss = np.sum(err ** 2, axis=0)
         return self
 
     def predict(self, X):
-        from sklearn.utils import safe_asarray
+        #from sklearn.utils import safe_asarray
         import numpy as np
-        X = safe_asarray(X)
+        #X = safe_asarray(X) # TODO PERFORM BASIC CHECK ARRAY
         pred_y = np.dot(X, self.coef)
         return pred_y
 
@@ -251,7 +250,8 @@ class MUOLS:
         # compute the projection matrix
         M = R0 - R
         #Ypred = np.dot(self.X, betas)
-        SS = np.sum(self.y_hat * np.dot(M, self.y_hat), axis=0)
+        y_hat = self.predict(self.X)
+        SS = np.sum(y_hat * np.dot(M, y_hat), axis=0)
         df_c1 = rank_x - rank_x0
         df_res = n - rank_x
         ## Broadcast over self.err_ss of Y
