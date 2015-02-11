@@ -59,17 +59,57 @@ class MUOLS:
     Example
     -------
     """
+    
+    def _block_slices(self, dim_size, block_size):
+        """Generator that yields slice objects for indexing into
+        sequential blocks of an array along a particular axis
+        """
+        count = 0
+        while True:
+            yield slice(count, count + block_size, 1)
+            count += block_size
+            if count >= dim_size:
+                raise StopIteration
+
     def __init__(self, Y, X):
         self.coef = None
         self.X = X  # TODO PERFORM BASIC CHECK ARRAY
         self.Y = Y  # TODO PERFORM BASIC CHECK ARRAY
 
-    def fit(self):
+    def fit(self, block=False, max_elements=2 ** 27):
+        self.block = block
+        self.max_elements = max_elements
+        # max_elements: block size (2**27= 1Go)
         self.pinv = scipy.linalg.pinv(self.X)
-        self.coef = np.dot(self.pinv, self.Y)
-        y_hat = self.predict(self.X)
-        err = self.Y - y_hat
-        self.err_ss = np.sum(err ** 2, axis=0)
+        n1, q = self.X.shape
+        n, p = self.Y.shape
+        if n1 != n:
+            raise ValueError('matrices are not aligned')
+        if self.block:
+            if self.max_elements < n:
+                raise ValueError('the maximum number of elements is too small')
+            # prioritize processing as many columns of A as possible
+            max_rows = n
+            max_cols = self.max_elements / max_rows
+        else:
+            max_rows = n
+            max_cols = p
+        self.coef = np.zeros((q, p))
+        self.err_ss = np.zeros(p)
+        for pp in self._block_slices(p, max_cols):
+            if self.block: Y_block = self.Y[:, pp].copy()  # copy to force a read
+            else: Y_block = self.Y[:, pp]
+            self.coef[:, pp] = np.dot(self.pinv, Y_block)
+            y_hat = np.dot(self.X, self.coef[:, pp])
+            err = Y_block - y_hat
+            del Y_block, y_hat
+            self.err_ss[pp] = np.sum(err ** 2, axis=0)
+            del err
+
+#        self.coef = np.dot(self.pinv, self.Y)
+#        y_hat = self.predict(self.X)
+#        err = self.Y - y_hat
+#        self.err_ss = np.sum(err ** 2, axis=0)
         return self
 
     def predict(self, X):
@@ -165,12 +205,14 @@ class MUOLS:
         for i in xrange(nperms):
             perm_idx = np.random.permutation(self.X.shape[0])
             Xp = self.X[perm_idx, :]
-            muols = MUOLS(self.Y, Xp).fit()
+            muols = MUOLS(self.Y, Xp).fit(block=self.block,
+                                          max_elements=self.max_elements)
             tvals_perm, _, _ = muols.t_test(contrasts=contrasts, pval=False,
                                             two_tailed=two_tailed)
             if two_tailed:
                 tvals_perm = np.abs(tvals_perm)
             max_t.append(np.max(tvals_perm, axis=1))
+            del muols
         max_t = np.array(max_t)
         tvals_ = np.abs(tvals) if two_tailed else tvals
         pvalues = np.array(
