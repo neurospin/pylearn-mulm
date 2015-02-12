@@ -79,23 +79,26 @@ class MUOLS:
         self.Y = Y  # TODO PERFORM BASIC CHECK ARRAY
 
     def fit(self, block=False, max_elements=2 ** 27):
+        """Use block=True for huge matrices Y.
+        Operations block by block to optimize time and memory.
+        max_elements: block dimension (2**27 corresponds to 1Go)
+        """
         self.block = block
         self.max_elements = max_elements
-        # max_elements: block size (2**27= 1Go)
         self.pinv = scipy.linalg.pinv(self.X)
         n, p = self.Y.shape
         q = self.X.shape[1]
         if self.block:
             if self.max_elements < n:
                 raise ValueError('the maximum number of elements is too small')
-            # prioritize processing as many columns of A as possible
             max_cols = int(self.max_elements / n)
         else:
             max_cols = p
         self.coef = np.zeros((q, p))
         self.err_ss = np.zeros(p)
         for pp in self._block_slices(p, max_cols):
-            if self.block: Y_block = self.Y[:, pp].copy()  # copy to force a read
+            if isinstance(self.Y, np.memmap):
+                Y_block = self.Y[:, pp].copy()  # copy to force a read
             else: Y_block = self.Y[:, pp]
             #Y_block = self.Y[:, pp]
             self.coef[:, pp] = np.dot(self.pinv, Y_block)
