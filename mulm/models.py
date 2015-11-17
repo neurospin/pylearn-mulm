@@ -59,7 +59,7 @@ class MUOLS:
     Example
     -------
     """
-    
+
     def _block_slices(self, dim_size, block_size):
         """Generator that yields slice objects for indexing into
         sequential blocks of an array along a particular axis
@@ -85,7 +85,7 @@ class MUOLS:
         """
         self.block = block
         self.max_elements = max_elements
-        self.pinv = scipy.linalg.pinv(self.X)
+        self.pinv = scipy.linalg.pinv2(self.X)
         n, p = self.Y.shape
         q = self.X.shape[1]
         if self.block:
@@ -280,9 +280,9 @@ class MUOLS:
         n, p = self.X.shape
         #Xpinv = scipy.linalg.pinv(X)
         rank_x = np.linalg.matrix_rank(self.pinv)
-        C0 = np.eye(p) - np.dot(C1, scipy.linalg.pinv(C1))  # Ortho. cont. to C1
+        C0 = np.eye(p) - np.dot(C1, scipy.linalg.pinv2(C1))  # Ortho. cont. to C1
         X0 = np.dot(self.X, C0)  # Design matrix of the reduced model
-        X0pinv = scipy.linalg.pinv(X0)
+        X0pinv = scipy.linalg.pinv2(X0)
         rank_x0 = np.linalg.matrix_rank(X0pinv)
         # Find the subspace (X1) of Xc1, which is orthogonal to X0
         # The projection matrix M due to X1 can be derived from the residual
