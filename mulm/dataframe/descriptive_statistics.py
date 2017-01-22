@@ -16,12 +16,13 @@ def describe_df_basic(data):
                           columns=["variable", "type", "isnumeric", "count"])
     return basic_desc
 
-def describe_df(data, exclude_from_cat_desc):
+def describe_df(data, exclude_from_cat_desc=[]):
     basic = describe_df_basic(data)
     desc_num = data.describe().T
     desc_num.insert(0, 'variable', desc_num.index)
     desc_num.index = range(len(desc_num))
-    cat_vars = data.columns - desc_num["variable"] - exclude_from_cat_desc
+    cat_vars = set(data.columns) - set(desc_num["variable"]) - set(exclude_from_cat_desc)
+    #cat_vars = data.columns - desc_num["variable"] - exclude_from_cat_desc
     desc_cat = None
     for var in cat_vars:
         c = data[var].value_counts()
