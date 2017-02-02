@@ -45,7 +45,7 @@ if __name__ == "__main__":
         exclude = options.exclude.split()
     else:
         exclude = []
-    print options.input, options.ouput, exclude
+    print(options.input, options.ouput, exclude)
     data = pd.read_csv(options.input)
     desc_num, desc_cat = describe_df(data, exclude=exclude)
     try:
