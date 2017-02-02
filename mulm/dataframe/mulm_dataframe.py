@@ -85,7 +85,7 @@ class MULM:
                 contrasts_str = ["_".join(X.columns[np.where(c)[0]].tolist())
                     for c in contrasts_]
                 # TODO FIXME IF CONTRASTS AS A MATRIX
-                #contrasts_str = [X.columns[contrasts[i] != 0] for i in xrange(len(contrasts))]
+                #contrasts_str = [X.columns[contrasts[i] != 0] for i in range(len(contrasts))]
             else:
                 contrasts_ = np.identity(X.shape[1])
                 contrasts_str = X.columns.tolist()
@@ -130,8 +130,8 @@ class MULM:
         tmax = list()
         tmin = list()
         targets = set([formula.split("~")[0] for formula in self.formulas])
-        for perm in xrange(nperm):
-            print "Perm ", perm
+        for perm in range(nperm):
+            print("Perm ", perm)
             # permut all targets
             for target in targets:
                 self.data[target] = np.random.permutation(self.data[target])
@@ -151,12 +151,13 @@ class MULM:
             else:
                 pvalues_onesided_maxT.append(np.sum(self.tmin <= t) / float(len(self.tmin)))
         pvalues_onesided_maxT = np.asarray(pvalues_onesided_maxT)
-        print "n pval two sided != one sided", \
-            np.sum(pvalues_onesided_maxT != pvalues_twosided_maxT)
+        print("n pval two sided != one sided",
+              np.sum(pvalues_onesided_maxT != pvalues_twosided_maxT))
         assert np.all(pvalues_onesided_maxT <= pvalues_twosided_maxT)
         stats["pvalues_onesided_maxT"] = pvalues_onesided_maxT
         stats["pvalues_twosided_maxT"] = pvalues_twosided_maxT
-        stats["pvalue_fdr_bh"] = multipletests(stats.pvalue, method='fdr_bh')[1]
+        stats["pvalue_fdr_bh"] = multipletests(stats.pvalue,
+                                               method='fdr_bh')[1]
         return stats
 
 
@@ -169,14 +170,14 @@ if __name__ == "__main__":
     n = 100
     px_info = 5
     px_noise = 5
-    regressors = ["x_%i" % i for i in xrange(px_info + px_noise)]
+    regressors = ["x_%i" % i for i in range(px_info + px_noise)]
 
     pz = 3
-    z_colnames = ["z_%i" % i for i in xrange(pz)]
+    z_colnames = ["z_%i" % i for i in range(pz)]
 
     py_info = 2
     py_noise = 8
-    targets = ["y_%i" % i for i in xrange(py_info + py_noise)]
+    targets = ["y_%i" % i for i in range(py_info + py_noise)]
 
     beta = np.concatenate([
         (np.arange(1, px_info+1) / float(px_info))[::-1],
@@ -187,15 +188,15 @@ if __name__ == "__main__":
     Y = np.random.randn(n, py_info + py_noise)
     # Causal model: add X on the first py_info variable
     Y[:, :py_info] += np.dot(X, beta) + np.dot(Z, [.1]*pz)[:, None] + 1.
-    data = pd.DataFrame(np.concatenate([Y, X, Z,], 1),
+    data = pd.DataFrame(np.concatenate([Y, X, Z], 1),
                         columns=targets + regressors + z_colnames)
 
     #######
     # Model
     #######
     covar_model = "+".join(z_colnames)
-    formulas = ['%s~%s+%s' % (target, regressor, covar_model) for target in targets
-        for regressor in regressors]
+    formulas = ['%s~%s+%s' % (target, regressor, covar_model)
+                for target in targets for regressor in regressors]
     model = MULM(data=data, formulas=formulas)
 
     #############################################
@@ -238,12 +239,10 @@ if __name__ == "__main__":
     model = MULM(data=data, formulas=formulas)
     self = model
 
-    #stats = model.t_test_maxT(nperm=10)
-    #stats = model.t_test_maxT(nperm=10, alternative="less")
-    stats = model.t_test_maxT(contrasts=1, nperm=20, alternative="greater")
+    stats = model.t_test_maxT(contrasts=1, nperm=20)
     #stats = model.t_test_maxT(nperm=10, alternative="two_sided")
     # Check that P (Positive) P_expected-20% < P < P_expected-20%
-    P = np.sum(stats.pvalue_maxT<0.05)
+    P = np.sum(stats.pvalues_onesided_maxT < 0.05)
     assert (P <= py_info * (px_info)) and (P > 1)
 
 """
