@@ -202,9 +202,10 @@ class MUOLS:
         >>> tvals, maxT, df = mod.t_test_maxT(contrasts, two_tailed=True)
         """
         #contrast = [0, 1] + [0] * (X.shape[1] - 2)
+        contrasts = np.atleast_2d(np.asarray(contrasts))
         tvals, _, df = self.t_test(contrasts=contrasts, pval=False, **kwargs)
         max_t = list()
-        for i in xrange(nperms):
+        for i in range(nperms):
             perm_idx = np.random.permutation(self.X.shape[0])
             Xp = self.X[perm_idx, :]
             muols = MUOLS(self.Y, Xp).fit(block=self.block,
@@ -219,7 +220,7 @@ class MUOLS:
         tvals_ = np.abs(tvals) if two_tailed else tvals
         pvalues = np.array(
             [np.array([np.sum(max_t[:, con] >= t) for t in tvals_[con, :]])\
-                / float(nperms) for con in xrange(contrasts.shape[0])])
+                / float(nperms) for con in range(contrasts.shape[0])])
         return tvals, pvalues, df
 
     def t_test_minP(self, contrasts, nperms=10000, two_tailed=True, **kwargs):
@@ -245,11 +246,11 @@ class MUOLS:
         tvals, pvals, df = self.t_test(contrasts=contrasts, pval=True, **kwargs)
         min_p = np.ones((contrasts.shape[0], nperms))
         perm_idx = np.zeros((self.X.shape[0], nperms + 1), dtype='int')
-        for i in xrange(self.Y.shape[1]):
+        for i in range(self.Y.shape[1]):
             Y_curr = self.Y[:, i]
             Yp_curr = np.zeros((self.X.shape[0], nperms + 1))
 
-            for j in xrange(nperms + 1):
+            for j in range(nperms + 1):
                 if i == 0:
                     perm_idx[:, j] = np.random.permutation(self.X.shape[0])
                 Yp_curr[:, j] = Y_curr[perm_idx[:, j]]
@@ -260,15 +261,15 @@ class MUOLS:
                 tvals_perm = np.abs(tvals_perm)
             pval_perm = np.array(
                [np.array([((np.sum(tvals_perm[con, :] >= tvals_perm[con, k])) - 1) \
-                         for k in xrange(nperms)]) / float(nperms) \
-                             for con in xrange(contrasts.shape[0])])
+                         for k in range(nperms)]) / float(nperms) \
+                             for con in range(contrasts.shape[0])])
             min_p = np.array(
                [(np.min(np.vstack((min_p[con, :], pval_perm[con, :])), axis=0)) \
-                         for con in xrange(contrasts.shape[0])])
+                         for con in range(contrasts.shape[0])])
         pvalues = np.array(
                [np.array([np.sum(min_p[con, :] <= p) \
                          for p in pvals[con, :]]) / float(nperms) \
-                             for con in xrange(contrasts.shape[0])])
+                             for con in range(contrasts.shape[0])])
         return tvals, pvalues, df
 
     def f_test(self, contrast, pval=False):
