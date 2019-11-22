@@ -69,7 +69,7 @@ class MUOLS:
             yield slice(count, count + block_size, 1)
             count += block_size
             if count >= dim_size:
-                raise StopIteration
+                return
 
     def __init__(self, Y, X):
         self.coef = None
@@ -158,6 +158,7 @@ class MUOLS:
         p_vals_ = list()
         df_ = list()
         for contrast in contrasts:
+            # contrast = contrasts[0]
             #ccontrasts = np.asarray(contrasts)
             # t = c'beta / std(c'beta)
             # std(c'beta) = sqrt(var_err (c'X+)(X+'c))
@@ -273,11 +274,11 @@ class MUOLS:
         return tvals, pvalues, df
 
     def f_test(self, contrast, pval=False):
-        from sklearn.utils import array2d
+        # from sklearn.utils import array2d
         #Ypred = self.predict(self.X)
         #betas = self.coef
         #ss_errors = np.sum((self.Y - self.y_hat) ** 2, axis=0)
-        C1 = array2d(contrast).T
+        C1 = np.atleast_2d(contrast).T
         n, p = self.X.shape
         #Xpinv = scipy.linalg.pinv(X)
         rank_x = np.linalg.matrix_rank(self.pinv)
