@@ -21,46 +21,31 @@ df = pd.read_csv(url)
 ################################################################################
 # Fit with statmodel
 
-oneway = smfrmla.ols('salary ~ experience + education + management', df).fit()
-print(oneway.summary())
-aov = sm.stats.anova_lm(oneway, typ=2) # Type 2 ANOVA DataFrame
-print(aov)
+mod_sm = smfrmla.ols('salary ~ experience + education + management', df).fit()
+aov_sm = sm.stats.anova_lm(oneway, typ=2) # Type 2 ANOVA DataFrame
+print(mod_sm.summary())
+print(aov_sm)
 
 ################################################################################
 # Fit with MULM
-
-X_df = pd.get_dummies(df.iloc[:, 1:])
-X = np.asarray(X_df).astype(float)
 Y = np.asarray(df.salary)[:, None].astype(float)
+X, t_contrasts, f_contrasts = mulm.design_matrix(formula="experience + education + management", data=df)
+mod_mulm = mulm.MUOLS(Y, X).fit()
+aov_mulm = OrderedDict((term, mod_mulm.f_test(f_contrasts[term], pval=True)) for term in f_contrasts)
 
-con_exp = np.zeros((X.shape[1], X.shape[1]))
-con_exp[0, 0] = 1
+print(mod_mulm.coef)
+print(aov_mulm)
 
-con_edu = np.zeros((X.shape[1], X.shape[1]))
-con_edu[[1, 2, 3], [1, 2, 3]] = 1
-
-con_man = np.zeros((X.shape[1], X.shape[1]))
-con_man[[4, 5], [4, 5]] = 1
-
-
-mod = mulm.MUOLS(Y, X).fit()
-tvals_exp, rawp_expt, df = mod.t_test([1, 0, 0, 0, 0, 0], pval=True, two_tailed=True)
-fvals_exp, rawp_exp = mod.f_test(con_exp, pval=True)
-fvals_edu, rawp_edu = mod.f_test(con_edu, pval=True)
-fvals_man, rawp_man = mod.f_test(con_man, pval=True)
+# Check equality of model parameters
+assert np.allclose(np.asarray(mod_sm.params), mod.coef[:, 0])
 
 ################################################################################
-# Check
+# Check equality of F-statistics
 
-assert np.allclose(aov.loc['experience', 'F'], tvals_exp[0] ** 2)
-assert np.allclose(aov.loc['experience', 'PR(>F)'], rawp_expt[0] ** 2)
+assert np.allclose(np.asarray(aov_sm.loc[:, "F"][:-1]),
+    np.asarray([aov_mulm[iv][0][0] for iv in list(f_contrasts.keys())[1:]]))
 
-assert np.allclose(aov.loc['experience', 'F'], fvals_exp[0])
-assert np.allclose(aov.loc['experience', 'PR(>F)'], rawp_exp[0])
-
-assert np.allclose(aov.loc['education', 'F'], fvals_edu[0])
-assert np.allclose(aov.loc['education', 'PR(>F)'], rawp_edu[0])
-
-assert np.allclose(aov.loc['management', 'F'], fvals_man[0])
-assert np.allclose(aov.loc['management', 'PR(>F)'], rawp_man[0])
+# Check equality of P-values
+assert np.allclose(np.asarray(aov_sm.loc[:, "PR(>F)"][:-1]),
+    np.asarray([aov_mulm[iv][1][0] for iv in list(f_contrasts.keys())[1:]]))
 
