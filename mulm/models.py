@@ -182,8 +182,8 @@ class MUOLS:
         return np.asarray(t_stats_), np.asarray(p_vals_), np.asarray(df_)
 
     def t_test_maxT(self, contrasts, nperms=1000, two_tailed=True, **kwargs):
-        """Correct for multiple comparisons using maxT procedure. See t_test()
-        For all parameters.
+        """Correct for multiple comparisons using Westfall and Young, 1993
+        a.k.a maxT procedure. See t_test() for all parameters.
 
         Example
         -------
@@ -274,7 +274,7 @@ class MUOLS:
         return tvals, pvalues, df
 
     def f_test(self, contrast, pval=False):
-        # from sklearn.utils import array2d
+        # from sklearn.utils import array2d
         #Ypred = self.predict(self.X)
         #betas = self.coef
         #ss_errors = np.sum((self.Y - self.y_hat) ** 2, axis=0)

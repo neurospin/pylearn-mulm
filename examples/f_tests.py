@@ -20,6 +20,44 @@ from collections import OrderedDict
 url = 'https://raw.github.com/neurospin/pystatsml/master/datasets/salary_table.csv'
 df = pd.read_csv(url)
 
+
+url = 'https://stats.idre.ucla.edu/stat/data/hsb2.csv'
+hsb2 = pd.read_csv(url)
+########################################################################################################################
+
+df.salary /= 100
+
+df.groupby('education')['salary'].mean()
+df['salary'].mean()
+
+""""
+education
+Bachelor    149.415000
+Master      182.863684
+Ph.D        182.928462
+
+172.70195652173913
+"""
+
+
+# 'salary', 'experience', 'education', 'management'
+from statsmodels.formula.api import ols
+mod = ols("salary ~ C(education, Treatment)", data=df).fit()
+print(mod.summary())
+
+mod = ols("salary ~ C(education, Sum)", data=df).fit()
+print(mod.summary())
+
+import patsy
+#formula = "write ~ C(race, Treatment)"
+formula = "education"
+
+dmat = patsy.dmatrix("education", data=df)
+dmat = patsy.dmatrix("C(education, Treatment)", data=df)
+dmat = patsy.dmatrix("C(education, Sum)", data=df)
+
+np.asarray(dmat)
+
 ########################################################################################################################
 # Fit with MULM
 
