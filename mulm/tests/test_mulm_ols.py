@@ -8,6 +8,7 @@ import unittest
 
 import numpy as np
 from numpy.testing import assert_almost_equal
+from numpy.testing import assert_allclose
 import mulm
 import pandas as pd
 import statsmodels.api as sm
@@ -50,9 +51,9 @@ class TestMULMOLS(unittest.TestCase):
         assert_almost_equal(mulm_tvals, sm_tvals)
         assert_almost_equal(mulm_pvals, sm_pvals)
 
-        assert np.all(mulm_tvals == mulm_tvals_block)
-        assert np.all(mulm_pvals == mulm_pvals_block)
-        assert np.all(mulm_df == mulm_df_block)
+        assert_allclose(mulm_tvals, mulm_tvals_block)
+        assert_allclose(mulm_pvals, mulm_pvals_block)
+        assert_allclose(mulm_df, mulm_df_block)
 
 #        ## OLS with MULM one-tailed
 #        mod = mulm.MUOLS(Y, X).fit()
@@ -89,10 +90,11 @@ class TestMULMOLS(unittest.TestCase):
         mod_block = mulm.MUOLS(Y, X).fit(block=True, max_elements=1000)
         tvals_block, rawp_block, df_block = mod.t_test(contrasts, pval=True, two_tailed=True)
         tvals_block2, maxT_block, df_block2 = mod_block.t_test_maxT(contrasts, two_tailed=True)
-        assert np.all(tvals_block == tvals_block2)
-        assert np.all(tvals_block2 == tvals2)
-        assert np.all(df_block == df_block2)
-        assert np.all(df_block2 == df2)
+
+        assert_allclose(tvals_block, tvals_block2)
+        assert_allclose(tvals_block2, tvals2)
+        assert_allclose(df_block, df_block2)
+        assert_allclose(df_block2, df2)
 
         # More than 10 positive with uncorrected pval
         expected_tp = py_info * 3
@@ -107,7 +109,7 @@ class TestMULMOLS(unittest.TestCase):
         assert np.sum(maxT_block < 0.05) < (expected_tp + 2) and np.sum(maxT_block < 0.05) > (expected_tp - 2)
 
     def test_ttest_ftest_vs_statsmodels(self):
-        url = 'https://raw.github.com/neurospin/pystatsml/master/datasets/salary_table.csv'
+        url = 'https://github.com/duchesnay/pystatsml/raw/master/datasets/salary_table.csv'
         df = pd.read_csv(url)
 
         # Fit with statmodel
