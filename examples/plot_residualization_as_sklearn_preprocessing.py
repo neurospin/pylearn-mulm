@@ -10,6 +10,8 @@ Preprocessing:
 Since age is used in residualization, it MUST be fitted on training data only.
 """
 
+import numpy as np
+import pandas as pd
 from sklearn import linear_model
 # from sklearn.model_selection import StratifiedKFold
 from sklearn.model_selection import KFold
@@ -18,9 +20,12 @@ from sklearn.pipeline import make_pipeline
 from sklearn.model_selection import cross_validate
 from sklearn import metrics
 
+from mulm.residualizer import Residualizer
+
 ################################################################################
-# Dataset
-# X: input data of the predictive model and y is the target
+# Dataset, here
+# - X: is the input data of the predictive model and y is the target
+# - Z: is the design matrix use to residualize the X
 
 site = np.array([-1] * 50 + [1] * 50)
 age = np.random.uniform(10, 40, size=100) + 5 * site
@@ -42,7 +47,7 @@ cv = KFold(n_splits=5, random_state=42)
 
 residualizer = Residualizer(data=demographic_df, formula_res='site',
                             formula_full='site + age')
-Z = residualizer.get_design_mat()
+Z = residualizer.get_design_mat(data=demographic_df)
 scores = np.zeros((5, 2))
 for i, (tr_idx, te_idx) in enumerate(cv.split(X, y)):
     X_tr, X_te = X[tr_idx, :], X[te_idx, :]
@@ -83,8 +88,9 @@ from mulm.residualizer import ResidualizerEstimator
 residualizer = Residualizer(data=demographic_df, formula_res='site',
                             formula_full='site + age')
 # Extract design matrix and pack it with X
-Z = residualizer.get_design_mat()
+Z = residualizer.get_design_mat(data=demographic_df)
 
+# Wrap the residualizer
 residualizer_wrapper = ResidualizerEstimator(residualizer)
 ZX = residualizer_wrapper.pack(Z, X)
 

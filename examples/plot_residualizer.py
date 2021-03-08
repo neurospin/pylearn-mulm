@@ -36,18 +36,26 @@ sns.lmplot(x="age", y="y", hue="site", data=data)
 # Simple residualization on site. Better, but removing site effect also remove
 # age effect
 
-res_spl = Residualizer(data, formula_res="site")
-yres = res_spl.fit_transform(y[:, None], res_spl.get_design_mat())
+res_spl = Residualizer(data=data, formula_res="site")
+X = res_spl.get_design_mat(data)
+print("Design mat contains intercept and site:")
+print(X[:5, :])
+yres = res_spl.fit_transform(y[:, None], X)
 data["yres"] = yres
 sns.lmplot(x="age", y="yres", hue="site", data=data)
 
 ################################################################################
-# Site residualization adjusted for age.
 # Site residualization adjusted for age provides higher correlation, and
 # lower stderr than simple residualization.
 
 res_adj = Residualizer(data, formula_res="site", formula_full="age + site")
-yadj = res_adj.fit_transform(y[:, None], res_adj.get_design_mat())
+X = res_adj.get_design_mat(data)
+print("Design mat contains intercept, site and age")
+print(X[:5, :])
+print("Residualisation contrast (intercept, site):")
+print(res_adj.contrast_res)
+
+yadj = res_adj.fit_transform(y[:, None], X)
 
 lm_res = stats.linregress(age, yres.ravel())
 lm_adj = stats.linregress(age, yadj.ravel())

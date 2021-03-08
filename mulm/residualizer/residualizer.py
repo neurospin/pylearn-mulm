@@ -7,40 +7,49 @@ Created on Thu Feb  6 15:15:14 2020
 """
 import numpy as np
 import mulm
-
+import pandas as pd
 
 class Residualizer:
     """
     Residualization of a Y data on possibly adjusted for other variables.
     Example: Y is a (n, p) array of p-dependant variables, we want to residualize
-    for "site" adjusted for "age + sex + diagnosis"
+    for "site" adjusted for "age + sex"
 
-    1) `Residualizer(data=df,
-                     formula_res="site",
-                     formula_full=site + age + sex + diagnosis")`
-    2) `get_design_mat()` will return the numpy (n, k) array design matrix.
+    1) Use of DataFrame and formula:
+    1.1) `Residualizer(data=df,
+                       formula_res="site",
+                       formula_full=site + age + sex")`
+
+    1.2) `Z = get_design_mat(data)` will return the numpy (n, k) array design matrix.
     Row selection can be done on both Y and design_mat (Cross-val., etc.)
 
-    3) `fit(Y, design_mat)` fits the model:
-    Y = b1 site + b2 age + b3 sex + b4 diagnosis + eps
-    => learn and store b1, b2, b3 and b4
+    2) Use of raw arrays: if you choose to manually write your design matrix.
+    In this case provide res_mask ie, the residualization mask within your full.
+    model. For example: `Residualizer(mask=[False, True, False, False])` will
+    fit the whole model and residualize on the second regressor, ie, site.
 
-    4) `transform(Y, design_mat)` Y and design_mat can contains other
-    observations than the ones used in training phase.
+    3) `fit(Y, X)` fits the model:
+    Y = b0 + b1 site + b2 age + b3 sex + eps
+    => learn and store b1, b2, b3
 
-    Return Y - b1 site
+    4) `transform(Y, X)` residualize Y on X, ie, returns Y - b1 site
 
     Parameters
     ----------
-    Y: array (n, p)
-        dependant variables
+    data: DataFrame
+        DataFrame containing column to build the design matrix (default None).
 
     formula_res: str
-        Residualisation formula ex: "site"
+        Residualisation formula. Ex: "site" (default None).
 
     formula_full: str
         Full model (formula) of residualisation containing other variables
-        to adjust for. Ex.: "site + age + sex + diagnosis"
+        to adjust for. Ex.: "site + age + sex" (default None).
+
+    cont_res: boolean array
+        the contrast for residualisation (matches formula_res).
+        Ex: [False, True, False, False]. The default None corresponds to True
+        everywhere.
 
     design_mat: array (n, k)
         where Y.shape[0] == design_mat.shape[0] and design_mat.shape[1] is
@@ -89,48 +98,70 @@ class Residualizer:
     True
     """
 
-    def __init__(self, data, formula_res, formula_full=None):
+    def __init__(self, data=None, formula_res=None, formula_full=None,
+                 contrast_res=None):
 
-        if formula_full is None:
-            formula_full = formula_res
-        res_terms = mulm.design_matrix(formula=formula_res, data=data)[1].keys()
-        self.design_mat, self.t_contrasts, self.f_contrasts = \
-            mulm.design_matrix(formula=formula_full, data=data)
-        # mask of terms in residualize formula within full model
-        self.mask = np.array([cont for term, cont in self.t_contrasts.items()
-                              if term in res_terms]).sum(axis=0) == 1
+        if isinstance(data, pd.DataFrame) and isinstance(formula_res, str):
+            if formula_full is None:
+                formula_full = formula_res
+            self.formula_full = formula_full
+            res_terms = mulm.design_matrix(formula=formula_res, data=data)[1].keys()
+            _, self.t_contrasts, self.f_contrasts = \
+                mulm.design_matrix(formula=formula_full, data=data)
+            # mask of terms in residualize formula within full model
+            self.contrast_res = np.array([cont for term, cont in self.t_contrasts.items()
+                                  if term in res_terms]).sum(axis=0) == 1
+        else:
+            self.contrast_res = contrast_res
 
-    def get_design_mat(self):
-        return self.design_mat
+    def get_design_mat(self, data):
+        design_mat, t_contrasts, f_contrasts = \
+            mulm.design_matrix(formula=self.formula_full, data=data)
+        assert np.all([self.t_contrasts[k] == t_contrasts[k]
+                       for k in self.t_contrasts]), "new data doesn't"
+        return design_mat
 
-    def fit(self, Y, design_mat):
-        """
+    def fit(self, Y, X):
+        """Fit parameters of p linear models where each Y is regressed on X.
+
         Y: array (n, p)
             Dependant variables
 
-        design_mat: array(n, k)
+        X: array(n, k)
             Design matrix of independant variables
         """
+        if self.contrast_res is None:
+            self.contrast_res = np.ones(X.shape[1]).astype(bool)
 
-        assert Y.shape[0] == design_mat.shape[0]
-        assert self.mask.shape[0] == design_mat.shape[1]
-        self.mod_mulm = mulm.MUOLS(Y, design_mat).fit()
+        assert Y.shape[0] == X.shape[0]
+        assert self.contrast_res.shape[0] == X.shape[1], "contrast doesn't match design matrix"
+        self.mod_mulm = mulm.MUOLS(Y, X).fit()
         return self
 
-    def transform(self, Y, design_mat=None):
+    def transform(self, Y, X):
 
-        assert Y.shape[0] == design_mat.shape[0]
-        assert self.mask.shape[0] == design_mat.shape[1]
-        return Y - np.dot(design_mat[:, self.mask],
-                          self.mod_mulm.coef[self.mask, :])
+        assert Y.shape[0] == X.shape[0]
+        assert self.contrast_res.shape[0] == X.shape[1], "contrast doesn't match design matrix"
+        return Y - np.dot(X[:, self.contrast_res],
+                          self.mod_mulm.coef[self.contrast_res, :])
 
-    def fit_transform(self, Y, design_mat):
-        self.fit(Y, design_mat)
-        return self.transform(Y, design_mat)
+    def fit_transform(self, Y, X):
+        self.fit(Y, X)
+        return self.transform(Y, X)
+
+
+def residualize(Y, data, formula_res, formula_full=None):
+    """Helper function. See Residualizer
+    """
+    res = Residualizer(data=data, formula_res=formula_res, formula_full=formula_full)
+    return res.fit_transform(Y, res.get_design_mat(data))
 
 
 class ResidualizerEstimator:
     """Wrap Residualizer into an Estimator compatible with sklearn API.
+
+    Note that to be consistant with sklearn API, here X contains the input variable
+    and Z is the design matrix for residualization.
 
     Parameters
     ----------
@@ -140,20 +171,20 @@ class ResidualizerEstimator:
     def __init__(self, residualizer):
 
         self.residualizer = residualizer
-        self.design_mat_ncol = self.residualizer.design_mat.shape[1]
+        self.design_mat_ncol = self.residualizer.contrast_res.shape[0]
 
     def fit(self, X, y=None):
-        design_mat, Y = self.upack(X)
-        return self.residualizer.fit(Y, design_mat)
+        Z, Y = self.upack(X)
+        return self.residualizer.fit(Y, Z)
 
     def transform(self, X):
-        design_mat, Y = self.upack(X)
-        return self.residualizer.transform(Y, design_mat)
+        Z, Y = self.upack(X)
+        return self.residualizer.transform(Y, Z)
 
     def fit_transform(self, X, y=None):
-        design_mat, Y = self.upack(X)
-        self.residualizer.fit(Y, design_mat)
-        return self.residualizer.transform(Y, design_mat)
+        Z, Y = self.upack(X)
+        self.residualizer.fit(Y, Z)
+        return self.residualizer.transform(Y, Z)
 
     def pack(self, Z, X):
         """Pack (concat) Z (design matrix) and X to match scikit-learn pipelines.
@@ -171,23 +202,17 @@ class ResidualizerEstimator:
         """
         return np.hstack([Z, X])
 
-    def upack(self, X):
+    def upack(self, ZX):
         """Unpack X and Z (design matrix) from X.
 
         Parameters
         ----------
-        X: array (n, (k+p))
-            array: [design_matrix, X]
+        ZX: array (n, (k+p))
+            array: [Z, X]
 
         Returns
         -------
-            design_matrix, X
+            Z (design_matrix), X
         """
-        return X[:, :self.design_mat_ncol], X[:, self.design_mat_ncol:]
+        return ZX[:, :self.design_mat_ncol], ZX[:, self.design_mat_ncol:]
 
-
-def residualize(Y, data, formula_res, formula_full=None):
-    """Helper function. See Residualizer
-    """
-    res = Residualizer(data=data, formula_res=formula_res, formula_full=formula_full)
-    return res.fit_transform(Y, res.get_design_mat())
