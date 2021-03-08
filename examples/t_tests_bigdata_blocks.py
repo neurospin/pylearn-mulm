@@ -10,7 +10,7 @@ import tempfile
 from mulm import MUOLS
 
 
-print "Create matrix"
+print("Create matrix")
 start_time = time.time()
 
 n = 1000
@@ -26,7 +26,7 @@ f = tempfile.mktemp()
 Y = np.random.randn(n, py_info + py_noize)
 # Causal model: add X on the first py_info variable
 Y[:, :py_info] += np.dot(X, beta)
-print "Save matrix to disk"
+print("Save matrix to disk")
 np.save(f, Y)
 del Y
 
@@ -44,7 +44,7 @@ time4 = time.time()
 tvals, pvals, dfs = muols.t_test(contrasts=contrasts,
                                  pval=True,
                                  two_tailed=True)
-print  "Mmap by block(max_elements=2 ** 27): ", time4 - time3
+print("Mmap by block(max_elements=2 ** 27): ", time4 - time3)
 del muols
 
 # univariate analysis: fit in one go
@@ -56,7 +56,7 @@ tvals, pvals, dfs = muols.t_test(contrasts=contrasts,
                                  pval=True,
                                  two_tailed=True)
 
-print "Mmap no block: ", time6 - time5
+print("Mmap no block: ", time6 - time5)
 del muols
 del Y_memmap
 
@@ -72,7 +72,7 @@ time10 = time.time()
 tvals, pvals, dfs = muols.t_test(contrasts=contrasts,
                                  pval=True,
                                  two_tailed=True)
-print "Mumpy by block(max_elements=2 ** 27): ",time10 - time9
+print("Mumpy by block(max_elements=2 ** 27): ",time10 - time9)
 del muols
 
 # univariate analysis: fit in one go
@@ -83,6 +83,6 @@ time12 = time.time()
 tvals, pvals, dfs = muols.t_test(contrasts=contrasts,
                                  pval=True,
                                  two_tailed=True)
-print "Mumpy no block", time12 - time11
+print("Mumpy no block", time12 - time11)
 del muols
 del Y

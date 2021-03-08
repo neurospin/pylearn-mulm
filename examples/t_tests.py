@@ -26,7 +26,7 @@ contrasts = np.identity(X.shape[1])
 ## OLS with statmodels, need to iterate over Y columns
 sm_tvals = list()
 sm_pvals = list()
-for j in xrange(Y.shape[1]):
+for j in range(Y.shape[1]):
     mod = sm.OLS(Y[:, j], X)
     sm_ttest = mod.fit().t_test(contrasts)
     sm_tvals.append(sm_ttest.tvalue)

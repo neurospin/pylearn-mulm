@@ -5,13 +5,6 @@ Created on Thu May 15 11:35:27 2014
 @author:  edouard.duchesnay@cea.fr
 @license: BSD-3-Clause
 """
-# -*- coding: utf-8 -*-
-"""
-Created on Thu May 15 11:35:27 2014
-
-@author:  edouard.duchesnay@cea.fr
-@license: BSD-3-Clause
-"""
 import numpy as np
 import mulm
 import pylab as plt
