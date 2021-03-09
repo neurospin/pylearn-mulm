@@ -13,7 +13,6 @@ Since age is used in residualization, it MUST be fitted on training data only.
 import numpy as np
 import pandas as pd
 from sklearn import linear_model
-# from sklearn.model_selection import StratifiedKFold
 from sklearn.model_selection import KFold
 from sklearn.preprocessing import StandardScaler
 from sklearn.pipeline import make_pipeline
