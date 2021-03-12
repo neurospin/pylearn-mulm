@@ -29,7 +29,7 @@ from sklearn import metrics
 
 
 WD = tempfile.gettempdir()
-WD = '/home/ed203246/data/brain_age_ixi'
+# WD = '/home/ed203246/data/brain_age_ixi'
 os.makedirs(os.path.join(WD, "data"), exist_ok=True)
 
 ################################################################################

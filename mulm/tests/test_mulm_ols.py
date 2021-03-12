@@ -2,7 +2,7 @@
 """
 Created on Sun Jun 16 09:13:14 2013
 
-@author: edouard
+@author: edouard.duchesnay@cea.fr
 """
 import unittest
 
@@ -114,7 +114,6 @@ class TestMULMOLS(unittest.TestCase):
 
         # Fit with statmodel
         oneway = smfrmla.ols('salary ~ experience + education + management', df).fit()
-        #print(oneway.summary())
         aov = sm.stats.anova_lm(oneway, typ=2) # Type 2 ANOVA DataFrame
 
         # Fit with MULM
@@ -134,9 +133,9 @@ class TestMULMOLS(unittest.TestCase):
         import mulm
         mod = mulm.MUOLS(Y, X).fit()
         tvals_exp, rawp_expt, df = mod.t_test([1, 0, 0, 0, 0, 0], pval=True, two_tailed=True)
-        fvals_exp, rawp_exp = mod.f_test(con_exp, pval=True)
-        fvals_edu, rawp_edu = mod.f_test(con_edu, pval=True)
-        fvals_man, rawp_man = mod.f_test(con_man, pval=True)
+        fvals_exp, rawp_exp, df = mod.f_test(con_exp, pval=True)
+        fvals_edu, rawp_edu, df = mod.f_test(con_edu, pval=True)
+        fvals_man, rawp_man, df = mod.f_test(con_man, pval=True)
 
         assert np.allclose(aov.loc['experience', 'F'], tvals_exp[0] ** 2)
         assert np.allclose(aov.loc['experience', 'PR(>F)'], rawp_expt[0] ** 2)

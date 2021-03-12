@@ -1,47 +1,74 @@
 # -*- coding: utf-8 -*-
-"""
-Created on Tue Jun 25 13:25:41 2013
+##########################################################################
+# Created on Tue Jun 25 13:25:41 2013
+# Copyright (c) 2013-2021, CEA/DRF/Joliot/NeuroSpin. All rights reserved.
+# @author:  Edouard Duchesnay
+# @email:   edouard.duchesnay@cea.fr
+# @license: BSD 3-clause.
+##########################################################################
 
-@author: ed203246
 """
+Linear models for massive univariate statistics.
+"""
+
 import numpy as np
 import scipy
 from sklearn.preprocessing import scale
 from scipy import stats
 
 class MUPairwiseCorr:
-    """Mass-univariate pairwise correlations. Given two arrays X [n_samples x p]
-    and Y [n_samples x q]. Fit p x q independent linear models. Prediction
-    and stats return [p x q] array.
+    """Mass-univariate pairwise correlations. Given two arrays X (n_samples x p)
+    and Y (n_samples x q). Fit p x q independent linear models. Prediction
+    and stats return (p x q) array.
 
-
-    Example
-    -------
+    Examples
+    --------
     >>> import numpy as np
     >>> from mulm import MUPairwiseCorr
     >>> X = np.random.randn(10, 5)
     >>> Y = np.random.randn(10, 3)
-    >>> corr = MUPairwiseCorr()
-    >>> corr.fit(X, Y)
+    >>> corr = MUPairwiseCorr(X, Y)
+    >>> corr.fit()
     <mulm.models.MUPairwiseCorr instance at 0x30da878>
-    >>> f, p = corr.stats_f(X, Y)
-    >>> print f.shape
+    >>> f, p = corr.stats_f()
+    >>> print(f.shape)
     (5, 3)
     """
-    def __init__(self, **kwargs):
-        pass
+    def __init__(self, X, Y):
+        """
+        Parameters
+        ----------
+        Y : numpy array (n_samples, p)
+            First block of variables.
 
-    def fit(self, X, Y):
-        Xs = scale(X, copy=True)
-        Ys = scale(Y, copy=True)
+        X : numpy array (n_samples, q)
+            Second block of variables.
+        """
+        self.Xs = scale(X, copy=True) # TODO PERFORM BASIC CHECK ARRAY
+        self.Ys = scale(Y, copy=True) # TODO PERFORM BASIC CHECK ARRAY
         self.n_samples = X.shape[0]
-        self.Corr_ = np.dot(Xs.T, Ys) / self.n_samples
+
+        if X.shape[0] != Y.shape[0]:
+            raise ValueError('matrices are not aligned')
+
+    def fit(self):
+        self.Corr_ = np.dot(self.Xs.T, self.Ys) / self.n_samples
         return self
 
     def predict(self, X):
         pass
 
     def stats_f(self, pval=True):
+        """
+
+        Parameters
+        ----------
+        pval
+
+        Returns
+        -------
+        fstats (k, p) array, pvals (k, p) array, df (k,) array
+        """
         R2 = self.Corr_ ** 2
         df_res = self.n_samples - 2
         f_stats = R2 * df_res / (1 - R2)
@@ -49,16 +76,50 @@ class MUPairwiseCorr:
             return (f_stats, None)
         else:
             p_vals = stats.f.sf(f_stats, 1, df_res)
-            return f_stats, p_vals
+            return f_stats, p_vals, df_res
+
 
 class MUOLS:
     """Mass-univariate linear modeling based Ordinary Least Squares.
     Given two arrays X (n_samples, p) and Y (n_samples, q).
-    Fit q independent linear models, ie., for all y in Y fit: lm(y ~ X)
+    Fit q independent linear models, ie., for all y in Y fit: lm(y ~ X).
 
     Example
     -------
+    >>> import numpy as np
+    >>> import mulm
+    >>> np.random.seed(42)
+    >>> # n_samples, nb of features that depends on X and that are pure noise
+    >>> n_samples, n_info, n_noise = 100, 2, 100
+    >>> beta = np.array([1, 0, 0.5, 0, 2])[:, np.newaxis]
+    >>> X = np.random.randn(n_samples, 5) # Design matrix
+    >>> X[:, -1] = 1 # Intercept
+    >>> Y = np.random.randn(n_samples, n_info + n_noise)
+    >>> Y[:, :n_info] += np.dot(X, beta) # n_info features depend from X
+    >>> contrasts = np.identity(X.shape[1])[:4] # don't test the intercept
+    >>> mod = mulm.MUOLS(Y, X).fit()
+    >>> tvals, pvals, df = mod.t_test(contrasts, two_tailed=True)
+    >>> print(pvals.shape)
+    (4, 102)
+    >>> print("Nb of uncorrected p-values <5%:", np.sum(pvals < 0.05))
+    Nb of uncorrected p-values <5%: 18
     """
+
+    def __init__(self, Y, X):
+        """
+        Parameters
+        ----------
+        Y : numpy array (n_samples, p)
+            dependant (target) variables.
+
+        X : numpy array (n_samples, q)
+            design matrix.
+        """
+        self.coef = None
+        if X.shape[0] != Y.shape[0]:
+            raise ValueError('matrices are not aligned')
+        self.X = X  # TODO PERFORM BASIC CHECK ARRAY
+        self.Y = Y  # TODO PERFORM BASIC CHECK ARRAY
 
     def _block_slices(self, dim_size, block_size):
         """Generator that yields slice objects for indexing into
@@ -71,17 +132,21 @@ class MUOLS:
             if count >= dim_size:
                 return
 
-    def __init__(self, Y, X):
-        self.coef = None
-        if X.shape[0] != Y.shape[0]:
-            raise ValueError('matrices are not aligned')
-        self.X = X  # TODO PERFORM BASIC CHECK ARRAY
-        self.Y = Y  # TODO PERFORM BASIC CHECK ARRAY
-
     def fit(self, block=False, max_elements=2 ** 27):
-        """Use block=True for huge matrices Y.
-        Operations block by block to optimize time and memory.
-        max_elements: block dimension (2**27 corresponds to 1Go)
+        """Fit p independent linear models, ie., for all y in Y fit: lm(y ~ X).
+
+        Parameters
+        ----------
+        block : boolean
+            Use block=True for huge matrices Y.
+            Operations block by block to optimize time and memory.
+
+        max_elements : int
+            block dimension (2**27 corresponds to 1Go)
+
+        Returns
+        -------
+            self
         """
         self.block = block
         self.max_elements = max_elements
@@ -108,13 +173,20 @@ class MUOLS:
             self.err_ss[pp] = np.sum(err ** 2, axis=0)
             del err
 
-#        self.coef = np.dot(self.pinv, self.Y)
-#        y_hat = self.predict(self.X)
-#        err = self.Y - y_hat
-#        self.err_ss = np.sum(err ** 2, axis=0)
         return self
 
     def predict(self, X):
+        """Predict Y given a new design matrix X.
+
+        Parameters
+        ----------
+        X : numpy array (n_samples, q)
+            design matrix of new predictors.
+
+        Returns
+        -------
+        (n_samples, 1) array of predicted values (X beta)
+        """
         #from sklearn.utils import safe_asarray
         import numpy as np
         #X = safe_asarray(X) # TODO PERFORM BASIC CHECK ARRAY
@@ -123,12 +195,14 @@ class MUOLS:
 
 
     def t_test(self, contrasts, pval=False, two_tailed=True):
-        """Compute statistics (t-scores and p-value associated to contrast)
+        """Compute T-statistics (t-scores and p-value associated to contrast).
+           The code has been cloned from the SPM MATLAB implementation.
 
         Parameters
         ----------
-        contrasts: The k contrasts to be tested, some list or array
-        that can be casted to an k x p array.
+        contrasts: array (q, ) or list of arrays or array 2D.
+            Single contrast (array) or list of contrasts or array of contrasts.
+            The k contrasts to be tested.
 
         pval: boolean
             compute pvalues (default is false)
@@ -136,21 +210,29 @@ class MUOLS:
         two_tailed: boolean
             one-tailed test or a two-tailed test (default True)
 
-        Return
-        ------
+        Returns
+        -------
         tstats (k, p) array, pvals (k, p) array, df (k,) array
 
         Example
         -------
         >>> import numpy as np
         >>> import mulm
-        >>> X = np.random.randn(100, 5)
-        >>> Y = np.random.randn(100, 10)
-        >>> beta = np.random.randn(5, 1)
-        >>> Y[:, :2] += np.dot(X, beta)
-        >>> contrasts = np.identity(X.shape[1])
+        >>> np.random.seed(42)
+        >>> # n_samples, nb of features that depends on X and that are pure noise
+        >>> n_samples, n_info, n_noise = 100, 2, 100
+        >>> beta = np.array([1, 0, 0.5, 0, 2])[:, np.newaxis]
+        >>> X = np.random.randn(n_samples, 5) # Design matrix
+        >>> X[:, -1] = 1 # Intercept
+        >>> Y = np.random.randn(n_samples, n_info + n_noise)
+        >>> Y[:, :n_info] += np.dot(X, beta) # n_info features depend from X
+        >>> contrasts = np.identity(X.shape[1])[:4] # don't test the intercept
         >>> mod = mulm.MUOLS(Y, X).fit()
-        >>> tvals, pvals, df = mod.t_test(contrasts, pval=True, two_tailed=True)
+        >>> tvals, pvals, df = mod.t_test(contrasts, two_tailed=True)
+        >>> print(pvals.shape)
+        (4, 102)
+        >>> print("Nb of uncorrected p-values <5%:", np.sum(pvals < 0.05))
+        Nb of uncorrected p-values <5%: 18
         """
         contrasts = np.atleast_2d(np.asarray(contrasts))
         n = self.X.shape[0]
@@ -182,26 +264,58 @@ class MUOLS:
         return np.asarray(t_stats_), np.asarray(p_vals_), np.asarray(df_)
 
     def t_test_maxT(self, contrasts, nperms=1000, two_tailed=True, **kwargs):
-        """Correct for multiple comparisons using Westfall and Young, 1993
-        a.k.a maxT procedure. See t_test() for all parameters.
+        """Correct for multiple comparisons using Westfall and Young, 1993 a.k.a maxT procedure.
+           It is based on permutation tests procedure. This is the procedure used by FSL (https://fsl.fmrib.ox.ac.uk/).
 
-        Example
+           It should be used when the test statistics, and hence the unadjusted p-values, are dependent.
+           This is the case when groups of dependant variables (in Y) tend to have highly correlated measures.
+           Westfall and Young (1993) proposed adjusted p-values for less conservative multiple testing procedures which
+           take into account the dependence structure among test statistics.
+           References:
+           - Anderson M. Winkler "Statistical analysis of areal quantities in the brain through
+           permutation tests" Ph.D 2017.
+           - Dudoit et al. "Multiple Hypothesis Testing in Microarray Experiments", Statist. Sci. 2003
+
+        Parameters
+        ----------
+        contrasts: array (q, ) or list of arrays or array 2D.
+            Single contrast (array) or list of contrasts or array of contrasts.
+            The k contrasts to be tested.
+
+        nperms: int
+                permutation tests (default 1000).
+
+        two_tailed: boolean
+            one-tailed test or a two-tailed test (default True)
+
+        Returns
         -------
+        tstats (k, p) array, pvals (k, p) array corrected for multiple comparisons
+        df (k,) array.
+
+        Examples
+        --------
         >>> import numpy as np
         >>> import mulm
-        >>> import pylab as plt
-        >>> n = 100
-        >>> px = 5
-        >>> py_info = 2
-        >>> py_noize = 100
-        >>> beta = np.array([1, 0, .5] + [0] * (px - 4) + [2]).reshape((px, 1))
-        >>> X = np.hstack([np.random.randn(n, px-1), np.ones((n, 1))]) # X with intercept
-        >>> Y = np.random.randn(n, py_info + py_noize)
-        >>> Y[:, :py_info] += np.dot(X, beta)
-        >>> contrasts = np.identity(X.shape[1])
-        >>> mod = mulm.MUOLS(Y, X)
-        >>> tvals, maxT, df = mod.t_test_maxT(contrasts, two_tailed=True)
-        """
+        >>> np.random.seed(42)
+        >>> # n_samples, nb of features that depends on X and that are pure noise
+        >>> n_samples, n_info, n_noise = 100, 2, 100
+        >>> beta = np.array([1, 0, 0.5, 0, 2])[:, np.newaxis]
+        >>> X = np.random.randn(n_samples, 5) # Design matrix
+        >>> X[:, -1] = 1 # Intercept
+        >>> Y = np.random.randn(n_samples, n_info + n_noise)
+        >>> Y[:, :n_info] += np.dot(X, beta) # n_info features depend from X
+        >>> contrasts = np.identity(X.shape[1])[:4] # don't test the intercept
+        >>> mod = mulm.MUOLS(Y, X).fit()
+        >>> tvals, pvals, df = mod.t_test(contrasts, two_tailed=True)
+        >>> print(pvals.shape)
+        (4, 102)
+        >>> print("Nb of uncorrected p-values <5%:", np.sum(pvals < 0.05))
+        Nb of uncorrected p-values <5%: 18
+        >>> tvals, pvals_corrmaxT, df = mod.t_test_maxT(contrasts, two_tailed=True)
+        >>> print("Nb of corrected pvalues <5%:", np.sum(pvals_corrmaxT < 0.05))
+        Nb of corrected pvalues <5%: 4
+       """
         #contrast = [0, 1] + [0] * (X.shape[1] - 2)
         contrasts = np.atleast_2d(np.asarray(contrasts))
         tvals, _, df = self.t_test(contrasts=contrasts, pval=False, **kwargs)
@@ -226,23 +340,49 @@ class MUOLS:
 
     def t_test_minP(self, contrasts, nperms=10000, two_tailed=True, **kwargs):
         """Correct for multiple comparisons using minP procedure.
-        For all parameters.
 
-        Example
+           References:
+           - Dudoit et al. "Multiple Hypothesis Testing in Microarray Experiments", Statist. Sci. 2003
+
+        Parameters
+        ----------
+        contrasts: array (q, ) or list of arrays or array 2D.
+            Single contrast (array) or list of contrasts or array of contrasts.
+            The k contrasts to be tested.
+
+        nperms: int
+                permutation tests (default 10000).
+
+        two_tailed: boolean
+            one-tailed test or a two-tailed test (default True)
+
+        Returns
         -------
+        tstats (k, p) array, pvals (k, p) array corrected for multiple comparisons
+        df (k,) array.
+
+        Examples
+        --------
         >>> import numpy as np
         >>> import mulm
-        >>> import pylab as plt
-        >>> n = 100
-        >>> px = 5
-        >>> py_info = 2
-        >>> py_noize = 100
-        >>> beta = np.array([1, 0, .5] + [0] * (px - 4) + [2]).reshape((px, 1))
-        >>> X = np.hstack([np.random.randn(n, px-1), np.ones((n, 1))]) # X with intercept
-        >>> Y = np.random.randn(n, py_info + py_noize)
-        >>> Y[:, :py_info] += np.dot(X, beta)
-        >>> contrasts = np.identity(X.shape[1])
-        >>> tvals, maxT, df = mod.t_test_minP(contrasts, two_tailed=True)
+        >>> np.random.seed(42)
+        >>> # n_samples, nb of features that depends on X and that are pure noise
+        >>> n_samples, n_info, n_noise = 100, 2, 100
+        >>> beta = np.array([1, 0, 0.5, 0, 2])[:, np.newaxis]
+        >>> X = np.random.randn(n_samples, 5) # Design matrix
+        >>> X[:, -1] = 1 # Intercept
+        >>> Y = np.random.randn(n_samples, n_info + n_noise)
+        >>> Y[:, :n_info] += np.dot(X, beta) # n_info features depend from X
+        >>> contrasts = np.identity(X.shape[1])[:4] # don't test the intercept
+        >>> mod = mulm.MUOLS(Y, X).fit()
+        >>> tvals, pvals, df = mod.t_test(contrasts, two_tailed=True)
+        >>> print(pvals.shape)
+        (4, 102)
+        >>> print("Nb of uncorrected p-values <5%:", np.sum(pvals < 0.05))
+        Nb of uncorrected p-values <5%: 18
+        >>> tvals, pval_corrminp, df = mod.t_test_minP(contrasts, two_tailed=True)
+        >>> print("Nb of corrected pvalues <5%:", np.sum(pval_corrminp < 0.05))
+        Nb of corrected pvalues <5%: 4
         """
         tvals, pvals, df = self.t_test(contrasts=contrasts, pval=True, **kwargs)
         min_p = np.ones((contrasts.shape[0], nperms))
@@ -274,13 +414,39 @@ class MUOLS:
         return tvals, pvalues, df
 
     def f_test(self, contrast, pval=False):
-        # from sklearn.utils import array2d
-        #Ypred = self.predict(self.X)
-        #betas = self.coef
-        #ss_errors = np.sum((self.Y - self.y_hat) ** 2, axis=0)
+        """Compute F-statistics (F-scores and p-value associated to contrast).
+           The code has been cloned from the SPM MATLAB implementation.
+
+        Parameters
+        ----------
+        contrasts: array (q, ) or list of arrays or array 2D.
+            Single contrast (array) or list of contrasts or array of contrasts.
+            The k contrasts to be tested.
+
+        pval: boolean
+            compute pvalues (default is false)
+
+        two_tailed: boolean
+            one-tailed test or a two-tailed test (default True)
+
+        Returns
+        -------
+        tstats (k, p) array, pvals (k, p) array, df (k,) array
+
+        Example
+        -------
+        >>> import numpy as np
+        >>> import mulm
+        >>> X = np.random.randn(100, 5)
+        >>> Y = np.random.randn(100, 10)
+        >>> beta = np.random.randn(5, 1)
+        >>> Y[:, :2] += np.dot(X, beta)
+        >>> contrasts = np.identity(X.shape[1])
+        >>> mod = mulm.MUOLS(Y, X).fit()
+        >>> fvals, pvals, df = mod.f_test(contrasts, pval=True)
+        """
         C1 = np.atleast_2d(contrast).T
         n, p = self.X.shape
-        #Xpinv = scipy.linalg.pinv(X)
         rank_x = np.linalg.matrix_rank(self.pinv)
         C0 = np.eye(p) - np.dot(C1, scipy.linalg.pinv2(C1))  # Ortho. cont. to C1
         X0 = np.dot(self.X, C0)  # Design matrix of the reduced model
@@ -303,10 +469,10 @@ class MUOLS:
         ## Broadcast over self.err_ss of Y
         f_stats = (SS * df_res) / (self.err_ss * df_c1)
         if not pval:
-            return (f_stats, None)
+            return f_stats, None, df_res
         else:
             p_vals = stats.f.sf(f_stats, df_c1, df_res)
-            return f_stats, p_vals
+            return f_stats, p_vals, df_res
 
     def stats_f_coefficients(self, X, Y, contrast, pval=False):
         return self.stats_f(contrast, pval=pval)

@@ -1,10 +1,17 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""
-Created on Thu Feb  6 15:15:14 2020
+##########################################################################
+# Created on Created on Thu Feb  6 15:15:14 2020
+# Copyright (c) 2013-2021, CEA/DRF/Joliot/NeuroSpin. All rights reserved.
+# @author:  Edouard Duchesnay
+# @email:   edouard.duchesnay@cea.fr
+# @license: BSD 3-clause.
+##########################################################################
 
-@author: edouard.duchesnay@cea.fr
 """
+Residualization of a Y data on possibly adjusted for other variables.
+"""
+
 import numpy as np
 import mulm
 import pandas as pd
@@ -33,34 +40,6 @@ class Residualizer:
     => learn and store b1, b2, b3
 
     4) `transform(Y, X)` residualize Y on X, ie, returns Y - b1 site
-
-    Parameters
-    ----------
-    data: DataFrame
-        DataFrame containing column to build the design matrix (default None).
-
-    formula_res: str
-        Residualisation formula. Ex: "site" (default None).
-
-    formula_full: str
-        Full model (formula) of residualisation containing other variables
-        to adjust for. Ex.: "site + age + sex" (default None).
-
-    cont_res: boolean array
-        the contrast for residualisation (matches formula_res).
-        Ex: [False, True, False, False]. The default None corresponds to True
-        everywhere.
-
-    design_mat: array (n, k)
-        where Y.shape[0] == design_mat.shape[0] and design_mat.shape[1] is
-        the same in fit and transform
-
-    pack_data: boolean (default=False)
-
-    Returns
-    -------
-    Y: array (n, p)
-        Residualized dependant variables
 
     Example
     -------
@@ -100,6 +79,24 @@ class Residualizer:
 
     def __init__(self, data=None, formula_res=None, formula_full=None,
                  contrast_res=None):
+        """
+        Parameters
+        ----------
+        data: DataFrame
+            DataFrame containing column to build the design matrix (default None).
+
+        formula_res: str
+            Residualisation formula. Ex: "site" (default None).
+
+        formula_full: str
+            Full model (formula) of residualisation containing other variables
+            to adjust for. Ex.: "site + age + sex" (default None).
+
+        cont_res: boolean array
+            the contrast for residualisation (matches formula_res).
+            Ex: [False, True, False, False]. The default None corresponds to True
+            everywhere.
+        """
 
         if isinstance(data, pd.DataFrame) and isinstance(formula_res, str):
             if formula_full is None:
@@ -124,6 +121,8 @@ class Residualizer:
     def fit(self, Y, X):
         """Fit parameters of p linear models where each Y is regressed on X.
 
+        Parameters
+        ----------
         Y: array (n, p)
             Dependant variables
 
@@ -139,37 +138,67 @@ class Residualizer:
         return self
 
     def transform(self, Y, X):
+        """Residualize Y on X.
 
+        Parameters
+        ----------
+        Y: array (n, p)
+            Dependant variables
+
+        X: array(n, k)
+            Design matrix of independant variables
+
+        Returns
+        -------
+        Yres: array (n, p)
+            Residualized Y data.
+        """
         assert Y.shape[0] == X.shape[0]
         assert self.contrast_res.shape[0] == X.shape[1], "contrast doesn't match design matrix"
         return Y - np.dot(X[:, self.contrast_res],
                           self.mod_mulm.coef[self.contrast_res, :])
 
     def fit_transform(self, Y, X):
+        """Fit parameters of p linear models where each Y is regressed on X.
+        Residualize Y on X.
+
+        Parameters
+        ----------
+        Y: array (n, p)
+            Dependant variables
+
+        X: array(n, k)
+            Design matrix of independant variables
+
+        Returns
+        -------
+        Yres: array (n, p)
+            Residualized Y data.
+        """
         self.fit(Y, X)
         return self.transform(Y, X)
 
 
 def residualize(Y, data, formula_res, formula_full=None):
-    """Helper function. See Residualizer
+    """Helper function. See Residualizer.
     """
     res = Residualizer(data=data, formula_res=formula_res, formula_full=formula_full)
     return res.fit_transform(Y, res.get_design_mat(data))
 
 
 class ResidualizerEstimator:
-    """Wrap Residualizer into an Estimator compatible with sklearn API.
+    """Wrap Residualizer into an estimator compatible with sklearn API.
 
     Note that to be consistant with sklearn API, here X contains the input variable
     and Z is the design matrix for residualization.
-
-    Parameters
-    ----------
-    residualizer: Residualizer
     """
 
     def __init__(self, residualizer):
-
+        """
+        Parameters
+        ----------
+        residualizer: Residualizer
+        """
         self.residualizer = residualizer
         self.design_mat_ncol = self.residualizer.contrast_res.shape[0]
 
