@@ -1,0 +1,299 @@
+<!doctype html>
+<html lang="en">
+
+    <head>
+
+		<!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <title>mulm</title>
+        
+        <!-- CSS -->
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500&display=swap">
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+        <link rel="stylesheet" href="../_static/css/jquery.mCustomScrollbar.min.css">
+        <link rel="stylesheet" href="../_static/css/animate.css">
+        <link rel="stylesheet" href="../_static/css/style.css">
+        <link rel="stylesheet" href="../_static/css/jquery.mosaic.css">
+        <link rel="stylesheet" href="../_static/gallery.css">
+        <link rel="stylesheet" href="../_static/css/media-queries.css">
+
+        <!-- Favicon and touch icons -->
+        <link rel="shortcut icon" href="../_static/ico/favicon.png">
+        <link rel="apple-touch-icon-precomposed" sizes="144x144" href="../_static/ico/apple-touch-icon-144-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../_static/ico/apple-touch-icon-114-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../_static/ico/apple-touch-icon-72-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" href="../_static/ico/apple-touch-icon-57-precomposed.png">
+
+    </head>
+
+    <body>
+
+		<!-- Wrapper -->
+    	<div class="wrapper">
+
+			<!-- Sidebar -->
+			<nav class="sidebar">
+				
+				<!-- close sidebar menu -->
+				<div class="dismiss">
+					<i class="fas fa-arrow-left"></i>
+				</div>
+				
+				<div class="logo"">
+					<h3><a href="../index.html">Sidebar Menu</a></h3>
+				</div>
+
+                <!-- info setup -->
+                    <p class="doc-version">
+                        This documentation is for mulm <strong>version 0.0.1</strong>
+                    </p>
+                <p class="citing">
+                    If you use the software, please do not hesitate to 
+                    <a &mdash; <a href="https://github.com/neurospin/pylearn-mulm">
+                    Report a Bug</a>.
+                </p>
+				
+                <!-- links -->
+                
+                
+				<ul class="list-unstyled menu-elements">
+					<li class="active">
+						<a href="../index.html"><i class="fas fa-home"></i> Home</a>
+					</li>
+					<li>
+						<a href="../generated/installation.html"><i class="fas fa-cog"></i> Installation</a>
+					</li>
+					<li>
+						<a href="gallery.html"><i class="fas fa-eye"></i> Gallery</a>
+					</li>
+					<li>
+						<a href="../generated/documentation.html"><i class="fas fa-pencil-alt"></i> API documentation</a>
+					</li>
+					<li>
+						<a href="https://joliot.cea.fr/drf/joliot/Pages/Entites_de_recherche/NeuroSpin.aspx"><i class="fas fa-external-link-alt"></i> NeuroSpin</a>
+					</li>
+					<li>
+						<a href="#otherSections" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle" role="button" aria-controls="otherSections">
+							<i class="fas fa-sync"></i>Sections
+						</a>
+						<ul class="collapse list-unstyled" id="otherSections">
+                            
+                                
+                                    
+                                    
+                                    
+                                
+                                    
+                                    
+                                    
+                                
+                            
+                                
+                                    
+                                    
+                                    
+                                
+                            
+						</ul>
+					</li>
+				</ul>
+				
+                <!-- go top page -->
+				<div class="to-top">
+					<a class="btn btn-primary btn-customized-3" href="#" role="button">
+	                    <i class="fas fa-arrow-up"></i> Top
+	                </a>
+				</div>
+			
+                <!-- change color -->
+				<div class="dark-light-buttons">
+					<a class="btn btn-primary btn-customized-4 btn-customized-dark" href="#" role="button">Dark</a>
+					<a class="btn btn-primary btn-customized-4 btn-customized-light" href="#" role="button">Light</a>
+				</div>
+			
+			</nav>
+			<!-- End sidebar -->
+			
+			<!-- Dark overlay -->
+    		<div class="overlay"></div>
+
+			<!-- Content -->
+			<div class="content">
+			
+				<!-- open sidebar menu -->
+				<a class="btn btn-primary btn-customized open-menu" href="#" role="button">
+                    <i class="fas fa-align-left"></i> <span>Menu</span>
+                </a>
+
+		        <!-- Top content -->
+		        <div class="top-content section-container" id="top-content">
+			        <div class="container">
+			            <div class="row">
+                            <div class="col-md-3 section-5-box banner-logo">
+                                <img alt="Logo" src="../_static/mulm.png">
+                            </div>
+			                <div class="col-md-7 section-5-box">
+			                	<h1 class="wow fadeIn">    <p>Massive univariate linear model.</p></h1>
+			                </div>
+			            </div>
+			        </div>
+		        </div>
+                    
+                    <div class="document">
+                        <div class="section" id="residualizer">
+<span id="sphx-glr-auto-gallery-plot-residualizer-py"></span><h1>Residualizer<a class="headerlink" href="#residualizer" title="Permalink to this headline">¶</a></h1><div class='divider-1 wow fadeInUp'><span></span></div>
+<p>Credit: E Duchesnay</p>
+<p>Residualization of a Y data on possibly adjusted for other variables.</p>
+<p>Suppose we have 3 variable:
+- site : contains a site effect
+- age: some uniform value plus some site effect
+- y = -0.1 * age + site + eps</p>
+<p>The goal is to remove the site effect while preserving the age effect.</p>
+<p>Import</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">scipy.stats</span> <span class="kn">as</span> <span class="nn">stats</span>
+<span class="kn">from</span> <span class="nn">mulm.residualizer</span> <span class="kn">import</span> <span class="n">Residualizer</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="kn">as</span> <span class="nn">sns</span>
+
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Dataset with site effect on age
+Before residualization on site. The association between y and age is affected
+by site.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">site</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="mi">50</span> <span class="o">+</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="mi">50</span><span class="p">)</span>
+<span class="n">age</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span> <span class="o">+</span> <span class="mi">5</span> <span class="o">*</span> <span class="n">site</span>
+<span class="n">y</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.1</span> <span class="o">*</span> <span class="n">age</span> <span class="o">+</span> <span class="n">site</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="nb">dict</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="p">,</span> <span class="n">age</span><span class="o">=</span><span class="n">age</span><span class="p">,</span> <span class="n">site</span><span class="o">=</span><span class="n">site</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">object</span><span class="p">)))</span>
+
+<span class="n">sns</span><span class="o">.</span><span class="n">lmplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;age&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;y&quot;</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s2">&quot;site&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
+</pre></div>
+</div>
+<img alt="../_images/sphx_glr_plot_residualizer_001.png" class="align-center" src="../_images/sphx_glr_plot_residualizer_001.png" />
+<p>Simple residualization on site. Better, but removing site effect also remove
+age effect</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">res_spl</span> <span class="o">=</span> <span class="n">Residualizer</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">,</span> <span class="n">formula_res</span><span class="o">=</span><span class="s2">&quot;site&quot;</span><span class="p">)</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">res_spl</span><span class="o">.</span><span class="n">get_design_mat</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;Design mat contains intercept and site:&quot;</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">X</span><span class="p">[:</span><span class="mi">5</span><span class="p">,</span> <span class="p">:])</span>
+<span class="n">yres</span> <span class="o">=</span> <span class="n">res_spl</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">y</span><span class="p">[:,</span> <span class="bp">None</span><span class="p">],</span> <span class="n">X</span><span class="p">)</span>
+<span class="n">data</span><span class="p">[</span><span class="s2">&quot;yres&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">yres</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">lmplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;age&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;yres&quot;</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s2">&quot;site&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
+</pre></div>
+</div>
+<img alt="../_images/sphx_glr_plot_residualizer_002.png" class="align-center" src="../_images/sphx_glr_plot_residualizer_002.png" />
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Design</span> <span class="n">mat</span> <span class="n">contains</span> <span class="n">intercept</span> <span class="ow">and</span> <span class="n">site</span><span class="p">:</span>
+<span class="p">[[</span><span class="mf">1.</span> <span class="mf">0.</span><span class="p">]</span>
+ <span class="p">[</span><span class="mf">1.</span> <span class="mf">0.</span><span class="p">]</span>
+ <span class="p">[</span><span class="mf">1.</span> <span class="mf">0.</span><span class="p">]</span>
+ <span class="p">[</span><span class="mf">1.</span> <span class="mf">0.</span><span class="p">]</span>
+ <span class="p">[</span><span class="mf">1.</span> <span class="mf">0.</span><span class="p">]]</span>
+</pre></div>
+</div>
+<p>Site residualization adjusted for age provides higher correlation, and
+lower stderr than simple residualization.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">res_adj</span> <span class="o">=</span> <span class="n">Residualizer</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">formula_res</span><span class="o">=</span><span class="s2">&quot;site&quot;</span><span class="p">,</span> <span class="n">formula_full</span><span class="o">=</span><span class="s2">&quot;age + site&quot;</span><span class="p">)</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">res_adj</span><span class="o">.</span><span class="n">get_design_mat</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;Design mat contains intercept, site and age&quot;</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">X</span><span class="p">[:</span><span class="mi">5</span><span class="p">,</span> <span class="p">:])</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;Residualisation contrast (intercept, site):&quot;</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">res_adj</span><span class="o">.</span><span class="n">contrast_res</span><span class="p">)</span>
+
+<span class="n">yadj</span> <span class="o">=</span> <span class="n">res_adj</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">y</span><span class="p">[:,</span> <span class="bp">None</span><span class="p">],</span> <span class="n">X</span><span class="p">)</span>
+
+<span class="n">lm_res</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">linregress</span><span class="p">(</span><span class="n">age</span><span class="p">,</span> <span class="n">yres</span><span class="o">.</span><span class="n">ravel</span><span class="p">())</span>
+<span class="n">lm_adj</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">linregress</span><span class="p">(</span><span class="n">age</span><span class="p">,</span> <span class="n">yadj</span><span class="o">.</span><span class="n">ravel</span><span class="p">())</span>
+
+<span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">((</span><span class="n">lm_res</span><span class="o">.</span><span class="n">slope</span><span class="p">,</span> <span class="n">lm_res</span><span class="o">.</span><span class="n">rvalue</span><span class="p">,</span> <span class="n">lm_res</span><span class="o">.</span><span class="n">stderr</span><span class="p">),</span>
+            <span class="p">(</span><span class="o">-</span><span class="mf">0.079187578</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.623733003</span><span class="p">,</span> <span class="mf">0.0100242219</span><span class="p">))</span>
+
+<span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">((</span><span class="n">lm_adj</span><span class="o">.</span><span class="n">slope</span><span class="p">,</span> <span class="n">lm_adj</span><span class="o">.</span><span class="n">rvalue</span><span class="p">,</span> <span class="n">lm_adj</span><span class="o">.</span><span class="n">stderr</span><span class="p">),</span>
+            <span class="p">(</span><span class="o">-</span><span class="mf">0.110779913</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.7909219758</span><span class="p">,</span> <span class="mf">0.00865778640</span><span class="p">))</span>
+
+<span class="n">data</span><span class="p">[</span><span class="s2">&quot;yadj&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">yadj</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">lmplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;age&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;yadj&quot;</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s2">&quot;site&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
+</pre></div>
+</div>
+<img alt="../_images/sphx_glr_plot_residualizer_003.png" class="align-center" src="../_images/sphx_glr_plot_residualizer_003.png" />
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Design</span> <span class="n">mat</span> <span class="n">contains</span> <span class="n">intercept</span><span class="p">,</span> <span class="n">site</span> <span class="ow">and</span> <span class="n">age</span>
+<span class="p">[[</span> <span class="mf">1.</span>          <span class="mf">0.</span>         <span class="mf">17.51066014</span><span class="p">]</span>
+ <span class="p">[</span> <span class="mf">1.</span>          <span class="mf">0.</span>         <span class="mf">26.6097348</span> <span class="p">]</span>
+ <span class="p">[</span> <span class="mf">1.</span>          <span class="mf">0.</span>          <span class="mf">5.00343124</span><span class="p">]</span>
+ <span class="p">[</span> <span class="mf">1.</span>          <span class="mf">0.</span>         <span class="mf">14.06997718</span><span class="p">]</span>
+ <span class="p">[</span> <span class="mf">1.</span>          <span class="mf">0.</span>          <span class="mf">9.40267672</span><span class="p">]]</span>
+<span class="n">Residualisation</span> <span class="n">contrast</span> <span class="p">(</span><span class="n">intercept</span><span class="p">,</span> <span class="n">site</span><span class="p">):</span>
+<span class="p">[</span> <span class="kc">True</span>  <span class="kc">True</span> <span class="kc">False</span><span class="p">]</span>
+</pre></div>
+</div>
+<p><strong>Total running time of the script:</strong> ( 0 minutes  5.917 seconds)</p>
+<div class="sphx-glr-footer docutils container">
+<div class="sphx-glr-download docutils container">
+<p><a class="reference download internal" download="" href="../_downloads/30c98d28bf82e44bf9f906385f969d23/plot_residualizer.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_residualizer.py</span></code></a></p>
+</div>
+<div class="sphx-glr-download docutils container">
+<p><a class="reference download internal" download="" href="../_downloads/117c76b796c3c7954a907c8d75886b00/plot_residualizer.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">plot_residualizer.ipynb</span></code></a></p>
+</div>
+</div>
+<p class="sphx-glr-signature">Gallery generated by Sphinx-Gallery</p>
+</div>
+
+                    </div>
+                <div class="spacer"></div>
+		        
+		        <!-- Footer -->
+		        <div class="section-6-container section-container section-container-image-bg" id="section-6">
+			        <div class="container">
+			            <div class="row">
+		                    <div class="col-md-5 offset-md-1 section-6-box wow fadeInDown">
+		                    	<h3>Follow us</h3>
+		                    	<div class="section-6-social">
+			                    	<a href="https://www.facebook.com/pages/NeuroSpin/171075046414933"><i class="fab fa-facebook-f"></i></a>
+									<a href="https://www.youtube.com/CEASaclay"><i class="fab fa-youtube"></i></a>
+									<a href="https://twitter.com/neurospin_91"><i class="fab fa-twitter"></i></a>
+									<a href="https://github.com/AGrigis/pysphinxdoc"><i class="fab fa-github"></i></a>
+		                    	</div>
+		                    </div>
+			            </div>
+			        	<div class="row">
+		                    <div class="col">
+                                &copy; 2021, 
+pylearn-mulm developers
+ <edouard.duchesnay@cea.fr>. <br/>
+                                Inspired by <a href="https://azmind.com/demo/bootstrap-4-sidebar-menu/">AZMIND template</a>.
+		                    </div>
+		                </div>
+			        </div>
+                </div>
+	        
+	        </div>
+	        <!-- End content -->
+        
+        </div>
+        <!-- End wrapper -->
+
+        <!-- Javascript -->
+		<script src="../_static/js/jquery-3.3.1.min.js"></script>
+		<script src="../_static/js/jquery-migrate-3.0.0.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+        <script src="../_static/js/jquery.backstretch.min.js"></script>
+        <script src="../_static/js/wow.min.js"></script>
+        <script src="../_static/js/jquery.waypoints.min.js"></script>
+        <script src="../_static/js/jquery.mCustomScrollbar.concat.min.js"></script>
+        <script src="../_static/js/scripts.js"></script>
+        <script src="../_static/js/jquery.mosaic.js"></script>
+        <script type="text/javascript">
+	        $('.top-content').backstretch("../_static/img/backgrounds/1.jpg");
+            $('.section-4-container').backstretch("../_static/img/backgrounds/2.jpg");
+            $('.section-6-container').backstretch("../_static/img/backgrounds/1.jpg");
+        </script>
+
+    </body>
+
+</html>

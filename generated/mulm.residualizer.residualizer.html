@@ -1,0 +1,352 @@
+<!doctype html>
+<html lang="en">
+
+    <head>
+
+		<!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <title>mulm</title>
+        
+        <!-- CSS -->
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500&display=swap">
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+        <link rel="stylesheet" href="../_static/css/jquery.mCustomScrollbar.min.css">
+        <link rel="stylesheet" href="../_static/css/animate.css">
+        <link rel="stylesheet" href="../_static/css/style.css">
+        <link rel="stylesheet" href="../_static/css/jquery.mosaic.css">
+        <link rel="stylesheet" href="../_static/gallery.css">
+        <link rel="stylesheet" href="../_static/css/media-queries.css">
+
+        <!-- Favicon and touch icons -->
+        <link rel="shortcut icon" href="../_static/ico/favicon.png">
+        <link rel="apple-touch-icon-precomposed" sizes="144x144" href="../_static/ico/apple-touch-icon-144-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../_static/ico/apple-touch-icon-114-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../_static/ico/apple-touch-icon-72-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" href="../_static/ico/apple-touch-icon-57-precomposed.png">
+
+    </head>
+
+    <body>
+
+		<!-- Wrapper -->
+    	<div class="wrapper">
+
+			<!-- Sidebar -->
+			<nav class="sidebar">
+				
+				<!-- close sidebar menu -->
+				<div class="dismiss">
+					<i class="fas fa-arrow-left"></i>
+				</div>
+				
+				<div class="logo"">
+					<h3><a href="../index.html">Sidebar Menu</a></h3>
+				</div>
+
+                <!-- info setup -->
+                    <p class="doc-version">
+                        This documentation is for mulm <strong>version 0.0.1</strong>
+                    </p>
+                <p class="citing">
+                    If you use the software, please do not hesitate to 
+                    <a &mdash; <a href="https://github.com/neurospin/pylearn-mulm">
+                    Report a Bug</a>.
+                </p>
+				
+                <!-- links -->
+                
+                
+				<ul class="list-unstyled menu-elements">
+					<li class="active">
+						<a href="../index.html"><i class="fas fa-home"></i> Home</a>
+					</li>
+					<li>
+						<a href="installation.html"><i class="fas fa-cog"></i> Installation</a>
+					</li>
+					<li>
+						<a href="../auto_gallery/gallery.html"><i class="fas fa-eye"></i> Gallery</a>
+					</li>
+					<li>
+						<a href="documentation.html"><i class="fas fa-pencil-alt"></i> API documentation</a>
+					</li>
+					<li>
+						<a href="https://joliot.cea.fr/drf/joliot/Pages/Entites_de_recherche/NeuroSpin.aspx"><i class="fas fa-external-link-alt"></i> NeuroSpin</a>
+					</li>
+					<li>
+						<a href="#otherSections" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle" role="button" aria-controls="otherSections">
+							<i class="fas fa-sync"></i>Sections
+						</a>
+						<ul class="collapse list-unstyled" id="otherSections">
+                            
+                                
+                                    
+                                    
+                                    
+                                
+                            
+						</ul>
+					</li>
+				</ul>
+				
+                <!-- go top page -->
+				<div class="to-top">
+					<a class="btn btn-primary btn-customized-3" href="#" role="button">
+	                    <i class="fas fa-arrow-up"></i> Top
+	                </a>
+				</div>
+			
+                <!-- change color -->
+				<div class="dark-light-buttons">
+					<a class="btn btn-primary btn-customized-4 btn-customized-dark" href="#" role="button">Dark</a>
+					<a class="btn btn-primary btn-customized-4 btn-customized-light" href="#" role="button">Light</a>
+				</div>
+			
+			</nav>
+			<!-- End sidebar -->
+			
+			<!-- Dark overlay -->
+    		<div class="overlay"></div>
+
+			<!-- Content -->
+			<div class="content">
+			
+				<!-- open sidebar menu -->
+				<a class="btn btn-primary btn-customized open-menu" href="#" role="button">
+                    <i class="fas fa-align-left"></i> <span>Menu</span>
+                </a>
+
+		        <!-- Top content -->
+		        <div class="top-content section-container" id="top-content">
+			        <div class="container">
+			            <div class="row">
+                            <div class="col-md-3 section-5-box banner-logo">
+                                <img alt="Logo" src="../_static/mulm.png">
+                            </div>
+			                <div class="col-md-7 section-5-box">
+			                	<h1 class="wow fadeIn">    <p>Massive univariate linear model.</p></h1>
+			                </div>
+			            </div>
+			        </div>
+		        </div>
+                    
+                    <div class="document">
+                        <span class="target" id="module-mulm.residualizer.residualizer"></span><p>Residualization of a Y data on possibly adjusted for other variables.</p>
+<dl class="class">
+<dt id="mulm.residualizer.residualizer.Residualizer">
+<em class="property">class </em><code class="sig-prename descclassname">mulm.residualizer.residualizer.</code><code class="sig-name descname">Residualizer</code><span class="sig-paren">(</span><em class="sig-param">data=None</em>, <em class="sig-param">formula_res=None</em>, <em class="sig-param">formula_full=None</em>, <em class="sig-param">contrast_res=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mulm/residualizer/residualizer.html#Residualizer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mulm.residualizer.residualizer.Residualizer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Residualization of a Y data on possibly adjusted for other variables.</p>
+<p>Example: Y is a (n, p) array of p-dependant variables, we want to residualize
+for “site” adjusted for “age + sex”.</p>
+<p>1) Use of DataFrame and formula:
+1.1) <cite>Residualizer(data=df, formula_res=”site”, formula_full=site + age + sex”)</cite></p>
+<p>1.2) <cite>Z = get_design_mat(data)</cite> will return the numpy (n, k) array design matrix.
+Row selection can be done on both Y and design_mat (Cross-val., etc.)</p>
+<p>2) Use of raw arrays: if you choose to manually write your design matrix.
+In this case provide res_mask ie, the residualization mask within your full.
+model. For example: <cite>Residualizer(mask=[False, True, False, False])</cite> will
+fit the whole model and residualize on the second regressor, ie, site.</p>
+<p>3) <cite>fit(Y, X)</cite> fits the model:
+Y = b0 + b1 site + b2 age + b3 sex + eps
+=&gt; learn and store b1, b2, b3</p>
+<ol class="arabic simple" start="4">
+<li><p><cite>transform(Y, X)</cite> residualize Y on X, ie, returns Y - b1 site</p></li>
+</ol>
+<dl class="method">
+<dt id="mulm.residualizer.residualizer.Residualizer.fit">
+<code class="sig-name descname">fit</code><span class="sig-paren">(</span><em class="sig-param">Y</em>, <em class="sig-param">X</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mulm/residualizer/residualizer.html#Residualizer.fit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mulm.residualizer.residualizer.Residualizer.fit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fit parameters of p linear models where each Y is regressed on X.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>Y: array (n, p)</strong></p>
+<blockquote>
+<div><p>Dependant variables</p>
+</div></blockquote>
+<p><strong>X: array(n, k)</strong></p>
+<blockquote>
+<div><p>Design matrix of independant variables</p>
+</div></blockquote>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mulm.residualizer.residualizer.Residualizer.fit_transform">
+<code class="sig-name descname">fit_transform</code><span class="sig-paren">(</span><em class="sig-param">Y</em>, <em class="sig-param">X</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mulm/residualizer/residualizer.html#Residualizer.fit_transform"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mulm.residualizer.residualizer.Residualizer.fit_transform" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fit parameters of p linear models where each Y is regressed on X.
+Residualize Y on X.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>Y: array (n, p)</strong></p>
+<blockquote>
+<div><p>Dependant variables</p>
+</div></blockquote>
+<p><strong>X: array(n, k)</strong></p>
+<blockquote>
+<div><p>Design matrix of independant variables</p>
+</div></blockquote>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Yres: array (n, p)</p>
+<blockquote>
+<div><p>Residualized Y data.</p>
+</div></blockquote>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mulm.residualizer.residualizer.Residualizer.get_design_mat">
+<code class="sig-name descname">get_design_mat</code><span class="sig-paren">(</span><em class="sig-param">data</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mulm/residualizer/residualizer.html#Residualizer.get_design_mat"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mulm.residualizer.residualizer.Residualizer.get_design_mat" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mulm.residualizer.residualizer.Residualizer.transform">
+<code class="sig-name descname">transform</code><span class="sig-paren">(</span><em class="sig-param">Y</em>, <em class="sig-param">X</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mulm/residualizer/residualizer.html#Residualizer.transform"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mulm.residualizer.residualizer.Residualizer.transform" title="Permalink to this definition">¶</a></dt>
+<dd><p>Residualize Y on X.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>Y: array (n, p)</strong></p>
+<blockquote>
+<div><p>Dependant variables</p>
+</div></blockquote>
+<p><strong>X: array(n, k)</strong></p>
+<blockquote>
+<div><p>Design matrix of independant variables</p>
+</div></blockquote>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Yres: array (n, p)</p>
+<blockquote>
+<div><p>Residualized Y data.</p>
+</div></blockquote>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="mulm.residualizer.residualizer.ResidualizerEstimator">
+<em class="property">class </em><code class="sig-prename descclassname">mulm.residualizer.residualizer.</code><code class="sig-name descname">ResidualizerEstimator</code><span class="sig-paren">(</span><em class="sig-param">residualizer</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mulm/residualizer/residualizer.html#ResidualizerEstimator"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mulm.residualizer.residualizer.ResidualizerEstimator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Wrap Residualizer into an estimator compatible with sklearn API.</p>
+<p>Note that to be consistant with sklearn API, here X contains the input variable
+and Z is the design matrix for residualization.</p>
+<dl class="method">
+<dt id="mulm.residualizer.residualizer.ResidualizerEstimator.fit">
+<code class="sig-name descname">fit</code><span class="sig-paren">(</span><em class="sig-param">X</em>, <em class="sig-param">y=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mulm/residualizer/residualizer.html#ResidualizerEstimator.fit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mulm.residualizer.residualizer.ResidualizerEstimator.fit" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mulm.residualizer.residualizer.ResidualizerEstimator.fit_transform">
+<code class="sig-name descname">fit_transform</code><span class="sig-paren">(</span><em class="sig-param">X</em>, <em class="sig-param">y=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mulm/residualizer/residualizer.html#ResidualizerEstimator.fit_transform"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mulm.residualizer.residualizer.ResidualizerEstimator.fit_transform" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mulm.residualizer.residualizer.ResidualizerEstimator.pack">
+<code class="sig-name descname">pack</code><span class="sig-paren">(</span><em class="sig-param">Z</em>, <em class="sig-param">X</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mulm/residualizer/residualizer.html#ResidualizerEstimator.pack"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mulm.residualizer.residualizer.ResidualizerEstimator.pack" title="Permalink to this definition">¶</a></dt>
+<dd><p>Pack (concat) Z (design matrix) and X to match scikit-learn pipelines.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>Z: array (n, k)</strong></p>
+<blockquote>
+<div><p>the design_matrix</p>
+</div></blockquote>
+<p><strong>X: array (n, p)</strong></p>
+<blockquote>
+<div><p>the input data for scikit-learn: fit(X, y) or transform(X)</p>
+</div></blockquote>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>(n, (k+p)) array: [design_matrix, X]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mulm.residualizer.residualizer.ResidualizerEstimator.transform">
+<code class="sig-name descname">transform</code><span class="sig-paren">(</span><em class="sig-param">X</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mulm/residualizer/residualizer.html#ResidualizerEstimator.transform"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mulm.residualizer.residualizer.ResidualizerEstimator.transform" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mulm.residualizer.residualizer.ResidualizerEstimator.upack">
+<code class="sig-name descname">upack</code><span class="sig-paren">(</span><em class="sig-param">ZX</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mulm/residualizer/residualizer.html#ResidualizerEstimator.upack"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mulm.residualizer.residualizer.ResidualizerEstimator.upack" title="Permalink to this definition">¶</a></dt>
+<dd><p>Unpack X and Z (design matrix) from X.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>ZX: array (n, (k+p))</strong></p>
+<blockquote>
+<div><p>array: [Z, X]</p>
+</div></blockquote>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Z (design_matrix), X</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="mulm.residualizer.residualizer.residualize">
+<code class="sig-prename descclassname">mulm.residualizer.residualizer.</code><code class="sig-name descname">residualize</code><span class="sig-paren">(</span><em class="sig-param">Y</em>, <em class="sig-param">data</em>, <em class="sig-param">formula_res</em>, <em class="sig-param">formula_full=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mulm/residualizer/residualizer.html#residualize"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mulm.residualizer.residualizer.residualize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Helper function. See Residualizer.</p>
+</dd></dl>
+
+
+                    </div>
+                <div class="spacer"></div>
+		        
+		        <!-- Footer -->
+		        <div class="section-6-container section-container section-container-image-bg" id="section-6">
+			        <div class="container">
+			            <div class="row">
+		                    <div class="col-md-5 offset-md-1 section-6-box wow fadeInDown">
+		                    	<h3>Follow us</h3>
+		                    	<div class="section-6-social">
+			                    	<a href="https://www.facebook.com/pages/NeuroSpin/171075046414933"><i class="fab fa-facebook-f"></i></a>
+									<a href="https://www.youtube.com/CEASaclay"><i class="fab fa-youtube"></i></a>
+									<a href="https://twitter.com/neurospin_91"><i class="fab fa-twitter"></i></a>
+									<a href="https://github.com/AGrigis/pysphinxdoc"><i class="fab fa-github"></i></a>
+		                    	</div>
+		                    </div>
+			            </div>
+			        	<div class="row">
+		                    <div class="col">
+                                &copy; 2021, 
+pylearn-mulm developers
+ <edouard.duchesnay@cea.fr>. <br/>
+                                Inspired by <a href="https://azmind.com/demo/bootstrap-4-sidebar-menu/">AZMIND template</a>.
+		                    </div>
+		                </div>
+			        </div>
+                </div>
+	        
+	        </div>
+	        <!-- End content -->
+        
+        </div>
+        <!-- End wrapper -->
+
+        <!-- Javascript -->
+		<script src="../_static/js/jquery-3.3.1.min.js"></script>
+		<script src="../_static/js/jquery-migrate-3.0.0.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+        <script src="../_static/js/jquery.backstretch.min.js"></script>
+        <script src="../_static/js/wow.min.js"></script>
+        <script src="../_static/js/jquery.waypoints.min.js"></script>
+        <script src="../_static/js/jquery.mCustomScrollbar.concat.min.js"></script>
+        <script src="../_static/js/scripts.js"></script>
+        <script src="../_static/js/jquery.mosaic.js"></script>
+        <script type="text/javascript">
+	        $('.top-content').backstretch("../_static/img/backgrounds/1.jpg");
+            $('.section-4-container').backstretch("../_static/img/backgrounds/2.jpg");
+            $('.section-6-container').backstretch("../_static/img/backgrounds/1.jpg");
+        </script>
+
+    </body>
+
+</html>

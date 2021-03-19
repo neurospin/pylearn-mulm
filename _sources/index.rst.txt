@@ -1,0 +1,25 @@
+..  mulm documentation master file
+
+
+Massive univariate linear model.
+
+
+
+.. toctree::
+    :maxdepth: 1
+    :hidden:
+
+    generated/installation
+    generated/documentation
+
+
+=======
+Search
+=======
+
+:ref:`search`
+
+
+
+
+

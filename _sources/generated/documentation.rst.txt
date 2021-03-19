@@ -1,0 +1,41 @@
+.. AUTO-GENERATED FILE -- DO NOT EDIT!
+
+API documentation of MULM
+==========================
+
+This is the classes and functions reference in mulm. Please refer to the gallery for further details, as the class and function raw specifications may not be enough to give full guidelines on their uses.
+
+.. rst-class:: documentation-contents
+
+  **Contents**:
+    * `mulm <mulm.html>`_
+    * `mulm.residualizer <mulm.residualizer.html>`_
+
+.. raw:: html
+
+    <!-- Block section -->
+
+    <div class='container-fluid'>
+
+    <div class='float-left'>
+
+    <div class='row'>
+
+    <div class='col-md-4'>
+    <h3><a href='mulm.html'>
+    mulm
+    </a></h3>
+    <blockquote>
+        <p>The Massive Univariate Linear Model (MULM) module.</p>    </blockquote>
+    </div>
+    <div class='col-md-4'>
+    <h3><a href='mulm.residualizer.html'>
+    mulm.residualizer
+    </a></h3>
+    <blockquote>
+        <p>Module that contains the residualizers.</p>    </blockquote>
+    </div>
+
+    </div>
+    </div>
+    </div>

@@ -1,0 +1,460 @@
+<!doctype html>
+<html lang="en">
+
+    <head>
+
+		<!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <title>mulm</title>
+        
+        <!-- CSS -->
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500&display=swap">
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+        <link rel="stylesheet" href="../_static/css/jquery.mCustomScrollbar.min.css">
+        <link rel="stylesheet" href="../_static/css/animate.css">
+        <link rel="stylesheet" href="../_static/css/style.css">
+        <link rel="stylesheet" href="../_static/css/jquery.mosaic.css">
+        <link rel="stylesheet" href="../_static/gallery.css">
+        <link rel="stylesheet" href="../_static/css/media-queries.css">
+
+        <!-- Favicon and touch icons -->
+        <link rel="shortcut icon" href="../_static/ico/favicon.png">
+        <link rel="apple-touch-icon-precomposed" sizes="144x144" href="../_static/ico/apple-touch-icon-144-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../_static/ico/apple-touch-icon-114-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../_static/ico/apple-touch-icon-72-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" href="../_static/ico/apple-touch-icon-57-precomposed.png">
+
+    </head>
+
+    <body>
+
+		<!-- Wrapper -->
+    	<div class="wrapper">
+
+			<!-- Sidebar -->
+			<nav class="sidebar">
+				
+				<!-- close sidebar menu -->
+				<div class="dismiss">
+					<i class="fas fa-arrow-left"></i>
+				</div>
+				
+				<div class="logo"">
+					<h3><a href="../index.html">Sidebar Menu</a></h3>
+				</div>
+
+                <!-- info setup -->
+                    <p class="doc-version">
+                        This documentation is for mulm <strong>version 0.0.1</strong>
+                    </p>
+                <p class="citing">
+                    If you use the software, please do not hesitate to 
+                    <a &mdash; <a href="https://github.com/neurospin/pylearn-mulm">
+                    Report a Bug</a>.
+                </p>
+				
+                <!-- links -->
+                
+                
+				<ul class="list-unstyled menu-elements">
+					<li class="active">
+						<a href="../index.html"><i class="fas fa-home"></i> Home</a>
+					</li>
+					<li>
+						<a href="installation.html"><i class="fas fa-cog"></i> Installation</a>
+					</li>
+					<li>
+						<a href="../auto_gallery/gallery.html"><i class="fas fa-eye"></i> Gallery</a>
+					</li>
+					<li>
+						<a href="documentation.html"><i class="fas fa-pencil-alt"></i> API documentation</a>
+					</li>
+					<li>
+						<a href="https://joliot.cea.fr/drf/joliot/Pages/Entites_de_recherche/NeuroSpin.aspx"><i class="fas fa-external-link-alt"></i> NeuroSpin</a>
+					</li>
+					<li>
+						<a href="#otherSections" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle" role="button" aria-controls="otherSections">
+							<i class="fas fa-sync"></i>Sections
+						</a>
+						<ul class="collapse list-unstyled" id="otherSections">
+                            
+                                
+                                    
+                                    
+                                    
+                                
+                            
+						</ul>
+					</li>
+				</ul>
+				
+                <!-- go top page -->
+				<div class="to-top">
+					<a class="btn btn-primary btn-customized-3" href="#" role="button">
+	                    <i class="fas fa-arrow-up"></i> Top
+	                </a>
+				</div>
+			
+                <!-- change color -->
+				<div class="dark-light-buttons">
+					<a class="btn btn-primary btn-customized-4 btn-customized-dark" href="#" role="button">Dark</a>
+					<a class="btn btn-primary btn-customized-4 btn-customized-light" href="#" role="button">Light</a>
+				</div>
+			
+			</nav>
+			<!-- End sidebar -->
+			
+			<!-- Dark overlay -->
+    		<div class="overlay"></div>
+
+			<!-- Content -->
+			<div class="content">
+			
+				<!-- open sidebar menu -->
+				<a class="btn btn-primary btn-customized open-menu" href="#" role="button">
+                    <i class="fas fa-align-left"></i> <span>Menu</span>
+                </a>
+
+		        <!-- Top content -->
+		        <div class="top-content section-container" id="top-content">
+			        <div class="container">
+			            <div class="row">
+                            <div class="col-md-3 section-5-box banner-logo">
+                                <img alt="Logo" src="../_static/mulm.png">
+                            </div>
+			                <div class="col-md-7 section-5-box">
+			                	<h1 class="wow fadeIn">    <p>Massive univariate linear model.</p></h1>
+			                </div>
+			            </div>
+			        </div>
+		        </div>
+                    
+                    <div class="document">
+                        <span class="target" id="module-mulm.models"></span><p>Linear models for massive univariate statistics.</p>
+<dl class="class">
+<dt id="mulm.models.MUOLS">
+<em class="property">class </em><code class="sig-prename descclassname">mulm.models.</code><code class="sig-name descname">MUOLS</code><span class="sig-paren">(</span><em class="sig-param">Y</em>, <em class="sig-param">X</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mulm/models.html#MUOLS"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mulm.models.MUOLS" title="Permalink to this definition">¶</a></dt>
+<dd><p>Mass-univariate linear modeling based Ordinary Least Squares.
+Given two arrays X (n_samples, p) and Y (n_samples, q).
+Fit q independent linear models, ie., for all y in Y fit: lm(y ~ X).</p>
+<dl class="method">
+<dt id="mulm.models.MUOLS.f_test">
+<code class="sig-name descname">f_test</code><span class="sig-paren">(</span><em class="sig-param">contrast</em>, <em class="sig-param">pval=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mulm/models.html#MUOLS.f_test"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mulm.models.MUOLS.f_test" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="simple">
+<dt>Compute F-statistics (F-scores and p-value associated to contrast).</dt><dd><p>The code has been cloned from the SPM MATLAB implementation.</p>
+</dd>
+</dl>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>contrasts: array (q, ) or list of arrays or array 2D.</strong></p>
+<blockquote>
+<div><p>Single contrast (array) or list of contrasts or array of contrasts.
+The k contrasts to be tested.</p>
+</div></blockquote>
+<p><strong>pval: boolean</strong></p>
+<blockquote>
+<div><p>compute pvalues (default is false)</p>
+</div></blockquote>
+<p><strong>two_tailed: boolean</strong></p>
+<blockquote>
+<div><p>one-tailed test or a two-tailed test (default True)</p>
+</div></blockquote>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>tstats (k, p) array, pvals (k, p) array, df (k,) array</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mulm.models.MUOLS.fit">
+<code class="sig-name descname">fit</code><span class="sig-paren">(</span><em class="sig-param">block=False</em>, <em class="sig-param">max_elements=134217728</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mulm/models.html#MUOLS.fit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mulm.models.MUOLS.fit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fit p independent linear models, ie., for all y in Y fit: lm(y ~ X).</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>block</strong> : boolean</p>
+<blockquote>
+<div><p>Use block=True for huge matrices Y.
+Operations block by block to optimize time and memory.</p>
+</div></blockquote>
+<p><strong>max_elements</strong> : int</p>
+<blockquote>
+<div><p>block dimension (2**27 corresponds to 1Go)</p>
+</div></blockquote>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>self</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mulm.models.MUOLS.predict">
+<code class="sig-name descname">predict</code><span class="sig-paren">(</span><em class="sig-param">X</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mulm/models.html#MUOLS.predict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mulm.models.MUOLS.predict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Predict Y given a new design matrix X.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>X</strong> : numpy array (n_samples, q)</p>
+<blockquote>
+<div><p>design matrix of new predictors.</p>
+</div></blockquote>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>(n_samples, 1) array of predicted values (X beta)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mulm.models.MUOLS.stats_f_coefficients">
+<code class="sig-name descname">stats_f_coefficients</code><span class="sig-paren">(</span><em class="sig-param">X</em>, <em class="sig-param">Y</em>, <em class="sig-param">contrast</em>, <em class="sig-param">pval=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mulm/models.html#MUOLS.stats_f_coefficients"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mulm.models.MUOLS.stats_f_coefficients" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mulm.models.MUOLS.t_test">
+<code class="sig-name descname">t_test</code><span class="sig-paren">(</span><em class="sig-param">contrasts</em>, <em class="sig-param">pval=False</em>, <em class="sig-param">two_tailed=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mulm/models.html#MUOLS.t_test"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mulm.models.MUOLS.t_test" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="simple">
+<dt>Compute T-statistics (t-scores and p-value associated to contrast).</dt><dd><p>The code has been cloned from the SPM MATLAB implementation.</p>
+</dd>
+</dl>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>contrasts: array (q, ) or list of arrays or array 2D.</strong></p>
+<blockquote>
+<div><p>Single contrast (array) or list of contrasts or array of contrasts.
+The k contrasts to be tested.</p>
+</div></blockquote>
+<p><strong>pval: boolean</strong></p>
+<blockquote>
+<div><p>compute pvalues (default is false)</p>
+</div></blockquote>
+<p><strong>two_tailed: boolean</strong></p>
+<blockquote>
+<div><p>one-tailed test or a two-tailed test (default True)</p>
+</div></blockquote>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>tstats (k, p) array, pvals (k, p) array, df (k,) array</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mulm.models.MUOLS.t_test_maxT">
+<code class="sig-name descname">t_test_maxT</code><span class="sig-paren">(</span><em class="sig-param">contrasts</em>, <em class="sig-param">nperms=1000</em>, <em class="sig-param">two_tailed=True</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mulm/models.html#MUOLS.t_test_maxT"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mulm.models.MUOLS.t_test_maxT" title="Permalink to this definition">¶</a></dt>
+<dd><dl>
+<dt>Correct for multiple comparisons using Westfall and Young, 1993 a.k.a maxT procedure.</dt><dd><p>It is based on permutation tests procedure. This is the procedure used by FSL (<a class="reference external" href="https://fsl.fmrib.ox.ac.uk/">https://fsl.fmrib.ox.ac.uk/</a>).</p>
+<p>It should be used when the test statistics, and hence the unadjusted p-values, are dependent.
+This is the case when groups of dependant variables (in Y) tend to have highly correlated measures.
+Westfall and Young (1993) proposed adjusted p-values for less conservative multiple testing procedures which
+take into account the dependence structure among test statistics.
+References:
+- Anderson M. Winkler “Statistical analysis of areal quantities in the brain through
+permutation tests” Ph.D 2017.
+- Dudoit et al. “Multiple Hypothesis Testing in Microarray Experiments”, Statist. Sci. 2003</p>
+</dd>
+</dl>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>contrasts: array (q, ) or list of arrays or array 2D.</strong></p>
+<blockquote>
+<div><p>Single contrast (array) or list of contrasts or array of contrasts.
+The k contrasts to be tested.</p>
+</div></blockquote>
+<p><strong>nperms: int</strong></p>
+<blockquote>
+<div><p>permutation tests (default 1000).</p>
+</div></blockquote>
+<p><strong>two_tailed: boolean</strong></p>
+<blockquote>
+<div><p>one-tailed test or a two-tailed test (default True)</p>
+</div></blockquote>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>tstats (k, p) array, pvals (k, p) array corrected for multiple comparisons</p>
+<p>df (k,) array.</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">mulm</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># n_samples, nb of features that depends on X and that are pure noise</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n_samples</span><span class="p">,</span> <span class="n">n_info</span><span class="p">,</span> <span class="n">n_noise</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">100</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">beta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">])[:,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">n_samples</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span> <span class="c1"># Design matrix</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span><span class="p">[:,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span> <span class="c1"># Intercept</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">n_samples</span><span class="p">,</span> <span class="n">n_info</span> <span class="o">+</span> <span class="n">n_noise</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Y</span><span class="p">[:,</span> <span class="p">:</span><span class="n">n_info</span><span class="p">]</span> <span class="o">+=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">beta</span><span class="p">)</span> <span class="c1"># n_info features depend from X</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">contrasts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])[:</span><span class="mi">4</span><span class="p">]</span> <span class="c1"># don&#39;t test the intercept</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mod</span> <span class="o">=</span> <span class="n">mulm</span><span class="o">.</span><span class="n">MUOLS</span><span class="p">(</span><span class="n">Y</span><span class="p">,</span> <span class="n">X</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tvals</span><span class="p">,</span> <span class="n">pvals</span><span class="p">,</span> <span class="n">df</span> <span class="o">=</span> <span class="n">mod</span><span class="o">.</span><span class="n">t_test</span><span class="p">(</span><span class="n">contrasts</span><span class="p">,</span> <span class="n">two_tailed</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">pvals</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="go">(4, 102)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Nb of uncorrected p-values &lt;5%:&quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">pvals</span> <span class="o">&lt;</span> <span class="mf">0.05</span><span class="p">))</span>
+<span class="go">Nb of uncorrected p-values &lt;5%: 18</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tvals</span><span class="p">,</span> <span class="n">pvals_corrmaxT</span><span class="p">,</span> <span class="n">df</span> <span class="o">=</span> <span class="n">mod</span><span class="o">.</span><span class="n">t_test_maxT</span><span class="p">(</span><span class="n">contrasts</span><span class="p">,</span> <span class="n">two_tailed</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Nb of corrected pvalues &lt;5%:&quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">pvals_corrmaxT</span> <span class="o">&lt;</span> <span class="mf">0.05</span><span class="p">))</span>
+<span class="go">Nb of corrected pvalues &lt;5%: 4</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="mulm.models.MUOLS.t_test_minP">
+<code class="sig-name descname">t_test_minP</code><span class="sig-paren">(</span><em class="sig-param">contrasts</em>, <em class="sig-param">nperms=10000</em>, <em class="sig-param">two_tailed=True</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mulm/models.html#MUOLS.t_test_minP"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mulm.models.MUOLS.t_test_minP" title="Permalink to this definition">¶</a></dt>
+<dd><p>Correct for multiple comparisons using minP procedure.</p>
+<blockquote>
+<div><p>References:
+- Dudoit et al. “Multiple Hypothesis Testing in Microarray Experiments”, Statist. Sci. 2003</p>
+</div></blockquote>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>contrasts: array (q, ) or list of arrays or array 2D.</strong></p>
+<blockquote>
+<div><p>Single contrast (array) or list of contrasts or array of contrasts.
+The k contrasts to be tested.</p>
+</div></blockquote>
+<p><strong>nperms: int</strong></p>
+<blockquote>
+<div><p>permutation tests (default 10000).</p>
+</div></blockquote>
+<p><strong>two_tailed: boolean</strong></p>
+<blockquote>
+<div><p>one-tailed test or a two-tailed test (default True)</p>
+</div></blockquote>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>tstats (k, p) array, pvals (k, p) array corrected for multiple comparisons</p>
+<p>df (k,) array.</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">mulm</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># n_samples, nb of features that depends on X and that are pure noise</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n_samples</span><span class="p">,</span> <span class="n">n_info</span><span class="p">,</span> <span class="n">n_noise</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">100</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">beta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">])[:,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">n_samples</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span> <span class="c1"># Design matrix</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span><span class="p">[:,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span> <span class="c1"># Intercept</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">n_samples</span><span class="p">,</span> <span class="n">n_info</span> <span class="o">+</span> <span class="n">n_noise</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Y</span><span class="p">[:,</span> <span class="p">:</span><span class="n">n_info</span><span class="p">]</span> <span class="o">+=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">beta</span><span class="p">)</span> <span class="c1"># n_info features depend from X</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">contrasts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])[:</span><span class="mi">4</span><span class="p">]</span> <span class="c1"># don&#39;t test the intercept</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mod</span> <span class="o">=</span> <span class="n">mulm</span><span class="o">.</span><span class="n">MUOLS</span><span class="p">(</span><span class="n">Y</span><span class="p">,</span> <span class="n">X</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tvals</span><span class="p">,</span> <span class="n">pvals</span><span class="p">,</span> <span class="n">df</span> <span class="o">=</span> <span class="n">mod</span><span class="o">.</span><span class="n">t_test</span><span class="p">(</span><span class="n">contrasts</span><span class="p">,</span> <span class="n">two_tailed</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">pvals</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="go">(4, 102)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Nb of uncorrected p-values &lt;5%:&quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">pvals</span> <span class="o">&lt;</span> <span class="mf">0.05</span><span class="p">))</span>
+<span class="go">Nb of uncorrected p-values &lt;5%: 18</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tvals</span><span class="p">,</span> <span class="n">pval_corrminp</span><span class="p">,</span> <span class="n">df</span> <span class="o">=</span> <span class="n">mod</span><span class="o">.</span><span class="n">t_test_minP</span><span class="p">(</span><span class="n">contrasts</span><span class="p">,</span> <span class="n">two_tailed</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Nb of corrected pvalues &lt;5%:&quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">pval_corrminp</span> <span class="o">&lt;</span> <span class="mf">0.05</span><span class="p">))</span>
+<span class="go">Nb of corrected pvalues &lt;5%: 4</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="mulm.models.MUPairwiseCorr">
+<em class="property">class </em><code class="sig-prename descclassname">mulm.models.</code><code class="sig-name descname">MUPairwiseCorr</code><span class="sig-paren">(</span><em class="sig-param">X</em>, <em class="sig-param">Y</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mulm/models.html#MUPairwiseCorr"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mulm.models.MUPairwiseCorr" title="Permalink to this definition">¶</a></dt>
+<dd><p>Mass-univariate pairwise correlations. Given two arrays X (n_samples x p)
+and Y (n_samples x q). Fit p x q independent linear models. Prediction
+and stats return (p x q) array.</p>
+<p class="rubric">Examples</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">mulm</span> <span class="k">import</span> <span class="n">MUPairwiseCorr</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">corr</span> <span class="o">=</span> <span class="n">MUPairwiseCorr</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">corr</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+<span class="go">&lt;mulm.models.MUPairwiseCorr instance at 0x30da878&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">f</span><span class="p">,</span> <span class="n">p</span> <span class="o">=</span> <span class="n">corr</span><span class="o">.</span><span class="n">stats_f</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="go">(5, 3)</span>
+</pre></div>
+</div>
+<dl class="method">
+<dt id="mulm.models.MUPairwiseCorr.fit">
+<code class="sig-name descname">fit</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mulm/models.html#MUPairwiseCorr.fit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mulm.models.MUPairwiseCorr.fit" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mulm.models.MUPairwiseCorr.predict">
+<code class="sig-name descname">predict</code><span class="sig-paren">(</span><em class="sig-param">X</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mulm/models.html#MUPairwiseCorr.predict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mulm.models.MUPairwiseCorr.predict" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mulm.models.MUPairwiseCorr.stats_f">
+<code class="sig-name descname">stats_f</code><span class="sig-paren">(</span><em class="sig-param">pval=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mulm/models.html#MUPairwiseCorr.stats_f"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mulm.models.MUPairwiseCorr.stats_f" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>pval</strong></p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>fstats (k, p) array, pvals (k, p) array, df (k,) array</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+
+                    </div>
+                <div class="spacer"></div>
+		        
+		        <!-- Footer -->
+		        <div class="section-6-container section-container section-container-image-bg" id="section-6">
+			        <div class="container">
+			            <div class="row">
+		                    <div class="col-md-5 offset-md-1 section-6-box wow fadeInDown">
+		                    	<h3>Follow us</h3>
+		                    	<div class="section-6-social">
+			                    	<a href="https://www.facebook.com/pages/NeuroSpin/171075046414933"><i class="fab fa-facebook-f"></i></a>
+									<a href="https://www.youtube.com/CEASaclay"><i class="fab fa-youtube"></i></a>
+									<a href="https://twitter.com/neurospin_91"><i class="fab fa-twitter"></i></a>
+									<a href="https://github.com/AGrigis/pysphinxdoc"><i class="fab fa-github"></i></a>
+		                    	</div>
+		                    </div>
+			            </div>
+			        	<div class="row">
+		                    <div class="col">
+                                &copy; 2021, 
+pylearn-mulm developers
+ <edouard.duchesnay@cea.fr>. <br/>
+                                Inspired by <a href="https://azmind.com/demo/bootstrap-4-sidebar-menu/">AZMIND template</a>.
+		                    </div>
+		                </div>
+			        </div>
+                </div>
+	        
+	        </div>
+	        <!-- End content -->
+        
+        </div>
+        <!-- End wrapper -->
+
+        <!-- Javascript -->
+		<script src="../_static/js/jquery-3.3.1.min.js"></script>
+		<script src="../_static/js/jquery-migrate-3.0.0.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+        <script src="../_static/js/jquery.backstretch.min.js"></script>
+        <script src="../_static/js/wow.min.js"></script>
+        <script src="../_static/js/jquery.waypoints.min.js"></script>
+        <script src="../_static/js/jquery.mCustomScrollbar.concat.min.js"></script>
+        <script src="../_static/js/scripts.js"></script>
+        <script src="../_static/js/jquery.mosaic.js"></script>
+        <script type="text/javascript">
+	        $('.top-content').backstretch("../_static/img/backgrounds/1.jpg");
+            $('.section-4-container').backstretch("../_static/img/backgrounds/2.jpg");
+            $('.section-6-container').backstretch("../_static/img/backgrounds/1.jpg");
+        </script>
+
+    </body>
+
+</html>

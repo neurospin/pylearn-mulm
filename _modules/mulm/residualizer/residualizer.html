@@ -1,0 +1,435 @@
+<!doctype html>
+<html lang="en">
+
+    <head>
+
+		<!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <title>mulm</title>
+        
+        <!-- CSS -->
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500&display=swap">
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+        <link rel="stylesheet" href="../../../_static/css/jquery.mCustomScrollbar.min.css">
+        <link rel="stylesheet" href="../../../_static/css/animate.css">
+        <link rel="stylesheet" href="../../../_static/css/style.css">
+        <link rel="stylesheet" href="../../../_static/css/jquery.mosaic.css">
+        <link rel="stylesheet" href="../../../_static/gallery.css">
+        <link rel="stylesheet" href="../../../_static/css/media-queries.css">
+
+        <!-- Favicon and touch icons -->
+        <link rel="shortcut icon" href="../../../_static/ico/favicon.png">
+        <link rel="apple-touch-icon-precomposed" sizes="144x144" href="../../../_static/ico/apple-touch-icon-144-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../../../_static/ico/apple-touch-icon-114-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../../../_static/ico/apple-touch-icon-72-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" href="../../../_static/ico/apple-touch-icon-57-precomposed.png">
+
+    </head>
+
+    <body>
+
+		<!-- Wrapper -->
+    	<div class="wrapper">
+
+			<!-- Sidebar -->
+			<nav class="sidebar">
+				
+				<!-- close sidebar menu -->
+				<div class="dismiss">
+					<i class="fas fa-arrow-left"></i>
+				</div>
+				
+				<div class="logo"">
+					<h3><a href="../../../index.html">Sidebar Menu</a></h3>
+				</div>
+
+                <!-- info setup -->
+                    <p class="doc-version">
+                        This documentation is for mulm <strong>version 0.0.1</strong>
+                    </p>
+                <p class="citing">
+                    If you use the software, please do not hesitate to 
+                    <a &mdash; <a href="https://github.com/neurospin/pylearn-mulm">
+                    Report a Bug</a>.
+                </p>
+				
+                <!-- links -->
+                
+                
+				<ul class="list-unstyled menu-elements">
+					<li class="active">
+						<a href="../../../index.html"><i class="fas fa-home"></i> Home</a>
+					</li>
+					<li>
+						<a href="../../../generated/installation.html"><i class="fas fa-cog"></i> Installation</a>
+					</li>
+					<li>
+						<a href="../../../auto_gallery/gallery.html"><i class="fas fa-eye"></i> Gallery</a>
+					</li>
+					<li>
+						<a href="../../../generated/documentation.html"><i class="fas fa-pencil-alt"></i> API documentation</a>
+					</li>
+					<li>
+						<a href="https://joliot.cea.fr/drf/joliot/Pages/Entites_de_recherche/NeuroSpin.aspx"><i class="fas fa-external-link-alt"></i> NeuroSpin</a>
+					</li>
+					<li>
+						<a href="#otherSections" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle" role="button" aria-controls="otherSections">
+							<i class="fas fa-sync"></i>Sections
+						</a>
+						<ul class="collapse list-unstyled" id="otherSections">
+                            
+                                
+                                    
+                                    
+                                    
+                                
+                            
+						</ul>
+					</li>
+				</ul>
+				
+                <!-- go top page -->
+				<div class="to-top">
+					<a class="btn btn-primary btn-customized-3" href="#" role="button">
+	                    <i class="fas fa-arrow-up"></i> Top
+	                </a>
+				</div>
+			
+                <!-- change color -->
+				<div class="dark-light-buttons">
+					<a class="btn btn-primary btn-customized-4 btn-customized-dark" href="#" role="button">Dark</a>
+					<a class="btn btn-primary btn-customized-4 btn-customized-light" href="#" role="button">Light</a>
+				</div>
+			
+			</nav>
+			<!-- End sidebar -->
+			
+			<!-- Dark overlay -->
+    		<div class="overlay"></div>
+
+			<!-- Content -->
+			<div class="content">
+			
+				<!-- open sidebar menu -->
+				<a class="btn btn-primary btn-customized open-menu" href="#" role="button">
+                    <i class="fas fa-align-left"></i> <span>Menu</span>
+                </a>
+
+		        <!-- Top content -->
+		        <div class="top-content section-container" id="top-content">
+			        <div class="container">
+			            <div class="row">
+                            <div class="col-md-3 section-5-box banner-logo">
+                                <img alt="Logo" src="../../../_static/mulm.png">
+                            </div>
+			                <div class="col-md-7 section-5-box">
+			                	<h1 class="wow fadeIn">    <p>Massive univariate linear model.</p></h1>
+			                </div>
+			            </div>
+			        </div>
+		        </div>
+                    
+                    <div class="document">
+                        <h1>Source code for mulm.residualizer.residualizer</h1><div class='divider-1 wow fadeInUp'><span></span></div><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="c1">##########################################################################</span>
+<span class="c1"># Created on Created on Thu Feb  6 15:15:14 2020</span>
+<span class="c1"># Copyright (c) 2013-2021, CEA/DRF/Joliot/NeuroSpin. All rights reserved.</span>
+<span class="c1"># @author:  Edouard Duchesnay</span>
+<span class="c1"># @email:   edouard.duchesnay@cea.fr</span>
+<span class="c1"># @license: BSD 3-clause.</span>
+<span class="c1">##########################################################################</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Residualization of a Y data on possibly adjusted for other variables.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">mulm</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<div class="viewcode-block" id="Residualizer"><a class="viewcode-back" href="../../../generated/mulm.residualizer.residualizer.html#mulm.residualizer.residualizer.Residualizer">[docs]</a><span class="k">class</span> <span class="nc">Residualizer</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot; Residualization of a Y data on possibly adjusted for other variables.</span>
+
+<span class="sd">    Example: Y is a (n, p) array of p-dependant variables, we want to residualize</span>
+<span class="sd">    for &quot;site&quot; adjusted for &quot;age + sex&quot;.</span>
+
+<span class="sd">    1) Use of DataFrame and formula:</span>
+<span class="sd">    1.1) `Residualizer(data=df, formula_res=&quot;site&quot;, formula_full=site + age + sex&quot;)`</span>
+
+<span class="sd">    1.2) `Z = get_design_mat(data)` will return the numpy (n, k) array design matrix.</span>
+<span class="sd">    Row selection can be done on both Y and design_mat (Cross-val., etc.)</span>
+
+<span class="sd">    2) Use of raw arrays: if you choose to manually write your design matrix.</span>
+<span class="sd">    In this case provide res_mask ie, the residualization mask within your full.</span>
+<span class="sd">    model. For example: `Residualizer(mask=[False, True, False, False])` will</span>
+<span class="sd">    fit the whole model and residualize on the second regressor, ie, site.</span>
+
+<span class="sd">    3) `fit(Y, X)` fits the model:</span>
+<span class="sd">    Y = b0 + b1 site + b2 age + b3 sex + eps</span>
+<span class="sd">    =&gt; learn and store b1, b2, b3</span>
+
+<span class="sd">    4) `transform(Y, X)` residualize Y on X, ie, returns Y - b1 site</span>
+
+<span class="sd">    Example</span>
+<span class="sd">    -------</span>
+<span class="sd">    &gt;&gt;&gt; import numpy as np</span>
+<span class="sd">    &gt;&gt;&gt; import pandas as pd</span>
+<span class="sd">    &gt;&gt;&gt; import scipy.stats as stats</span>
+<span class="sd">    &gt;&gt;&gt; from mulm.residualizer import Residualizer</span>
+<span class="sd">    &gt;&gt;&gt; import seaborn as sns</span>
+<span class="sd">    &gt;&gt;&gt; np.random.seed(1)</span>
+<span class="sd">    &gt;&gt;&gt;</span>
+<span class="sd">    &gt;&gt;&gt; # Dataset with site effect on age</span>
+<span class="sd">    &gt;&gt;&gt; site = np.array([-1] * 50 + [1] * 50)</span>
+<span class="sd">    &gt;&gt;&gt; age = np.random.uniform(10, 40, size=100) + 5 * site</span>
+<span class="sd">    &gt;&gt;&gt; y = -0.1 * age  + site + np.random.normal(size=100)</span>
+<span class="sd">    &gt;&gt;&gt; data = pd.DataFrame(dict(y=y, age=age, site=site.astype(object)))</span>
+<span class="sd">    &gt;&gt;&gt;</span>
+<span class="sd">    &gt;&gt;&gt; # Simple residualization on site</span>
+<span class="sd">    &gt;&gt;&gt; res_spl = Residualizer(data, formula_res=&quot;site&quot;)</span>
+<span class="sd">    &gt;&gt;&gt; yres = res_spl.fit_transform(y[:, None], res_spl.get_design_mat())</span>
+<span class="sd">    &gt;&gt;&gt;</span>
+<span class="sd">    &gt;&gt;&gt; # Site residualization adjusted for age</span>
+<span class="sd">    &gt;&gt;&gt; res_adj = Residualizer(data, formula_res=&quot;site&quot;, formula_full=&quot;age + site&quot;)</span>
+<span class="sd">    &gt;&gt;&gt; yadj = res_adj.fit_transform(y[:, None], res_adj.get_design_mat())</span>
+<span class="sd">    &gt;&gt;&gt;</span>
+<span class="sd">    &gt;&gt;&gt; # Site residualization adjusted for age provides higher correlation,</span>
+<span class="sd">    &gt;&gt;&gt; # and lower stderr than simple residualization</span>
+<span class="sd">    &gt;&gt;&gt; lm_res = stats.linregress(age, yres.ravel())</span>
+<span class="sd">    &gt;&gt;&gt; lm_adj = stats.linregress(age, yadj.ravel())</span>
+<span class="sd">    &gt;&gt;&gt;</span>
+<span class="sd">    &gt;&gt;&gt; np.allclose((lm_res.slope, lm_res.rvalue, lm_res.stderr),</span>
+<span class="sd">    &gt;&gt;&gt;             (-0.079187578, -0.623733003, 0.0100242219))</span>
+<span class="sd">    True</span>
+<span class="sd">    &gt;&gt;&gt; np.allclose((lm_adj.slope, lm_adj.rvalue, lm_adj.stderr),</span>
+<span class="sd">    &gt;&gt;&gt;             (-0.110779913, -0.7909219758, 0.00865778640))</span>
+<span class="sd">    True</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">formula_res</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">formula_full</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                 <span class="n">contrast_res</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        data: DataFrame</span>
+<span class="sd">            DataFrame containing column to build the design matrix (default None).</span>
+
+<span class="sd">        formula_res: str</span>
+<span class="sd">            Residualisation formula. Ex: &quot;site&quot; (default None).</span>
+
+<span class="sd">        formula_full: str</span>
+<span class="sd">            Full model (formula) of residualisation containing other variables</span>
+<span class="sd">            to adjust for. Ex.: &quot;site + age + sex&quot; (default None).</span>
+
+<span class="sd">        cont_res: boolean array</span>
+<span class="sd">            the contrast for residualisation (matches formula_res).</span>
+<span class="sd">            Ex: [False, True, False, False]. The default None corresponds to True</span>
+<span class="sd">            everywhere.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">formula_res</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">formula_full</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">formula_full</span> <span class="o">=</span> <span class="n">formula_res</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">formula_full</span> <span class="o">=</span> <span class="n">formula_full</span>
+            <span class="n">res_terms</span> <span class="o">=</span> <span class="n">mulm</span><span class="o">.</span><span class="n">design_matrix</span><span class="p">(</span><span class="n">formula</span><span class="o">=</span><span class="n">formula_res</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+            <span class="n">_</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">t_contrasts</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">f_contrasts</span> <span class="o">=</span> \
+                <span class="n">mulm</span><span class="o">.</span><span class="n">design_matrix</span><span class="p">(</span><span class="n">formula</span><span class="o">=</span><span class="n">formula_full</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
+            <span class="c1"># mask of terms in residualize formula within full model</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">contrast_res</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">cont</span> <span class="k">for</span> <span class="n">term</span><span class="p">,</span> <span class="n">cont</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">t_contrasts</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+                                  <span class="k">if</span> <span class="n">term</span> <span class="ow">in</span> <span class="n">res_terms</span><span class="p">])</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">contrast_res</span> <span class="o">=</span> <span class="n">contrast_res</span>
+
+<div class="viewcode-block" id="Residualizer.get_design_mat"><a class="viewcode-back" href="../../../generated/mulm.residualizer.residualizer.html#mulm.residualizer.residualizer.Residualizer.get_design_mat">[docs]</a>    <span class="k">def</span> <span class="nf">get_design_mat</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+        <span class="n">design_mat</span><span class="p">,</span> <span class="n">t_contrasts</span><span class="p">,</span> <span class="n">f_contrasts</span> <span class="o">=</span> \
+            <span class="n">mulm</span><span class="o">.</span><span class="n">design_matrix</span><span class="p">(</span><span class="n">formula</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">formula_full</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">t_contrasts</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">==</span> <span class="n">t_contrasts</span><span class="p">[</span><span class="n">k</span><span class="p">]</span>
+                       <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">t_contrasts</span><span class="p">]),</span> <span class="s2">&quot;new data doesn&#39;t&quot;</span>
+        <span class="k">return</span> <span class="n">design_mat</span></div>
+
+<div class="viewcode-block" id="Residualizer.fit"><a class="viewcode-back" href="../../../generated/mulm.residualizer.residualizer.html#mulm.residualizer.residualizer.Residualizer.fit">[docs]</a>    <span class="k">def</span> <span class="nf">fit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">X</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Fit parameters of p linear models where each Y is regressed on X.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        Y: array (n, p)</span>
+<span class="sd">            Dependant variables</span>
+
+<span class="sd">        X: array(n, k)</span>
+<span class="sd">            Design matrix of independant variables</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">contrast_res</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">contrast_res</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">bool</span><span class="p">)</span>
+
+        <span class="k">assert</span> <span class="n">Y</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">assert</span> <span class="bp">self</span><span class="o">.</span><span class="n">contrast_res</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s2">&quot;contrast doesn&#39;t match design matrix&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mod_mulm</span> <span class="o">=</span> <span class="n">mulm</span><span class="o">.</span><span class="n">MUOLS</span><span class="p">(</span><span class="n">Y</span><span class="p">,</span> <span class="n">X</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+        <span class="k">return</span> <span class="bp">self</span></div>
+
+<div class="viewcode-block" id="Residualizer.transform"><a class="viewcode-back" href="../../../generated/mulm.residualizer.residualizer.html#mulm.residualizer.residualizer.Residualizer.transform">[docs]</a>    <span class="k">def</span> <span class="nf">transform</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">X</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Residualize Y on X.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        Y: array (n, p)</span>
+<span class="sd">            Dependant variables</span>
+
+<span class="sd">        X: array(n, k)</span>
+<span class="sd">            Design matrix of independant variables</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        Yres: array (n, p)</span>
+<span class="sd">            Residualized Y data.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">assert</span> <span class="n">Y</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">assert</span> <span class="bp">self</span><span class="o">.</span><span class="n">contrast_res</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s2">&quot;contrast doesn&#39;t match design matrix&quot;</span>
+        <span class="k">return</span> <span class="n">Y</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">X</span><span class="p">[:,</span> <span class="bp">self</span><span class="o">.</span><span class="n">contrast_res</span><span class="p">],</span>
+                          <span class="bp">self</span><span class="o">.</span><span class="n">mod_mulm</span><span class="o">.</span><span class="n">coef</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">contrast_res</span><span class="p">,</span> <span class="p">:])</span></div>
+
+<div class="viewcode-block" id="Residualizer.fit_transform"><a class="viewcode-back" href="../../../generated/mulm.residualizer.residualizer.html#mulm.residualizer.residualizer.Residualizer.fit_transform">[docs]</a>    <span class="k">def</span> <span class="nf">fit_transform</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">X</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Fit parameters of p linear models where each Y is regressed on X.</span>
+<span class="sd">        Residualize Y on X.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        Y: array (n, p)</span>
+<span class="sd">            Dependant variables</span>
+
+<span class="sd">        X: array(n, k)</span>
+<span class="sd">            Design matrix of independant variables</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        Yres: array (n, p)</span>
+<span class="sd">            Residualized Y data.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">Y</span><span class="p">,</span> <span class="n">X</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">Y</span><span class="p">,</span> <span class="n">X</span><span class="p">)</span></div></div>
+
+
+<div class="viewcode-block" id="residualize"><a class="viewcode-back" href="../../../generated/mulm.residualizer.residualizer.html#mulm.residualizer.residualizer.residualize">[docs]</a><span class="k">def</span> <span class="nf">residualize</span><span class="p">(</span><span class="n">Y</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">formula_res</span><span class="p">,</span> <span class="n">formula_full</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Helper function. See Residualizer.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="n">Residualizer</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">,</span> <span class="n">formula_res</span><span class="o">=</span><span class="n">formula_res</span><span class="p">,</span> <span class="n">formula_full</span><span class="o">=</span><span class="n">formula_full</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">res</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">Y</span><span class="p">,</span> <span class="n">res</span><span class="o">.</span><span class="n">get_design_mat</span><span class="p">(</span><span class="n">data</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="ResidualizerEstimator"><a class="viewcode-back" href="../../../generated/mulm.residualizer.residualizer.html#mulm.residualizer.residualizer.ResidualizerEstimator">[docs]</a><span class="k">class</span> <span class="nc">ResidualizerEstimator</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Wrap Residualizer into an estimator compatible with sklearn API.</span>
+
+<span class="sd">    Note that to be consistant with sklearn API, here X contains the input variable</span>
+<span class="sd">    and Z is the design matrix for residualization.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">residualizer</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        residualizer: Residualizer</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">residualizer</span> <span class="o">=</span> <span class="n">residualizer</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">design_mat_ncol</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">residualizer</span><span class="o">.</span><span class="n">contrast_res</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+<div class="viewcode-block" id="ResidualizerEstimator.fit"><a class="viewcode-back" href="../../../generated/mulm.residualizer.residualizer.html#mulm.residualizer.residualizer.ResidualizerEstimator.fit">[docs]</a>    <span class="k">def</span> <span class="nf">fit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="n">Z</span><span class="p">,</span> <span class="n">Y</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">upack</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">residualizer</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">Y</span><span class="p">,</span> <span class="n">Z</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="ResidualizerEstimator.transform"><a class="viewcode-back" href="../../../generated/mulm.residualizer.residualizer.html#mulm.residualizer.residualizer.ResidualizerEstimator.transform">[docs]</a>    <span class="k">def</span> <span class="nf">transform</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">):</span>
+        <span class="n">Z</span><span class="p">,</span> <span class="n">Y</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">upack</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">residualizer</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">Y</span><span class="p">,</span> <span class="n">Z</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="ResidualizerEstimator.fit_transform"><a class="viewcode-back" href="../../../generated/mulm.residualizer.residualizer.html#mulm.residualizer.residualizer.ResidualizerEstimator.fit_transform">[docs]</a>    <span class="k">def</span> <span class="nf">fit_transform</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="n">Z</span><span class="p">,</span> <span class="n">Y</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">upack</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">residualizer</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">Y</span><span class="p">,</span> <span class="n">Z</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">residualizer</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">Y</span><span class="p">,</span> <span class="n">Z</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="ResidualizerEstimator.pack"><a class="viewcode-back" href="../../../generated/mulm.residualizer.residualizer.html#mulm.residualizer.residualizer.ResidualizerEstimator.pack">[docs]</a>    <span class="k">def</span> <span class="nf">pack</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">Z</span><span class="p">,</span> <span class="n">X</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Pack (concat) Z (design matrix) and X to match scikit-learn pipelines.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        Z: array (n, k)</span>
+<span class="sd">            the design_matrix</span>
+<span class="sd">        X: array (n, p)</span>
+<span class="sd">            the input data for scikit-learn: fit(X, y) or transform(X)</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        (n, (k+p)) array: [design_matrix, X]</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">([</span><span class="n">Z</span><span class="p">,</span> <span class="n">X</span><span class="p">])</span></div>
+
+<div class="viewcode-block" id="ResidualizerEstimator.upack"><a class="viewcode-back" href="../../../generated/mulm.residualizer.residualizer.html#mulm.residualizer.residualizer.ResidualizerEstimator.upack">[docs]</a>    <span class="k">def</span> <span class="nf">upack</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ZX</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Unpack X and Z (design matrix) from X.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        ZX: array (n, (k+p))</span>
+<span class="sd">            array: [Z, X]</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">            Z (design_matrix), X</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">ZX</span><span class="p">[:,</span> <span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">design_mat_ncol</span><span class="p">],</span> <span class="n">ZX</span><span class="p">[:,</span> <span class="bp">self</span><span class="o">.</span><span class="n">design_mat_ncol</span><span class="p">:]</span></div></div>
+
+</pre></div>
+                    </div>
+                <div class="spacer"></div>
+		        
+		        <!-- Footer -->
+		        <div class="section-6-container section-container section-container-image-bg" id="section-6">
+			        <div class="container">
+			            <div class="row">
+		                    <div class="col-md-5 offset-md-1 section-6-box wow fadeInDown">
+		                    	<h3>Follow us</h3>
+		                    	<div class="section-6-social">
+			                    	<a href="https://www.facebook.com/pages/NeuroSpin/171075046414933"><i class="fab fa-facebook-f"></i></a>
+									<a href="https://www.youtube.com/CEASaclay"><i class="fab fa-youtube"></i></a>
+									<a href="https://twitter.com/neurospin_91"><i class="fab fa-twitter"></i></a>
+									<a href="https://github.com/AGrigis/pysphinxdoc"><i class="fab fa-github"></i></a>
+		                    	</div>
+		                    </div>
+			            </div>
+			        	<div class="row">
+		                    <div class="col">
+                                &copy; 2021, 
+pylearn-mulm developers
+ <edouard.duchesnay@cea.fr>. <br/>
+                                Inspired by <a href="https://azmind.com/demo/bootstrap-4-sidebar-menu/">AZMIND template</a>.
+		                    </div>
+		                </div>
+			        </div>
+                </div>
+	        
+	        </div>
+	        <!-- End content -->
+        
+        </div>
+        <!-- End wrapper -->
+
+        <!-- Javascript -->
+		<script src="../../../_static/js/jquery-3.3.1.min.js"></script>
+		<script src="../../../_static/js/jquery-migrate-3.0.0.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+        <script src="../../../_static/js/jquery.backstretch.min.js"></script>
+        <script src="../../../_static/js/wow.min.js"></script>
+        <script src="../../../_static/js/jquery.waypoints.min.js"></script>
+        <script src="../../../_static/js/jquery.mCustomScrollbar.concat.min.js"></script>
+        <script src="../../../_static/js/scripts.js"></script>
+        <script src="../../../_static/js/jquery.mosaic.js"></script>
+        <script type="text/javascript">
+	        $('.top-content').backstretch("../../../_static/img/backgrounds/1.jpg");
+            $('.section-4-container').backstretch("../../../_static/img/backgrounds/2.jpg");
+            $('.section-6-container').backstretch("../../../_static/img/backgrounds/1.jpg");
+        </script>
+
+    </body>
+
+</html>

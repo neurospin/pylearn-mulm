@@ -1,0 +1,415 @@
+<!doctype html>
+<html lang="en">
+
+    <head>
+
+		<!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <title>mulm</title>
+        
+        <!-- CSS -->
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500&display=swap">
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+        <link rel="stylesheet" href="../_static/css/jquery.mCustomScrollbar.min.css">
+        <link rel="stylesheet" href="../_static/css/animate.css">
+        <link rel="stylesheet" href="../_static/css/style.css">
+        <link rel="stylesheet" href="../_static/css/jquery.mosaic.css">
+        <link rel="stylesheet" href="../_static/gallery.css">
+        <link rel="stylesheet" href="../_static/css/media-queries.css">
+
+        <!-- Favicon and touch icons -->
+        <link rel="shortcut icon" href="../_static/ico/favicon.png">
+        <link rel="apple-touch-icon-precomposed" sizes="144x144" href="../_static/ico/apple-touch-icon-144-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../_static/ico/apple-touch-icon-114-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../_static/ico/apple-touch-icon-72-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" href="../_static/ico/apple-touch-icon-57-precomposed.png">
+
+    </head>
+
+    <body>
+
+		<!-- Wrapper -->
+    	<div class="wrapper">
+
+			<!-- Sidebar -->
+			<nav class="sidebar">
+				
+				<!-- close sidebar menu -->
+				<div class="dismiss">
+					<i class="fas fa-arrow-left"></i>
+				</div>
+				
+				<div class="logo"">
+					<h3><a href="../index.html">Sidebar Menu</a></h3>
+				</div>
+
+                <!-- info setup -->
+                    <p class="doc-version">
+                        This documentation is for mulm <strong>version 0.0.1</strong>
+                    </p>
+                <p class="citing">
+                    If you use the software, please do not hesitate to 
+                    <a &mdash; <a href="https://github.com/neurospin/pylearn-mulm">
+                    Report a Bug</a>.
+                </p>
+				
+                <!-- links -->
+                
+                
+				<ul class="list-unstyled menu-elements">
+					<li class="active">
+						<a href="../index.html"><i class="fas fa-home"></i> Home</a>
+					</li>
+					<li>
+						<a href="../generated/installation.html"><i class="fas fa-cog"></i> Installation</a>
+					</li>
+					<li>
+						<a href="gallery.html"><i class="fas fa-eye"></i> Gallery</a>
+					</li>
+					<li>
+						<a href="../generated/documentation.html"><i class="fas fa-pencil-alt"></i> API documentation</a>
+					</li>
+					<li>
+						<a href="https://joliot.cea.fr/drf/joliot/Pages/Entites_de_recherche/NeuroSpin.aspx"><i class="fas fa-external-link-alt"></i> NeuroSpin</a>
+					</li>
+					<li>
+						<a href="#otherSections" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle" role="button" aria-controls="otherSections">
+							<i class="fas fa-sync"></i>Sections
+						</a>
+						<ul class="collapse list-unstyled" id="otherSections">
+                            
+                                
+                                    
+                                    
+                                    
+                                
+                                    
+                                    
+                                    
+                                
+                                    
+                                    
+                                    
+							        <li>
+								        <a href="#example-1-salary-dataset">Example 1: Salary Dataset</a>
+							        </li>
+                                
+                            
+                                
+                                    
+                                    
+                                    
+                                
+                                    
+                                    
+                                    
+							        <li>
+								        <a href="#example-2-multiple-targets-y-i-age-sex-site">Example 2: Multiple Targets: Y_i = Age + Sex + Site</a>
+							        </li>
+                                
+                            
+                                
+                                    
+                                    
+                                    
+                                
+                            
+                                
+                                    
+                                    
+                                    
+                                
+                            
+						</ul>
+					</li>
+				</ul>
+				
+                <!-- go top page -->
+				<div class="to-top">
+					<a class="btn btn-primary btn-customized-3" href="#" role="button">
+	                    <i class="fas fa-arrow-up"></i> Top
+	                </a>
+				</div>
+			
+                <!-- change color -->
+				<div class="dark-light-buttons">
+					<a class="btn btn-primary btn-customized-4 btn-customized-dark" href="#" role="button">Dark</a>
+					<a class="btn btn-primary btn-customized-4 btn-customized-light" href="#" role="button">Light</a>
+				</div>
+			
+			</nav>
+			<!-- End sidebar -->
+			
+			<!-- Dark overlay -->
+    		<div class="overlay"></div>
+
+			<!-- Content -->
+			<div class="content">
+			
+				<!-- open sidebar menu -->
+				<a class="btn btn-primary btn-customized open-menu" href="#" role="button">
+                    <i class="fas fa-align-left"></i> <span>Menu</span>
+                </a>
+
+		        <!-- Top content -->
+		        <div class="top-content section-container" id="top-content">
+			        <div class="container">
+			            <div class="row">
+                            <div class="col-md-3 section-5-box banner-logo">
+                                <img alt="Logo" src="../_static/mulm.png">
+                            </div>
+			                <div class="col-md-7 section-5-box">
+			                	<h1 class="wow fadeIn">    <p>Massive univariate linear model.</p></h1>
+			                </div>
+			            </div>
+			        </div>
+		        </div>
+                    
+                    <div class="document">
+                        <div class="section" id="univariate-t-and-f-tests">
+<span id="sphx-glr-auto-gallery-plot-univariate-t-and-f-tests-py"></span><h1>Univariate T and F tests<a class="headerlink" href="#univariate-t-and-f-tests" title="Permalink to this headline">¶</a></h1><div class='divider-1 wow fadeInUp'><span></span></div>
+<p>Credit: E Duchesnay</p>
+<p>Univariate statistics: F-test and T-test with MULM (Massive univariate linear model)
+compared with statsmodel.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">mulm</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">statsmodels.api</span> <span class="kn">as</span> <span class="nn">sm</span>
+<span class="kn">import</span> <span class="nn">statsmodels.formula.api</span> <span class="kn">as</span> <span class="nn">smfrmla</span>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">OrderedDict</span>
+</pre></div>
+</div>
+<div class="section" id="example-1-salary-dataset">
+<h2>Example 1: Salary dataset<a class="headerlink" href="#example-1-salary-dataset" title="Permalink to this headline">¶</a><i class='fas fa-angle-right'></i></h2>
+<p>Fit model a single model: <cite>salary ~ experience + education + management</cite></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">url</span> <span class="o">=</span> <span class="s1">&#39;https://github.com/duchesnay/pystatsml/raw/master/datasets/salary_table.csv&#39;</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Fit with MULM</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">salary</span><span class="p">)[:,</span> <span class="bp">None</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span>
+<span class="n">X</span><span class="p">,</span> <span class="n">t_contrasts</span><span class="p">,</span> <span class="n">f_contrasts</span> <span class="o">=</span> <span class="n">mulm</span><span class="o">.</span><span class="n">design_matrix</span><span class="p">(</span><span class="n">formula</span><span class="o">=</span><span class="s2">&quot;experience + education + management&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">)</span>
+<span class="n">mod_mulm</span> <span class="o">=</span> <span class="n">mulm</span><span class="o">.</span><span class="n">MUOLS</span><span class="p">(</span><span class="n">Y</span><span class="p">,</span> <span class="n">X</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+<span class="n">tstat_mulm</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">((</span><span class="n">term</span><span class="p">,</span> <span class="n">mod_mulm</span><span class="o">.</span><span class="n">t_test</span><span class="p">(</span><span class="n">t_contrasts</span><span class="p">[</span><span class="n">term</span><span class="p">],</span> <span class="n">pval</span><span class="o">=</span><span class="bp">True</span><span class="p">))</span> <span class="k">for</span> <span class="n">term</span> <span class="ow">in</span> <span class="n">t_contrasts</span><span class="p">)</span>
+<span class="n">fstat_mulm</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">((</span><span class="n">term</span><span class="p">,</span> <span class="n">mod_mulm</span><span class="o">.</span><span class="n">f_test</span><span class="p">(</span><span class="n">f_contrasts</span><span class="p">[</span><span class="n">term</span><span class="p">],</span> <span class="n">pval</span><span class="o">=</span><span class="bp">True</span><span class="p">))</span> <span class="k">for</span> <span class="n">term</span> <span class="ow">in</span> <span class="n">f_contrasts</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">mod_mulm</span><span class="o">.</span><span class="n">coef</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">tstat_mulm</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;tstat&#39;</span><span class="p">,</span> <span class="s1">&#39;pval&#39;</span><span class="p">,</span> <span class="s1">&#39;df&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+<span class="c1"># print(pd.DataFrame(fstat_mulm, index=[&#39;fstat&#39;, &#39;pval&#39;]).T)</span>
+</pre></div>
+</div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[[</span><span class="mf">8035.59762964</span><span class="p">]</span>
+ <span class="p">[</span><span class="mf">3144.03520995</span><span class="p">]</span>
+ <span class="p">[</span><span class="mf">2996.21026198</span><span class="p">]</span>
+ <span class="p">[</span><span class="mf">6883.53100596</span><span class="p">]</span>
+ <span class="p">[</span> <span class="mf">546.1840189</span> <span class="p">]]</span>
+                                      <span class="n">tstat</span>                        <span class="n">pval</span>                   <span class="n">df</span>
+<span class="n">Intercept</span>             <span class="p">[[</span><span class="mf">20.78050375184039</span><span class="p">]]</span>  <span class="p">[[</span><span class="mf">2.1992317660106647e-23</span><span class="p">]]</span>  <span class="p">[</span><span class="mf">41.00000000000001</span><span class="p">]</span>
+<span class="n">education</span><span class="p">[</span><span class="n">T</span><span class="o">.</span><span class="n">Master</span><span class="p">]</span>   <span class="p">[[</span><span class="mf">8.685941421521713</span><span class="p">]]</span>   <span class="p">[[</span><span class="mf">7.733200691899716e-11</span><span class="p">]]</span>  <span class="p">[</span><span class="mf">41.00000000000001</span><span class="p">]</span>
+<span class="n">education</span><span class="p">[</span><span class="n">T</span><span class="o">.</span><span class="n">Ph</span><span class="o">.</span><span class="n">D</span><span class="p">]</span>     <span class="p">[[</span><span class="mf">7.276722572205208</span><span class="p">]]</span>   <span class="p">[[</span><span class="mf">6.722373055820008e-09</span><span class="p">]]</span>  <span class="p">[</span><span class="mf">41.00000000000001</span><span class="p">]</span>
+<span class="n">management</span><span class="p">[</span><span class="n">T</span><span class="o">.</span><span class="n">Y</span><span class="p">]</span>      <span class="p">[[</span><span class="mf">21.927731174885658</span><span class="p">]]</span>  <span class="p">[[</span><span class="mf">2.9014441220138002e-24</span><span class="p">]]</span>  <span class="p">[</span><span class="mf">41.00000000000001</span><span class="p">]</span>
+<span class="n">experience</span>           <span class="p">[[</span><span class="mf">17.896410931586338</span><span class="p">]]</span>   <span class="p">[[</span><span class="mf">5.546313438178072e-21</span><span class="p">]]</span>  <span class="p">[</span><span class="mf">41.00000000000001</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Fit with statsmodel</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">mod_sm</span> <span class="o">=</span> <span class="n">smfrmla</span><span class="o">.</span><span class="n">ols</span><span class="p">(</span><span class="s1">&#39;salary ~ experience + education + management&#39;</span><span class="p">,</span> <span class="n">df</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+<span class="k">print</span><span class="p">(</span><span class="n">mod_sm</span><span class="o">.</span><span class="n">summary</span><span class="p">())</span>
+
+<span class="n">fstat_sm</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">anova_lm</span><span class="p">(</span><span class="n">mod_sm</span><span class="p">,</span> <span class="n">typ</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span> <span class="c1"># Type 2 ANOVA DataFrame</span>
+<span class="n">tstat_sm</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">((</span><span class="n">term</span><span class="p">,</span> <span class="p">(</span><span class="n">mod_sm</span><span class="o">.</span><span class="n">t_test</span><span class="p">(</span><span class="n">t_contrasts</span><span class="p">[</span><span class="n">term</span><span class="p">])</span><span class="o">.</span><span class="n">tvalue</span><span class="p">,</span>
+                               <span class="n">mod_sm</span><span class="o">.</span><span class="n">t_test</span><span class="p">(</span><span class="n">t_contrasts</span><span class="p">[</span><span class="n">term</span><span class="p">])</span><span class="o">.</span><span class="n">pvalue</span><span class="p">,</span>
+                               <span class="n">mod_sm</span><span class="o">.</span><span class="n">t_test</span><span class="p">(</span><span class="n">t_contrasts</span><span class="p">[</span><span class="n">term</span><span class="p">])</span><span class="o">.</span><span class="n">df_denom</span><span class="p">))</span> <span class="k">for</span> <span class="n">term</span> <span class="ow">in</span> <span class="n">t_contrasts</span><span class="p">)</span>
+
+
+<span class="k">print</span><span class="p">(</span><span class="n">fstat_sm</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">tstat_mulm</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;tstat&#39;</span><span class="p">,</span> <span class="s1">&#39;pval&#39;</span><span class="p">,</span> <span class="s1">&#39;df&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+</pre></div>
+</div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">OLS</span> <span class="n">Regression</span> <span class="n">Results</span>
+<span class="o">==============================================================================</span>
+<span class="n">Dep</span><span class="o">.</span> <span class="n">Variable</span><span class="p">:</span>                 <span class="n">salary</span>   <span class="n">R</span><span class="o">-</span><span class="n">squared</span><span class="p">:</span>                       <span class="mf">0.957</span>
+<span class="n">Model</span><span class="p">:</span>                            <span class="n">OLS</span>   <span class="n">Adj</span><span class="o">.</span> <span class="n">R</span><span class="o">-</span><span class="n">squared</span><span class="p">:</span>                  <span class="mf">0.953</span>
+<span class="n">Method</span><span class="p">:</span>                 <span class="n">Least</span> <span class="n">Squares</span>   <span class="n">F</span><span class="o">-</span><span class="n">statistic</span><span class="p">:</span>                     <span class="mf">226.8</span>
+<span class="n">Date</span><span class="p">:</span>              <span class="n">ven</span><span class="o">.</span><span class="p">,</span> <span class="mi">19</span> <span class="n">mars</span> <span class="mi">2021</span>   <span class="n">Prob</span> <span class="p">(</span><span class="n">F</span><span class="o">-</span><span class="n">statistic</span><span class="p">):</span>           <span class="mf">2.23e-27</span>
+<span class="n">Time</span><span class="p">:</span>                        <span class="mi">14</span><span class="p">:</span><span class="mi">04</span><span class="p">:</span><span class="mi">16</span>   <span class="n">Log</span><span class="o">-</span><span class="n">Likelihood</span><span class="p">:</span>                <span class="o">-</span><span class="mf">381.63</span>
+<span class="n">No</span><span class="o">.</span> <span class="n">Observations</span><span class="p">:</span>                  <span class="mi">46</span>   <span class="n">AIC</span><span class="p">:</span>                             <span class="mf">773.3</span>
+<span class="n">Df</span> <span class="n">Residuals</span><span class="p">:</span>                      <span class="mi">41</span>   <span class="n">BIC</span><span class="p">:</span>                             <span class="mf">782.4</span>
+<span class="n">Df</span> <span class="n">Model</span><span class="p">:</span>                           <span class="mi">4</span>
+<span class="n">Covariance</span> <span class="n">Type</span><span class="p">:</span>            <span class="n">nonrobust</span>
+<span class="o">=======================================================================================</span>
+                          <span class="n">coef</span>    <span class="n">std</span> <span class="n">err</span>          <span class="n">t</span>      <span class="n">P</span><span class="o">&gt;|</span><span class="n">t</span><span class="o">|</span>      <span class="p">[</span><span class="mf">0.025</span>      <span class="mf">0.975</span><span class="p">]</span>
+<span class="o">---------------------------------------------------------------------------------------</span>
+<span class="n">Intercept</span>            <span class="mf">8035.5976</span>    <span class="mf">386.689</span>     <span class="mf">20.781</span>      <span class="mf">0.000</span>    <span class="mf">7254.663</span>    <span class="mf">8816.532</span>
+<span class="n">education</span><span class="p">[</span><span class="n">T</span><span class="o">.</span><span class="n">Master</span><span class="p">]</span>  <span class="mf">3144.0352</span>    <span class="mf">361.968</span>      <span class="mf">8.686</span>      <span class="mf">0.000</span>    <span class="mf">2413.025</span>    <span class="mf">3875.045</span>
+<span class="n">education</span><span class="p">[</span><span class="n">T</span><span class="o">.</span><span class="n">Ph</span><span class="o">.</span><span class="n">D</span><span class="p">]</span>    <span class="mf">2996.2103</span>    <span class="mf">411.753</span>      <span class="mf">7.277</span>      <span class="mf">0.000</span>    <span class="mf">2164.659</span>    <span class="mf">3827.762</span>
+<span class="n">management</span><span class="p">[</span><span class="n">T</span><span class="o">.</span><span class="n">Y</span><span class="p">]</span>      <span class="mf">6883.5310</span>    <span class="mf">313.919</span>     <span class="mf">21.928</span>      <span class="mf">0.000</span>    <span class="mf">6249.559</span>    <span class="mf">7517.503</span>
+<span class="n">experience</span>            <span class="mf">546.1840</span>     <span class="mf">30.519</span>     <span class="mf">17.896</span>      <span class="mf">0.000</span>     <span class="mf">484.549</span>     <span class="mf">607.819</span>
+<span class="o">==============================================================================</span>
+<span class="n">Omnibus</span><span class="p">:</span>                        <span class="mf">2.293</span>   <span class="n">Durbin</span><span class="o">-</span><span class="n">Watson</span><span class="p">:</span>                   <span class="mf">2.237</span>
+<span class="n">Prob</span><span class="p">(</span><span class="n">Omnibus</span><span class="p">):</span>                  <span class="mf">0.318</span>   <span class="n">Jarque</span><span class="o">-</span><span class="n">Bera</span> <span class="p">(</span><span class="n">JB</span><span class="p">):</span>                <span class="mf">1.362</span>
+<span class="n">Skew</span><span class="p">:</span>                          <span class="o">-</span><span class="mf">0.077</span>   <span class="n">Prob</span><span class="p">(</span><span class="n">JB</span><span class="p">):</span>                        <span class="mf">0.506</span>
+<span class="n">Kurtosis</span><span class="p">:</span>                       <span class="mf">2.171</span>   <span class="n">Cond</span><span class="o">.</span> <span class="n">No</span><span class="o">.</span>                         <span class="mf">33.5</span>
+<span class="o">==============================================================================</span>
+
+<span class="n">Warnings</span><span class="p">:</span>
+<span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="n">Standard</span> <span class="n">Errors</span> <span class="n">assume</span> <span class="n">that</span> <span class="n">the</span> <span class="n">covariance</span> <span class="n">matrix</span> <span class="n">of</span> <span class="n">the</span> <span class="n">errors</span> <span class="ow">is</span> <span class="n">correctly</span> <span class="n">specified</span><span class="o">.</span>
+                  <span class="n">sum_sq</span>    <span class="n">df</span>           <span class="n">F</span>        <span class="n">PR</span><span class="p">(</span><span class="o">&gt;</span><span class="n">F</span><span class="p">)</span>
+<span class="n">education</span>   <span class="mf">9.152624e+07</span>   <span class="mf">2.0</span>   <span class="mf">43.351589</span>  <span class="mf">7.672450e-11</span>
+<span class="n">management</span>  <span class="mf">5.075724e+08</span>   <span class="mf">1.0</span>  <span class="mf">480.825394</span>  <span class="mf">2.901444e-24</span>
+<span class="n">experience</span>  <span class="mf">3.380979e+08</span>   <span class="mf">1.0</span>  <span class="mf">320.281524</span>  <span class="mf">5.546313e-21</span>
+<span class="n">Residual</span>    <span class="mf">4.328072e+07</span>  <span class="mf">41.0</span>         <span class="n">NaN</span>           <span class="n">NaN</span>
+                                      <span class="n">tstat</span>                        <span class="n">pval</span>                   <span class="n">df</span>
+<span class="n">Intercept</span>             <span class="p">[[</span><span class="mf">20.78050375184039</span><span class="p">]]</span>  <span class="p">[[</span><span class="mf">2.1992317660106647e-23</span><span class="p">]]</span>  <span class="p">[</span><span class="mf">41.00000000000001</span><span class="p">]</span>
+<span class="n">education</span><span class="p">[</span><span class="n">T</span><span class="o">.</span><span class="n">Master</span><span class="p">]</span>   <span class="p">[[</span><span class="mf">8.685941421521713</span><span class="p">]]</span>   <span class="p">[[</span><span class="mf">7.733200691899716e-11</span><span class="p">]]</span>  <span class="p">[</span><span class="mf">41.00000000000001</span><span class="p">]</span>
+<span class="n">education</span><span class="p">[</span><span class="n">T</span><span class="o">.</span><span class="n">Ph</span><span class="o">.</span><span class="n">D</span><span class="p">]</span>     <span class="p">[[</span><span class="mf">7.276722572205208</span><span class="p">]]</span>   <span class="p">[[</span><span class="mf">6.722373055820008e-09</span><span class="p">]]</span>  <span class="p">[</span><span class="mf">41.00000000000001</span><span class="p">]</span>
+<span class="n">management</span><span class="p">[</span><span class="n">T</span><span class="o">.</span><span class="n">Y</span><span class="p">]</span>      <span class="p">[[</span><span class="mf">21.927731174885658</span><span class="p">]]</span>  <span class="p">[[</span><span class="mf">2.9014441220138002e-24</span><span class="p">]]</span>  <span class="p">[</span><span class="mf">41.00000000000001</span><span class="p">]</span>
+<span class="n">experience</span>           <span class="p">[[</span><span class="mf">17.896410931586338</span><span class="p">]]</span>   <span class="p">[[</span><span class="mf">5.546313438178072e-21</span><span class="p">]]</span>  <span class="p">[</span><span class="mf">41.00000000000001</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Check equality of model parameters</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">assert</span> <span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">mod_sm</span><span class="o">.</span><span class="n">params</span><span class="p">),</span> <span class="n">mod_mulm</span><span class="o">.</span><span class="n">coef</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>Check equality of F-statistics</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">assert</span> <span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">fstat_sm</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="s2">&quot;F&quot;</span><span class="p">][:</span><span class="o">-</span><span class="mi">1</span><span class="p">]),</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">([</span><span class="n">fstat_mulm</span><span class="p">[</span><span class="n">iv</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">iv</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="n">f_contrasts</span><span class="o">.</span><span class="n">keys</span><span class="p">())[</span><span class="mi">1</span><span class="p">:]]))</span>
+</pre></div>
+</div>
+<p>Check equality of P-values</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">assert</span> <span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">fstat_sm</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="s2">&quot;PR(&gt;F)&quot;</span><span class="p">][:</span><span class="o">-</span><span class="mi">1</span><span class="p">]),</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">([</span><span class="n">fstat_mulm</span><span class="p">[</span><span class="n">iv</span><span class="p">][</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">iv</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="n">f_contrasts</span><span class="o">.</span><span class="n">keys</span><span class="p">())[</span><span class="mi">1</span><span class="p">:]]))</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="example-2-multiple-targets-y-i-age-sex-site">
+<h2>Example 2: Multiple targets: y_i = age + sex + site<a class="headerlink" href="#example-2-multiple-targets-y-i-age-sex-site" title="Permalink to this headline">¶</a><i class='fas fa-angle-right'></i></h2>
+<p>dataset with 3 dependant variables <cite>yi’s</cite> defined as:
+yi = b0 + b1 * age + b2 * sex + b3 * site</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">age</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">sex</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">sex_c</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;X</span><span class="si">%i</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">sex</span><span class="p">]</span>
+<span class="n">site</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">2</span><span class="p">]</span> <span class="o">*</span> <span class="mi">25</span> <span class="o">+</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="mi">25</span> <span class="o">+</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="mi">50</span><span class="p">)</span>
+<span class="n">site_c</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;S</span><span class="si">%i</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">site</span><span class="p">]</span>
+
+<span class="c1"># Independent variables</span>
+<span class="n">x_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">OrderedDict</span><span class="p">(</span><span class="n">age</span><span class="o">=</span><span class="n">age</span><span class="p">,</span> <span class="n">sex</span><span class="o">=</span><span class="n">sex_c</span><span class="p">,</span> <span class="n">site</span><span class="o">=</span><span class="n">site_c</span><span class="p">))</span>
+
+<span class="c1"># Dependent variables</span>
+<span class="n">y_dict</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">(</span>
+    <span class="n">y0</span> <span class="o">=</span> <span class="mf">0.1</span> <span class="o">*</span> <span class="n">age</span> <span class="o">+</span> <span class="mf">0.1</span> <span class="o">*</span> <span class="n">sex</span> <span class="o">+</span> <span class="n">site</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="mi">100</span><span class="p">),</span> <span class="c1"># age and sex</span>
+    <span class="n">y1</span> <span class="o">=</span> <span class="mf">0.1</span> <span class="o">*</span> <span class="n">age</span> <span class="o">+</span> <span class="mf">0.0</span> <span class="o">*</span> <span class="n">sex</span> <span class="o">+</span> <span class="n">site</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="mi">100</span><span class="p">),</span> <span class="c1"># age only</span>
+    <span class="n">y2</span> <span class="o">=</span> <span class="mf">0.0</span> <span class="o">*</span> <span class="n">age</span> <span class="o">+</span> <span class="mf">0.1</span> <span class="o">*</span> <span class="n">sex</span> <span class="o">+</span> <span class="n">site</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="mi">100</span><span class="p">))</span> <span class="c1"># sex only</span>
+
+<span class="c1"># for i in range(3, 10):</span>
+<span class="c1">#    y_dict[&quot;y%i&quot; % i] = 0.0 * age + 0.0 * sex + site + np.random.normal(size=100)</span>
+
+<span class="n">y_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">y_dict</span><span class="p">)</span>
+<span class="n">Y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">y_df</span><span class="p">)</span>
+
+<span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">((</span><span class="n">y_df</span><span class="p">,</span> <span class="n">x_df</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Fit with MULM</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">X</span><span class="p">,</span> <span class="n">t_contrasts</span><span class="p">,</span> <span class="n">f_contrasts</span> <span class="o">=</span> <span class="n">mulm</span><span class="o">.</span><span class="n">design_matrix</span><span class="p">(</span><span class="n">formula</span><span class="o">=</span><span class="s2">&quot;age + sex + site&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">x_df</span><span class="p">)</span>
+<span class="n">mod_mulm</span> <span class="o">=</span> <span class="n">mulm</span><span class="o">.</span><span class="n">MUOLS</span><span class="p">(</span><span class="n">Y</span><span class="p">,</span> <span class="n">X</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+<span class="n">fstat_mulm</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">((</span><span class="n">term</span><span class="p">,</span> <span class="n">mod_mulm</span><span class="o">.</span><span class="n">f_test</span><span class="p">(</span><span class="n">f_contrasts</span><span class="p">[</span><span class="n">term</span><span class="p">],</span> <span class="n">pval</span><span class="o">=</span><span class="bp">True</span><span class="p">))</span> <span class="k">for</span> <span class="n">term</span> <span class="ow">in</span> <span class="n">f_contrasts</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>With statsmodels</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">statsmodels.api</span> <span class="kn">as</span> <span class="nn">sm</span>
+<span class="kn">import</span> <span class="nn">statsmodels.formula.api</span> <span class="kn">as</span> <span class="nn">smfrmla</span>
+
+<span class="n">mod_sm</span> <span class="o">=</span> <span class="p">{</span><span class="n">dv</span><span class="p">:</span><span class="n">smfrmla</span><span class="o">.</span><span class="n">ols</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> ~ </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">dv</span><span class="p">,</span> <span class="s2">&quot;age + sex + site&quot;</span><span class="p">),</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span> <span class="k">for</span> <span class="n">dv</span> <span class="ow">in</span> <span class="n">y_df</span><span class="o">.</span><span class="n">columns</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>Check equality of model parameters</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">dv</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">y_df</span><span class="o">.</span><span class="n">columns</span><span class="p">):</span>
+    <span class="k">assert</span> <span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">mod_sm</span><span class="p">[</span><span class="n">dv</span><span class="p">]</span><span class="o">.</span><span class="n">params</span><span class="p">),</span> <span class="n">mod_mulm</span><span class="o">.</span><span class="n">coef</span><span class="p">[:,</span> <span class="n">idx</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>Check equality of F-statistics</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">fstat_sm</span> <span class="o">=</span> <span class="p">{</span><span class="n">dv</span><span class="p">:</span><span class="n">sm</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">anova_lm</span><span class="p">(</span><span class="n">mod_sm</span><span class="p">[</span><span class="n">dv</span><span class="p">],</span> <span class="n">typ</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span> <span class="k">for</span> <span class="n">dv</span> <span class="ow">in</span> <span class="n">mod_sm</span><span class="p">}</span>
+
+<span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">dv</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">y_df</span><span class="o">.</span><span class="n">columns</span><span class="p">):</span>
+    <span class="k">assert</span> <span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">fstat_sm</span><span class="p">[</span><span class="n">dv</span><span class="p">]</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="s2">&quot;F&quot;</span><span class="p">][:</span><span class="o">-</span><span class="mi">1</span><span class="p">]),</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">([</span><span class="n">fstat_mulm</span><span class="p">[</span><span class="n">iv</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="n">idx</span><span class="p">]</span> <span class="k">for</span> <span class="n">iv</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="n">f_contrasts</span><span class="o">.</span><span class="n">keys</span><span class="p">())[</span><span class="mi">1</span><span class="p">:]]))</span>
+</pre></div>
+</div>
+<p>Check equality of P-values</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">dv</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">y_df</span><span class="o">.</span><span class="n">columns</span><span class="p">):</span>
+    <span class="k">assert</span> <span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">fstat_sm</span><span class="p">[</span><span class="n">dv</span><span class="p">]</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="s2">&quot;PR(&gt;F)&quot;</span><span class="p">][:</span><span class="o">-</span><span class="mi">1</span><span class="p">]),</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">([</span><span class="n">fstat_mulm</span><span class="p">[</span><span class="n">iv</span><span class="p">][</span><span class="mi">1</span><span class="p">][</span><span class="n">idx</span><span class="p">]</span> <span class="k">for</span> <span class="n">iv</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="n">f_contrasts</span><span class="o">.</span><span class="n">keys</span><span class="p">())[</span><span class="mi">1</span><span class="p">:]]))</span>
+</pre></div>
+</div>
+<p><strong>Total running time of the script:</strong> ( 0 minutes  3.478 seconds)</p>
+<div class="sphx-glr-footer docutils container">
+<div class="sphx-glr-download docutils container">
+<p><a class="reference download internal" download="" href="../_downloads/c1f2f13b899e056b47cb05a43fd35944/plot_univariate_t_and_f_tests.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_univariate_t_and_f_tests.py</span></code></a></p>
+</div>
+<div class="sphx-glr-download docutils container">
+<p><a class="reference download internal" download="" href="../_downloads/009683c949a94ddf4aae20529cda71fe/plot_univariate_t_and_f_tests.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">plot_univariate_t_and_f_tests.ipynb</span></code></a></p>
+</div>
+</div>
+<p class="sphx-glr-signature">Gallery generated by Sphinx-Gallery</p>
+</div>
+</div>
+
+                    </div>
+                <div class="spacer"></div>
+		        
+		        <!-- Footer -->
+		        <div class="section-6-container section-container section-container-image-bg" id="section-6">
+			        <div class="container">
+			            <div class="row">
+		                    <div class="col-md-5 offset-md-1 section-6-box wow fadeInDown">
+		                    	<h3>Follow us</h3>
+		                    	<div class="section-6-social">
+			                    	<a href="https://www.facebook.com/pages/NeuroSpin/171075046414933"><i class="fab fa-facebook-f"></i></a>
+									<a href="https://www.youtube.com/CEASaclay"><i class="fab fa-youtube"></i></a>
+									<a href="https://twitter.com/neurospin_91"><i class="fab fa-twitter"></i></a>
+									<a href="https://github.com/AGrigis/pysphinxdoc"><i class="fab fa-github"></i></a>
+		                    	</div>
+		                    </div>
+			            </div>
+			        	<div class="row">
+		                    <div class="col">
+                                &copy; 2021, 
+pylearn-mulm developers
+ <edouard.duchesnay@cea.fr>. <br/>
+                                Inspired by <a href="https://azmind.com/demo/bootstrap-4-sidebar-menu/">AZMIND template</a>.
+		                    </div>
+		                </div>
+			        </div>
+                </div>
+	        
+	        </div>
+	        <!-- End content -->
+        
+        </div>
+        <!-- End wrapper -->
+
+        <!-- Javascript -->
+		<script src="../_static/js/jquery-3.3.1.min.js"></script>
+		<script src="../_static/js/jquery-migrate-3.0.0.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+        <script src="../_static/js/jquery.backstretch.min.js"></script>
+        <script src="../_static/js/wow.min.js"></script>
+        <script src="../_static/js/jquery.waypoints.min.js"></script>
+        <script src="../_static/js/jquery.mCustomScrollbar.concat.min.js"></script>
+        <script src="../_static/js/scripts.js"></script>
+        <script src="../_static/js/jquery.mosaic.js"></script>
+        <script type="text/javascript">
+	        $('.top-content').backstretch("../_static/img/backgrounds/1.jpg");
+            $('.section-4-container').backstretch("../_static/img/backgrounds/2.jpg");
+            $('.section-6-container').backstretch("../_static/img/backgrounds/1.jpg");
+        </script>
+
+    </body>
+
+</html>

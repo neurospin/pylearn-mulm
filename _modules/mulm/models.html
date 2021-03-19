@@ -1,0 +1,670 @@
+<!doctype html>
+<html lang="en">
+
+    <head>
+
+		<!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <title>mulm</title>
+        
+        <!-- CSS -->
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500&display=swap">
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+        <link rel="stylesheet" href="../../_static/css/jquery.mCustomScrollbar.min.css">
+        <link rel="stylesheet" href="../../_static/css/animate.css">
+        <link rel="stylesheet" href="../../_static/css/style.css">
+        <link rel="stylesheet" href="../../_static/css/jquery.mosaic.css">
+        <link rel="stylesheet" href="../../_static/gallery.css">
+        <link rel="stylesheet" href="../../_static/css/media-queries.css">
+
+        <!-- Favicon and touch icons -->
+        <link rel="shortcut icon" href="../../_static/ico/favicon.png">
+        <link rel="apple-touch-icon-precomposed" sizes="144x144" href="../../_static/ico/apple-touch-icon-144-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../../_static/ico/apple-touch-icon-114-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../../_static/ico/apple-touch-icon-72-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" href="../../_static/ico/apple-touch-icon-57-precomposed.png">
+
+    </head>
+
+    <body>
+
+		<!-- Wrapper -->
+    	<div class="wrapper">
+
+			<!-- Sidebar -->
+			<nav class="sidebar">
+				
+				<!-- close sidebar menu -->
+				<div class="dismiss">
+					<i class="fas fa-arrow-left"></i>
+				</div>
+				
+				<div class="logo"">
+					<h3><a href="../../index.html">Sidebar Menu</a></h3>
+				</div>
+
+                <!-- info setup -->
+                    <p class="doc-version">
+                        This documentation is for mulm <strong>version 0.0.1</strong>
+                    </p>
+                <p class="citing">
+                    If you use the software, please do not hesitate to 
+                    <a &mdash; <a href="https://github.com/neurospin/pylearn-mulm">
+                    Report a Bug</a>.
+                </p>
+				
+                <!-- links -->
+                
+                
+				<ul class="list-unstyled menu-elements">
+					<li class="active">
+						<a href="../../index.html"><i class="fas fa-home"></i> Home</a>
+					</li>
+					<li>
+						<a href="../../generated/installation.html"><i class="fas fa-cog"></i> Installation</a>
+					</li>
+					<li>
+						<a href="../../auto_gallery/gallery.html"><i class="fas fa-eye"></i> Gallery</a>
+					</li>
+					<li>
+						<a href="../../generated/documentation.html"><i class="fas fa-pencil-alt"></i> API documentation</a>
+					</li>
+					<li>
+						<a href="https://joliot.cea.fr/drf/joliot/Pages/Entites_de_recherche/NeuroSpin.aspx"><i class="fas fa-external-link-alt"></i> NeuroSpin</a>
+					</li>
+					<li>
+						<a href="#otherSections" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle" role="button" aria-controls="otherSections">
+							<i class="fas fa-sync"></i>Sections
+						</a>
+						<ul class="collapse list-unstyled" id="otherSections">
+                            
+                                
+                                    
+                                    
+                                    
+                                
+                            
+						</ul>
+					</li>
+				</ul>
+				
+                <!-- go top page -->
+				<div class="to-top">
+					<a class="btn btn-primary btn-customized-3" href="#" role="button">
+	                    <i class="fas fa-arrow-up"></i> Top
+	                </a>
+				</div>
+			
+                <!-- change color -->
+				<div class="dark-light-buttons">
+					<a class="btn btn-primary btn-customized-4 btn-customized-dark" href="#" role="button">Dark</a>
+					<a class="btn btn-primary btn-customized-4 btn-customized-light" href="#" role="button">Light</a>
+				</div>
+			
+			</nav>
+			<!-- End sidebar -->
+			
+			<!-- Dark overlay -->
+    		<div class="overlay"></div>
+
+			<!-- Content -->
+			<div class="content">
+			
+				<!-- open sidebar menu -->
+				<a class="btn btn-primary btn-customized open-menu" href="#" role="button">
+                    <i class="fas fa-align-left"></i> <span>Menu</span>
+                </a>
+
+		        <!-- Top content -->
+		        <div class="top-content section-container" id="top-content">
+			        <div class="container">
+			            <div class="row">
+                            <div class="col-md-3 section-5-box banner-logo">
+                                <img alt="Logo" src="../../_static/mulm.png">
+                            </div>
+			                <div class="col-md-7 section-5-box">
+			                	<h1 class="wow fadeIn">    <p>Massive univariate linear model.</p></h1>
+			                </div>
+			            </div>
+			        </div>
+		        </div>
+                    
+                    <div class="document">
+                        <h1>Source code for mulm.models</h1><div class='divider-1 wow fadeInUp'><span></span></div><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="c1">##########################################################################</span>
+<span class="c1"># Created on Tue Jun 25 13:25:41 2013</span>
+<span class="c1"># Copyright (c) 2013-2021, CEA/DRF/Joliot/NeuroSpin. All rights reserved.</span>
+<span class="c1"># @author:  Edouard Duchesnay</span>
+<span class="c1"># @email:   edouard.duchesnay@cea.fr</span>
+<span class="c1"># @license: BSD 3-clause.</span>
+<span class="c1">##########################################################################</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Linear models for massive univariate statistics.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">scipy</span>
+<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="k">import</span> <span class="n">scale</span>
+<span class="kn">from</span> <span class="nn">scipy</span> <span class="k">import</span> <span class="n">stats</span>
+
+<div class="viewcode-block" id="MUPairwiseCorr"><a class="viewcode-back" href="../../generated/mulm.models.html#mulm.models.MUPairwiseCorr">[docs]</a><span class="k">class</span> <span class="nc">MUPairwiseCorr</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Mass-univariate pairwise correlations. Given two arrays X (n_samples x p)</span>
+<span class="sd">    and Y (n_samples x q). Fit p x q independent linear models. Prediction</span>
+<span class="sd">    and stats return (p x q) array.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; import numpy as np</span>
+<span class="sd">    &gt;&gt;&gt; from mulm import MUPairwiseCorr</span>
+<span class="sd">    &gt;&gt;&gt; X = np.random.randn(10, 5)</span>
+<span class="sd">    &gt;&gt;&gt; Y = np.random.randn(10, 3)</span>
+<span class="sd">    &gt;&gt;&gt; corr = MUPairwiseCorr(X, Y)</span>
+<span class="sd">    &gt;&gt;&gt; corr.fit()</span>
+<span class="sd">    &lt;mulm.models.MUPairwiseCorr instance at 0x30da878&gt;</span>
+<span class="sd">    &gt;&gt;&gt; f, p = corr.stats_f()</span>
+<span class="sd">    &gt;&gt;&gt; print(f.shape)</span>
+<span class="sd">    (5, 3)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        Y : numpy array (n_samples, p)</span>
+<span class="sd">            First block of variables.</span>
+
+<span class="sd">        X : numpy array (n_samples, q)</span>
+<span class="sd">            Second block of variables.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">Xs</span> <span class="o">=</span> <span class="n">scale</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">copy</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="c1"># TODO PERFORM BASIC CHECK ARRAY</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">Ys</span> <span class="o">=</span> <span class="n">scale</span><span class="p">(</span><span class="n">Y</span><span class="p">,</span> <span class="n">copy</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="c1"># TODO PERFORM BASIC CHECK ARRAY</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">n_samples</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="n">Y</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;matrices are not aligned&#39;</span><span class="p">)</span>
+
+<div class="viewcode-block" id="MUPairwiseCorr.fit"><a class="viewcode-back" href="../../generated/mulm.models.html#mulm.models.MUPairwiseCorr.fit">[docs]</a>    <span class="k">def</span> <span class="nf">fit</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">Corr_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">Xs</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">Ys</span><span class="p">)</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_samples</span>
+        <span class="k">return</span> <span class="bp">self</span></div>
+
+<div class="viewcode-block" id="MUPairwiseCorr.predict"><a class="viewcode-back" href="../../generated/mulm.models.html#mulm.models.MUPairwiseCorr.predict">[docs]</a>    <span class="k">def</span> <span class="nf">predict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">):</span>
+        <span class="k">pass</span></div>
+
+<div class="viewcode-block" id="MUPairwiseCorr.stats_f"><a class="viewcode-back" href="../../generated/mulm.models.html#mulm.models.MUPairwiseCorr.stats_f">[docs]</a>    <span class="k">def</span> <span class="nf">stats_f</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pval</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        pval</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        fstats (k, p) array, pvals (k, p) array, df (k,) array</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">R2</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Corr_</span> <span class="o">**</span> <span class="mi">2</span>
+        <span class="n">df_res</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_samples</span> <span class="o">-</span> <span class="mi">2</span>
+        <span class="n">f_stats</span> <span class="o">=</span> <span class="n">R2</span> <span class="o">*</span> <span class="n">df_res</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">R2</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">pval</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">(</span><span class="n">f_stats</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">p_vals</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">f</span><span class="o">.</span><span class="n">sf</span><span class="p">(</span><span class="n">f_stats</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">df_res</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">f_stats</span><span class="p">,</span> <span class="n">p_vals</span><span class="p">,</span> <span class="n">df_res</span></div></div>
+
+
+<div class="viewcode-block" id="MUOLS"><a class="viewcode-back" href="../../generated/mulm.models.html#mulm.models.MUOLS">[docs]</a><span class="k">class</span> <span class="nc">MUOLS</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Mass-univariate linear modeling based Ordinary Least Squares.</span>
+<span class="sd">    Given two arrays X (n_samples, p) and Y (n_samples, q).</span>
+<span class="sd">    Fit q independent linear models, ie., for all y in Y fit: lm(y ~ X).</span>
+
+<span class="sd">    Example</span>
+<span class="sd">    -------</span>
+<span class="sd">    &gt;&gt;&gt; import numpy as np</span>
+<span class="sd">    &gt;&gt;&gt; import mulm</span>
+<span class="sd">    &gt;&gt;&gt; np.random.seed(42)</span>
+<span class="sd">    &gt;&gt;&gt; # n_samples, nb of features that depends on X and that are pure noise</span>
+<span class="sd">    &gt;&gt;&gt; n_samples, n_info, n_noise = 100, 2, 100</span>
+<span class="sd">    &gt;&gt;&gt; beta = np.array([1, 0, 0.5, 0, 2])[:, np.newaxis]</span>
+<span class="sd">    &gt;&gt;&gt; X = np.random.randn(n_samples, 5) # Design matrix</span>
+<span class="sd">    &gt;&gt;&gt; X[:, -1] = 1 # Intercept</span>
+<span class="sd">    &gt;&gt;&gt; Y = np.random.randn(n_samples, n_info + n_noise)</span>
+<span class="sd">    &gt;&gt;&gt; Y[:, :n_info] += np.dot(X, beta) # n_info features depend from X</span>
+<span class="sd">    &gt;&gt;&gt; contrasts = np.identity(X.shape[1])[:4] # don&#39;t test the intercept</span>
+<span class="sd">    &gt;&gt;&gt; mod = mulm.MUOLS(Y, X).fit()</span>
+<span class="sd">    &gt;&gt;&gt; tvals, pvals, df = mod.t_test(contrasts, two_tailed=True)</span>
+<span class="sd">    &gt;&gt;&gt; print(pvals.shape)</span>
+<span class="sd">    (4, 102)</span>
+<span class="sd">    &gt;&gt;&gt; print(&quot;Nb of uncorrected p-values &lt;5%:&quot;, np.sum(pvals &lt; 0.05))</span>
+<span class="sd">    Nb of uncorrected p-values &lt;5%: 18</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">X</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        Y : numpy array (n_samples, p)</span>
+<span class="sd">            dependant (target) variables.</span>
+
+<span class="sd">        X : numpy array (n_samples, q)</span>
+<span class="sd">            design matrix.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">coef</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">if</span> <span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="n">Y</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;matrices are not aligned&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">X</span> <span class="o">=</span> <span class="n">X</span>  <span class="c1"># TODO PERFORM BASIC CHECK ARRAY</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">Y</span> <span class="o">=</span> <span class="n">Y</span>  <span class="c1"># TODO PERFORM BASIC CHECK ARRAY</span>
+
+    <span class="k">def</span> <span class="nf">_block_slices</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dim_size</span><span class="p">,</span> <span class="n">block_size</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Generator that yields slice objects for indexing into</span>
+<span class="sd">        sequential blocks of an array along a particular axis</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="k">yield</span> <span class="nb">slice</span><span class="p">(</span><span class="n">count</span><span class="p">,</span> <span class="n">count</span> <span class="o">+</span> <span class="n">block_size</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+            <span class="n">count</span> <span class="o">+=</span> <span class="n">block_size</span>
+            <span class="k">if</span> <span class="n">count</span> <span class="o">&gt;=</span> <span class="n">dim_size</span><span class="p">:</span>
+                <span class="k">return</span>
+
+<div class="viewcode-block" id="MUOLS.fit"><a class="viewcode-back" href="../../generated/mulm.models.html#mulm.models.MUOLS.fit">[docs]</a>    <span class="k">def</span> <span class="nf">fit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">block</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">max_elements</span><span class="o">=</span><span class="mi">2</span> <span class="o">**</span> <span class="mi">27</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Fit p independent linear models, ie., for all y in Y fit: lm(y ~ X).</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        block : boolean</span>
+<span class="sd">            Use block=True for huge matrices Y.</span>
+<span class="sd">            Operations block by block to optimize time and memory.</span>
+
+<span class="sd">        max_elements : int</span>
+<span class="sd">            block dimension (2**27 corresponds to 1Go)</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">            self</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">block</span> <span class="o">=</span> <span class="n">block</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">max_elements</span> <span class="o">=</span> <span class="n">max_elements</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pinv</span> <span class="o">=</span> <span class="n">scipy</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">pinv2</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">X</span><span class="p">)</span>
+        <span class="n">n</span><span class="p">,</span> <span class="n">p</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Y</span><span class="o">.</span><span class="n">shape</span>
+        <span class="n">q</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">block</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_elements</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;the maximum number of elements is too small&#39;</span><span class="p">)</span>
+            <span class="n">max_cols</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">max_elements</span> <span class="o">/</span> <span class="n">n</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">max_cols</span> <span class="o">=</span> <span class="n">p</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">coef</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">q</span><span class="p">,</span> <span class="n">p</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">err_ss</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">pp</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_block_slices</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">max_cols</span><span class="p">):</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">Y</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">memmap</span><span class="p">):</span>
+                <span class="n">Y_block</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Y</span><span class="p">[:,</span> <span class="n">pp</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>  <span class="c1"># copy to force a read</span>
+            <span class="k">else</span><span class="p">:</span> <span class="n">Y_block</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Y</span><span class="p">[:,</span> <span class="n">pp</span><span class="p">]</span>
+            <span class="c1">#Y_block = self.Y[:, pp]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">coef</span><span class="p">[:,</span> <span class="n">pp</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pinv</span><span class="p">,</span> <span class="n">Y_block</span><span class="p">)</span>
+            <span class="n">y_hat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">X</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">coef</span><span class="p">[:,</span> <span class="n">pp</span><span class="p">])</span>
+            <span class="n">err</span> <span class="o">=</span> <span class="n">Y_block</span> <span class="o">-</span> <span class="n">y_hat</span>
+            <span class="k">del</span> <span class="n">Y_block</span><span class="p">,</span> <span class="n">y_hat</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">err_ss</span><span class="p">[</span><span class="n">pp</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">err</span> <span class="o">**</span> <span class="mi">2</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+            <span class="k">del</span> <span class="n">err</span>
+
+        <span class="k">return</span> <span class="bp">self</span></div>
+
+<div class="viewcode-block" id="MUOLS.predict"><a class="viewcode-back" href="../../generated/mulm.models.html#mulm.models.MUOLS.predict">[docs]</a>    <span class="k">def</span> <span class="nf">predict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Predict Y given a new design matrix X.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        X : numpy array (n_samples, q)</span>
+<span class="sd">            design matrix of new predictors.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        (n_samples, 1) array of predicted values (X beta)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1">#from sklearn.utils import safe_asarray</span>
+        <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+        <span class="c1">#X = safe_asarray(X) # TODO PERFORM BASIC CHECK ARRAY</span>
+        <span class="n">pred_y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">coef</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">pred_y</span></div>
+
+
+<div class="viewcode-block" id="MUOLS.t_test"><a class="viewcode-back" href="../../generated/mulm.models.html#mulm.models.MUOLS.t_test">[docs]</a>    <span class="k">def</span> <span class="nf">t_test</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">contrasts</span><span class="p">,</span> <span class="n">pval</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">two_tailed</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Compute T-statistics (t-scores and p-value associated to contrast).</span>
+<span class="sd">           The code has been cloned from the SPM MATLAB implementation.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        contrasts: array (q, ) or list of arrays or array 2D.</span>
+<span class="sd">            Single contrast (array) or list of contrasts or array of contrasts.</span>
+<span class="sd">            The k contrasts to be tested.</span>
+
+<span class="sd">        pval: boolean</span>
+<span class="sd">            compute pvalues (default is false)</span>
+
+<span class="sd">        two_tailed: boolean</span>
+<span class="sd">            one-tailed test or a two-tailed test (default True)</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        tstats (k, p) array, pvals (k, p) array, df (k,) array</span>
+
+<span class="sd">        Example</span>
+<span class="sd">        -------</span>
+<span class="sd">        &gt;&gt;&gt; import numpy as np</span>
+<span class="sd">        &gt;&gt;&gt; import mulm</span>
+<span class="sd">        &gt;&gt;&gt; np.random.seed(42)</span>
+<span class="sd">        &gt;&gt;&gt; # n_samples, nb of features that depends on X and that are pure noise</span>
+<span class="sd">        &gt;&gt;&gt; n_samples, n_info, n_noise = 100, 2, 100</span>
+<span class="sd">        &gt;&gt;&gt; beta = np.array([1, 0, 0.5, 0, 2])[:, np.newaxis]</span>
+<span class="sd">        &gt;&gt;&gt; X = np.random.randn(n_samples, 5) # Design matrix</span>
+<span class="sd">        &gt;&gt;&gt; X[:, -1] = 1 # Intercept</span>
+<span class="sd">        &gt;&gt;&gt; Y = np.random.randn(n_samples, n_info + n_noise)</span>
+<span class="sd">        &gt;&gt;&gt; Y[:, :n_info] += np.dot(X, beta) # n_info features depend from X</span>
+<span class="sd">        &gt;&gt;&gt; contrasts = np.identity(X.shape[1])[:4] # don&#39;t test the intercept</span>
+<span class="sd">        &gt;&gt;&gt; mod = mulm.MUOLS(Y, X).fit()</span>
+<span class="sd">        &gt;&gt;&gt; tvals, pvals, df = mod.t_test(contrasts, two_tailed=True)</span>
+<span class="sd">        &gt;&gt;&gt; print(pvals.shape)</span>
+<span class="sd">        (4, 102)</span>
+<span class="sd">        &gt;&gt;&gt; print(&quot;Nb of uncorrected p-values &lt;5%:&quot;, np.sum(pvals &lt; 0.05))</span>
+<span class="sd">        Nb of uncorrected p-values &lt;5%: 18</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">contrasts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">atleast_2d</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">contrasts</span><span class="p">))</span>
+        <span class="n">n</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">t_stats_</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
+        <span class="n">p_vals_</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
+        <span class="n">df_</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">contrast</span> <span class="ow">in</span> <span class="n">contrasts</span><span class="p">:</span>
+            <span class="c1"># contrast = contrasts[0]</span>
+            <span class="c1">#ccontrasts = np.asarray(contrasts)</span>
+            <span class="c1"># t = c&#39;beta / std(c&#39;beta)</span>
+            <span class="c1"># std(c&#39;beta) = sqrt(var_err (c&#39;X+)(X+&#39;c))</span>
+            <span class="c1">#Xpinv = scipy.linalg.pinv(X)</span>
+            <span class="n">cXpinv</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">contrast</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">pinv</span><span class="p">)</span>
+            <span class="n">R</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">X</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">pinv</span><span class="p">)</span>
+            <span class="n">df</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">trace</span><span class="p">(</span><span class="n">R</span><span class="p">)</span>
+            <span class="c1">## Broadcast over ss errors</span>
+            <span class="n">var_errors</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">err_ss</span> <span class="o">/</span> <span class="n">df</span>
+            <span class="n">std_cbeta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">var_errors</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">cXpinv</span><span class="p">,</span> <span class="n">cXpinv</span><span class="o">.</span><span class="n">T</span><span class="p">))</span>
+            <span class="n">t_stats</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">contrast</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">coef</span><span class="p">)</span> <span class="o">/</span> <span class="n">std_cbeta</span>
+            <span class="n">p_vals</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="k">if</span> <span class="n">pval</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">two_tailed</span><span class="p">:</span>
+                    <span class="n">p_vals</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">t</span><span class="o">.</span><span class="n">sf</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">t_stats</span><span class="p">),</span> <span class="n">df</span><span class="p">)</span> <span class="o">*</span> <span class="mi">2</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">p_vals</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">t</span><span class="o">.</span><span class="n">sf</span><span class="p">(</span><span class="n">t_stats</span><span class="p">,</span> <span class="n">df</span><span class="p">)</span>
+            <span class="n">t_stats_</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">t_stats</span><span class="p">)</span>
+            <span class="n">p_vals_</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">p_vals</span><span class="p">)</span>
+            <span class="n">df_</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">t_stats_</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">p_vals_</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">df_</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="MUOLS.t_test_maxT"><a class="viewcode-back" href="../../generated/mulm.models.html#mulm.models.MUOLS.t_test_maxT">[docs]</a>    <span class="k">def</span> <span class="nf">t_test_maxT</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">contrasts</span><span class="p">,</span> <span class="n">nperms</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">two_tailed</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Correct for multiple comparisons using Westfall and Young, 1993 a.k.a maxT procedure.</span>
+<span class="sd">           It is based on permutation tests procedure. This is the procedure used by FSL (https://fsl.fmrib.ox.ac.uk/).</span>
+
+<span class="sd">           It should be used when the test statistics, and hence the unadjusted p-values, are dependent.</span>
+<span class="sd">           This is the case when groups of dependant variables (in Y) tend to have highly correlated measures.</span>
+<span class="sd">           Westfall and Young (1993) proposed adjusted p-values for less conservative multiple testing procedures which</span>
+<span class="sd">           take into account the dependence structure among test statistics.</span>
+<span class="sd">           References:</span>
+<span class="sd">           - Anderson M. Winkler &quot;Statistical analysis of areal quantities in the brain through</span>
+<span class="sd">           permutation tests&quot; Ph.D 2017.</span>
+<span class="sd">           - Dudoit et al. &quot;Multiple Hypothesis Testing in Microarray Experiments&quot;, Statist. Sci. 2003</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        contrasts: array (q, ) or list of arrays or array 2D.</span>
+<span class="sd">            Single contrast (array) or list of contrasts or array of contrasts.</span>
+<span class="sd">            The k contrasts to be tested.</span>
+
+<span class="sd">        nperms: int</span>
+<span class="sd">                permutation tests (default 1000).</span>
+
+<span class="sd">        two_tailed: boolean</span>
+<span class="sd">            one-tailed test or a two-tailed test (default True)</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        tstats (k, p) array, pvals (k, p) array corrected for multiple comparisons</span>
+<span class="sd">        df (k,) array.</span>
+
+<span class="sd">        Examples</span>
+<span class="sd">        --------</span>
+<span class="sd">        &gt;&gt;&gt; import numpy as np</span>
+<span class="sd">        &gt;&gt;&gt; import mulm</span>
+<span class="sd">        &gt;&gt;&gt; np.random.seed(42)</span>
+<span class="sd">        &gt;&gt;&gt; # n_samples, nb of features that depends on X and that are pure noise</span>
+<span class="sd">        &gt;&gt;&gt; n_samples, n_info, n_noise = 100, 2, 100</span>
+<span class="sd">        &gt;&gt;&gt; beta = np.array([1, 0, 0.5, 0, 2])[:, np.newaxis]</span>
+<span class="sd">        &gt;&gt;&gt; X = np.random.randn(n_samples, 5) # Design matrix</span>
+<span class="sd">        &gt;&gt;&gt; X[:, -1] = 1 # Intercept</span>
+<span class="sd">        &gt;&gt;&gt; Y = np.random.randn(n_samples, n_info + n_noise)</span>
+<span class="sd">        &gt;&gt;&gt; Y[:, :n_info] += np.dot(X, beta) # n_info features depend from X</span>
+<span class="sd">        &gt;&gt;&gt; contrasts = np.identity(X.shape[1])[:4] # don&#39;t test the intercept</span>
+<span class="sd">        &gt;&gt;&gt; mod = mulm.MUOLS(Y, X).fit()</span>
+<span class="sd">        &gt;&gt;&gt; tvals, pvals, df = mod.t_test(contrasts, two_tailed=True)</span>
+<span class="sd">        &gt;&gt;&gt; print(pvals.shape)</span>
+<span class="sd">        (4, 102)</span>
+<span class="sd">        &gt;&gt;&gt; print(&quot;Nb of uncorrected p-values &lt;5%:&quot;, np.sum(pvals &lt; 0.05))</span>
+<span class="sd">        Nb of uncorrected p-values &lt;5%: 18</span>
+<span class="sd">        &gt;&gt;&gt; tvals, pvals_corrmaxT, df = mod.t_test_maxT(contrasts, two_tailed=True)</span>
+<span class="sd">        &gt;&gt;&gt; print(&quot;Nb of corrected pvalues &lt;5%:&quot;, np.sum(pvals_corrmaxT &lt; 0.05))</span>
+<span class="sd">        Nb of corrected pvalues &lt;5%: 4</span>
+<span class="sd">       &quot;&quot;&quot;</span>
+        <span class="c1">#contrast = [0, 1] + [0] * (X.shape[1] - 2)</span>
+        <span class="n">contrasts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">atleast_2d</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">contrasts</span><span class="p">))</span>
+        <span class="n">tvals</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">df</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">t_test</span><span class="p">(</span><span class="n">contrasts</span><span class="o">=</span><span class="n">contrasts</span><span class="p">,</span> <span class="n">pval</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="n">max_t</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nperms</span><span class="p">):</span>
+            <span class="n">perm_idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">permutation</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+            <span class="n">Xp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">X</span><span class="p">[</span><span class="n">perm_idx</span><span class="p">,</span> <span class="p">:]</span>
+            <span class="n">muols</span> <span class="o">=</span> <span class="n">MUOLS</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">Y</span><span class="p">,</span> <span class="n">Xp</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">block</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">block</span><span class="p">,</span>
+                                          <span class="n">max_elements</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">max_elements</span><span class="p">)</span>
+            <span class="n">tvals_perm</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">muols</span><span class="o">.</span><span class="n">t_test</span><span class="p">(</span><span class="n">contrasts</span><span class="o">=</span><span class="n">contrasts</span><span class="p">,</span> <span class="n">pval</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                                            <span class="n">two_tailed</span><span class="o">=</span><span class="n">two_tailed</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">two_tailed</span><span class="p">:</span>
+                <span class="n">tvals_perm</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">tvals_perm</span><span class="p">)</span>
+            <span class="n">max_t</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">tvals_perm</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
+            <span class="k">del</span> <span class="n">muols</span>
+        <span class="n">max_t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">max_t</span><span class="p">)</span>
+        <span class="n">tvals_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">tvals</span><span class="p">)</span> <span class="k">if</span> <span class="n">two_tailed</span> <span class="k">else</span> <span class="n">tvals</span>
+        <span class="n">pvalues</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
+            <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">max_t</span><span class="p">[:,</span> <span class="n">con</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">t</span><span class="p">)</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">tvals_</span><span class="p">[</span><span class="n">con</span><span class="p">,</span> <span class="p">:]])</span>\
+                <span class="o">/</span> <span class="nb">float</span><span class="p">(</span><span class="n">nperms</span><span class="p">)</span> <span class="k">for</span> <span class="n">con</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">contrasts</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])])</span>
+        <span class="k">return</span> <span class="n">tvals</span><span class="p">,</span> <span class="n">pvalues</span><span class="p">,</span> <span class="n">df</span></div>
+
+<div class="viewcode-block" id="MUOLS.t_test_minP"><a class="viewcode-back" href="../../generated/mulm.models.html#mulm.models.MUOLS.t_test_minP">[docs]</a>    <span class="k">def</span> <span class="nf">t_test_minP</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">contrasts</span><span class="p">,</span> <span class="n">nperms</span><span class="o">=</span><span class="mi">10000</span><span class="p">,</span> <span class="n">two_tailed</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Correct for multiple comparisons using minP procedure.</span>
+
+<span class="sd">           References:</span>
+<span class="sd">           - Dudoit et al. &quot;Multiple Hypothesis Testing in Microarray Experiments&quot;, Statist. Sci. 2003</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        contrasts: array (q, ) or list of arrays or array 2D.</span>
+<span class="sd">            Single contrast (array) or list of contrasts or array of contrasts.</span>
+<span class="sd">            The k contrasts to be tested.</span>
+
+<span class="sd">        nperms: int</span>
+<span class="sd">                permutation tests (default 10000).</span>
+
+<span class="sd">        two_tailed: boolean</span>
+<span class="sd">            one-tailed test or a two-tailed test (default True)</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        tstats (k, p) array, pvals (k, p) array corrected for multiple comparisons</span>
+<span class="sd">        df (k,) array.</span>
+
+<span class="sd">        Examples</span>
+<span class="sd">        --------</span>
+<span class="sd">        &gt;&gt;&gt; import numpy as np</span>
+<span class="sd">        &gt;&gt;&gt; import mulm</span>
+<span class="sd">        &gt;&gt;&gt; np.random.seed(42)</span>
+<span class="sd">        &gt;&gt;&gt; # n_samples, nb of features that depends on X and that are pure noise</span>
+<span class="sd">        &gt;&gt;&gt; n_samples, n_info, n_noise = 100, 2, 100</span>
+<span class="sd">        &gt;&gt;&gt; beta = np.array([1, 0, 0.5, 0, 2])[:, np.newaxis]</span>
+<span class="sd">        &gt;&gt;&gt; X = np.random.randn(n_samples, 5) # Design matrix</span>
+<span class="sd">        &gt;&gt;&gt; X[:, -1] = 1 # Intercept</span>
+<span class="sd">        &gt;&gt;&gt; Y = np.random.randn(n_samples, n_info + n_noise)</span>
+<span class="sd">        &gt;&gt;&gt; Y[:, :n_info] += np.dot(X, beta) # n_info features depend from X</span>
+<span class="sd">        &gt;&gt;&gt; contrasts = np.identity(X.shape[1])[:4] # don&#39;t test the intercept</span>
+<span class="sd">        &gt;&gt;&gt; mod = mulm.MUOLS(Y, X).fit()</span>
+<span class="sd">        &gt;&gt;&gt; tvals, pvals, df = mod.t_test(contrasts, two_tailed=True)</span>
+<span class="sd">        &gt;&gt;&gt; print(pvals.shape)</span>
+<span class="sd">        (4, 102)</span>
+<span class="sd">        &gt;&gt;&gt; print(&quot;Nb of uncorrected p-values &lt;5%:&quot;, np.sum(pvals &lt; 0.05))</span>
+<span class="sd">        Nb of uncorrected p-values &lt;5%: 18</span>
+<span class="sd">        &gt;&gt;&gt; tvals, pval_corrminp, df = mod.t_test_minP(contrasts, two_tailed=True)</span>
+<span class="sd">        &gt;&gt;&gt; print(&quot;Nb of corrected pvalues &lt;5%:&quot;, np.sum(pval_corrminp &lt; 0.05))</span>
+<span class="sd">        Nb of corrected pvalues &lt;5%: 4</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">tvals</span><span class="p">,</span> <span class="n">pvals</span><span class="p">,</span> <span class="n">df</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">t_test</span><span class="p">(</span><span class="n">contrasts</span><span class="o">=</span><span class="n">contrasts</span><span class="p">,</span> <span class="n">pval</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="n">min_p</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="n">contrasts</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">nperms</span><span class="p">))</span>
+        <span class="n">perm_idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">nperms</span> <span class="o">+</span> <span class="mi">1</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;int&#39;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">Y</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
+            <span class="n">Y_curr</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Y</span><span class="p">[:,</span> <span class="n">i</span><span class="p">]</span>
+            <span class="n">Yp_curr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">nperms</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
+
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nperms</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="n">perm_idx</span><span class="p">[:,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">permutation</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+                <span class="n">Yp_curr</span><span class="p">[:,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">Y_curr</span><span class="p">[</span><span class="n">perm_idx</span><span class="p">[:,</span> <span class="n">j</span><span class="p">]]</span>
+            <span class="n">muols</span> <span class="o">=</span> <span class="n">MUOLS</span><span class="p">(</span><span class="n">Yp_curr</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">X</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+            <span class="n">tvals_perm</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">muols</span><span class="o">.</span><span class="n">t_test</span><span class="p">(</span><span class="n">contrasts</span><span class="o">=</span><span class="n">contrasts</span><span class="p">,</span> <span class="n">pval</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                                            <span class="n">two_tailed</span><span class="o">=</span><span class="n">two_tailed</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">two_tailed</span><span class="p">:</span>
+                <span class="n">tvals_perm</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">tvals_perm</span><span class="p">)</span>
+            <span class="n">pval_perm</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
+               <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([((</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">tvals_perm</span><span class="p">[</span><span class="n">con</span><span class="p">,</span> <span class="p">:]</span> <span class="o">&gt;=</span> <span class="n">tvals_perm</span><span class="p">[</span><span class="n">con</span><span class="p">,</span> <span class="n">k</span><span class="p">]))</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> \
+                         <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nperms</span><span class="p">)])</span> <span class="o">/</span> <span class="nb">float</span><span class="p">(</span><span class="n">nperms</span><span class="p">)</span> \
+                             <span class="k">for</span> <span class="n">con</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">contrasts</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])])</span>
+            <span class="n">min_p</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
+               <span class="p">[(</span><span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">((</span><span class="n">min_p</span><span class="p">[</span><span class="n">con</span><span class="p">,</span> <span class="p">:],</span> <span class="n">pval_perm</span><span class="p">[</span><span class="n">con</span><span class="p">,</span> <span class="p">:])),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span> \
+                         <span class="k">for</span> <span class="n">con</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">contrasts</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])])</span>
+        <span class="n">pvalues</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
+               <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">min_p</span><span class="p">[</span><span class="n">con</span><span class="p">,</span> <span class="p">:]</span> <span class="o">&lt;=</span> <span class="n">p</span><span class="p">)</span> \
+                         <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">pvals</span><span class="p">[</span><span class="n">con</span><span class="p">,</span> <span class="p">:]])</span> <span class="o">/</span> <span class="nb">float</span><span class="p">(</span><span class="n">nperms</span><span class="p">)</span> \
+                             <span class="k">for</span> <span class="n">con</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">contrasts</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])])</span>
+        <span class="k">return</span> <span class="n">tvals</span><span class="p">,</span> <span class="n">pvalues</span><span class="p">,</span> <span class="n">df</span></div>
+
+<div class="viewcode-block" id="MUOLS.f_test"><a class="viewcode-back" href="../../generated/mulm.models.html#mulm.models.MUOLS.f_test">[docs]</a>    <span class="k">def</span> <span class="nf">f_test</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">contrast</span><span class="p">,</span> <span class="n">pval</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Compute F-statistics (F-scores and p-value associated to contrast).</span>
+<span class="sd">           The code has been cloned from the SPM MATLAB implementation.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        contrasts: array (q, ) or list of arrays or array 2D.</span>
+<span class="sd">            Single contrast (array) or list of contrasts or array of contrasts.</span>
+<span class="sd">            The k contrasts to be tested.</span>
+
+<span class="sd">        pval: boolean</span>
+<span class="sd">            compute pvalues (default is false)</span>
+
+<span class="sd">        two_tailed: boolean</span>
+<span class="sd">            one-tailed test or a two-tailed test (default True)</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        tstats (k, p) array, pvals (k, p) array, df (k,) array</span>
+
+<span class="sd">        Example</span>
+<span class="sd">        -------</span>
+<span class="sd">        &gt;&gt;&gt; import numpy as np</span>
+<span class="sd">        &gt;&gt;&gt; import mulm</span>
+<span class="sd">        &gt;&gt;&gt; X = np.random.randn(100, 5)</span>
+<span class="sd">        &gt;&gt;&gt; Y = np.random.randn(100, 10)</span>
+<span class="sd">        &gt;&gt;&gt; beta = np.random.randn(5, 1)</span>
+<span class="sd">        &gt;&gt;&gt; Y[:, :2] += np.dot(X, beta)</span>
+<span class="sd">        &gt;&gt;&gt; contrasts = np.identity(X.shape[1])</span>
+<span class="sd">        &gt;&gt;&gt; mod = mulm.MUOLS(Y, X).fit()</span>
+<span class="sd">        &gt;&gt;&gt; fvals, pvals, df = mod.f_test(contrasts, pval=True)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">C1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">atleast_2d</span><span class="p">(</span><span class="n">contrast</span><span class="p">)</span><span class="o">.</span><span class="n">T</span>
+        <span class="n">n</span><span class="p">,</span> <span class="n">p</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span>
+        <span class="n">rank_x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">matrix_rank</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pinv</span><span class="p">)</span>
+        <span class="n">C0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">C1</span><span class="p">,</span> <span class="n">scipy</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">pinv2</span><span class="p">(</span><span class="n">C1</span><span class="p">))</span>  <span class="c1"># Ortho. cont. to C1</span>
+        <span class="n">X0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">X</span><span class="p">,</span> <span class="n">C0</span><span class="p">)</span>  <span class="c1"># Design matrix of the reduced model</span>
+        <span class="n">X0pinv</span> <span class="o">=</span> <span class="n">scipy</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">pinv2</span><span class="p">(</span><span class="n">X0</span><span class="p">)</span>
+        <span class="n">rank_x0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">matrix_rank</span><span class="p">(</span><span class="n">X0pinv</span><span class="p">)</span>
+        <span class="c1"># Find the subspace (X1) of Xc1, which is orthogonal to X0</span>
+        <span class="c1"># The projection matrix M due to X1 can be derived from the residual</span>
+        <span class="c1"># forming matrix of the reduced model X0</span>
+        <span class="c1"># R0 is the residual forming matrix of the reduced model</span>
+        <span class="n">R0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">X0</span><span class="p">,</span> <span class="n">X0pinv</span><span class="p">)</span>
+        <span class="c1"># R is the residual forming matrix of the full model</span>
+        <span class="n">R</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">X</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">pinv</span><span class="p">)</span>
+        <span class="c1"># compute the projection matrix</span>
+        <span class="n">M</span> <span class="o">=</span> <span class="n">R0</span> <span class="o">-</span> <span class="n">R</span>
+        <span class="c1">#Ypred = np.dot(self.X, betas)</span>
+        <span class="n">y_hat</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">X</span><span class="p">)</span>
+        <span class="n">SS</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">y_hat</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">y_hat</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+        <span class="n">df_c1</span> <span class="o">=</span> <span class="n">rank_x</span> <span class="o">-</span> <span class="n">rank_x0</span>
+        <span class="n">df_res</span> <span class="o">=</span> <span class="n">n</span> <span class="o">-</span> <span class="n">rank_x</span>
+        <span class="c1">## Broadcast over self.err_ss of Y</span>
+        <span class="n">f_stats</span> <span class="o">=</span> <span class="p">(</span><span class="n">SS</span> <span class="o">*</span> <span class="n">df_res</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">err_ss</span> <span class="o">*</span> <span class="n">df_c1</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">pval</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">f_stats</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="n">df_res</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">p_vals</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">f</span><span class="o">.</span><span class="n">sf</span><span class="p">(</span><span class="n">f_stats</span><span class="p">,</span> <span class="n">df_c1</span><span class="p">,</span> <span class="n">df_res</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">f_stats</span><span class="p">,</span> <span class="n">p_vals</span><span class="p">,</span> <span class="n">df_res</span></div>
+
+<div class="viewcode-block" id="MUOLS.stats_f_coefficients"><a class="viewcode-back" href="../../generated/mulm.models.html#mulm.models.MUOLS.stats_f_coefficients">[docs]</a>    <span class="k">def</span> <span class="nf">stats_f_coefficients</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">contrast</span><span class="p">,</span> <span class="n">pval</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">stats_f</span><span class="p">(</span><span class="n">contrast</span><span class="p">,</span> <span class="n">pval</span><span class="o">=</span><span class="n">pval</span><span class="p">)</span></div></div>
+
+</pre></div>
+                    </div>
+                <div class="spacer"></div>
+		        
+		        <!-- Footer -->
+		        <div class="section-6-container section-container section-container-image-bg" id="section-6">
+			        <div class="container">
+			            <div class="row">
+		                    <div class="col-md-5 offset-md-1 section-6-box wow fadeInDown">
+		                    	<h3>Follow us</h3>
+		                    	<div class="section-6-social">
+			                    	<a href="https://www.facebook.com/pages/NeuroSpin/171075046414933"><i class="fab fa-facebook-f"></i></a>
+									<a href="https://www.youtube.com/CEASaclay"><i class="fab fa-youtube"></i></a>
+									<a href="https://twitter.com/neurospin_91"><i class="fab fa-twitter"></i></a>
+									<a href="https://github.com/AGrigis/pysphinxdoc"><i class="fab fa-github"></i></a>
+		                    	</div>
+		                    </div>
+			            </div>
+			        	<div class="row">
+		                    <div class="col">
+                                &copy; 2021, 
+pylearn-mulm developers
+ <edouard.duchesnay@cea.fr>. <br/>
+                                Inspired by <a href="https://azmind.com/demo/bootstrap-4-sidebar-menu/">AZMIND template</a>.
+		                    </div>
+		                </div>
+			        </div>
+                </div>
+	        
+	        </div>
+	        <!-- End content -->
+        
+        </div>
+        <!-- End wrapper -->
+
+        <!-- Javascript -->
+		<script src="../../_static/js/jquery-3.3.1.min.js"></script>
+		<script src="../../_static/js/jquery-migrate-3.0.0.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+        <script src="../../_static/js/jquery.backstretch.min.js"></script>
+        <script src="../../_static/js/wow.min.js"></script>
+        <script src="../../_static/js/jquery.waypoints.min.js"></script>
+        <script src="../../_static/js/jquery.mCustomScrollbar.concat.min.js"></script>
+        <script src="../../_static/js/scripts.js"></script>
+        <script src="../../_static/js/jquery.mosaic.js"></script>
+        <script type="text/javascript">
+	        $('.top-content').backstretch("../../_static/img/backgrounds/1.jpg");
+            $('.section-4-container').backstretch("../../_static/img/backgrounds/2.jpg");
+            $('.section-6-container').backstretch("../../_static/img/backgrounds/1.jpg");
+        </script>
+
+    </body>
+
+</html>

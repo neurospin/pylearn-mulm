@@ -1,0 +1,39 @@
+.. AUTO-GENERATED FILE -- DO NOT EDIT!
+
+:orphan:
+
+API documentation of *mulm*
+============================
+
+
+The Massive Univariate Linear Model (MULM) module.
+
+
+.. raw:: html
+
+    <br/>    <!-- Block section -->
+    <table border='1' class='docutils' style='width:100%'>
+    <colgroup><col width='25%'/><col width='75%'/></colgroup>
+    <tbody valign='top'>
+    <tr class='row-odd'>
+    <td><a class='reference internal' href='mulm.models.html'><em>mulm.models</em></a></td>
+    <td>
+        <p>Linear models for massive univariate statistics.</p>
+    </td>
+    </tr>
+    <tr class='row-even'>
+    <td><a class='reference internal' href='mulm.helpers.html'><em>mulm.helpers</em></a></td>
+    <td>
+        <p>Module with helpers functions.</p>
+    </td>
+    </tr>
+    <tr class='row-odd'>
+    <td><a class='reference internal' href='mulm.utils.html'><em>mulm.utils</em></a></td>
+    <td>
+        <p>Module that contains utility functions.</p>
+    </td>
+    </tr>
+    </tbody>
+
+
+    </table>
