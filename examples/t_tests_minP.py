@@ -1,9 +1,8 @@
-# -*- coding: utf-8 -*-
 """
-Created on Thu May 15 11:35:27 2014
+T tests minP
+============
 
-@author:  edouard.duchesnay@cea.fr
-@license: BSD-3-Clause
+Credit: E Duchesnay
 """
 import numpy as np
 import mulm

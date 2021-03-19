@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 ##########################################################################
 # Created on Created on Thu Feb  6 15:15:14 2020
@@ -17,15 +16,13 @@ import mulm
 import pandas as pd
 
 class Residualizer:
-    """
-    Residualization of a Y data on possibly adjusted for other variables.
+    """ Residualization of a Y data on possibly adjusted for other variables.
+
     Example: Y is a (n, p) array of p-dependant variables, we want to residualize
-    for "site" adjusted for "age + sex"
+    for "site" adjusted for "age + sex".
 
     1) Use of DataFrame and formula:
-    1.1) `Residualizer(data=df,
-                       formula_res="site",
-                       formula_full=site + age + sex")`
+    1.1) `Residualizer(data=df, formula_res="site", formula_full=site + age + sex")`
 
     1.2) `Z = get_design_mat(data)` will return the numpy (n, k) array design matrix.
     Row selection can be done on both Y and design_mat (Cross-val., etc.)

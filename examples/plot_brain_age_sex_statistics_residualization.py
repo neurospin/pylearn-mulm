@@ -1,5 +1,8 @@
 """
+Brain & age statistics residuallization
+=======================================
 
+Credit: E Duchesnay
 """
 # General
 import os
@@ -141,4 +144,3 @@ cv_res = cross_validate(estimator=pipeline, X=ZX_train, y=y_train, cv=cv, n_jobs
 r2 = cv_res['test_r2'].mean()
 mae = np.mean(-cv_res['test_neg_mean_absolute_error'])
 print("CV R2:%.4f, MAE:%.4f" % (r2, mae))
-

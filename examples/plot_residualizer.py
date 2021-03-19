@@ -1,4 +1,9 @@
 """
+Residualizer
+============
+
+Credit: E Duchesnay
+
 Residualization of a Y data on possibly adjusted for other variables.
 
 Suppose we have 3 variable:

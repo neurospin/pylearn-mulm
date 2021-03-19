@@ -1,9 +1,14 @@
 # -*- coding: utf-8 -*-
-"""
-Created on Thu Dec 22 19:07:13 CET 2019
+##########################################################################
+# Created on Created on Thu Feb  6 15:15:14 2020
+# Copyright (c) 2013-2021, CEA/DRF/Joliot/NeuroSpin. All rights reserved.
+# @author:  Edouard Duchesnay
+# @email:   edouard.duchesnay@cea.fr
+# @license: BSD 3-clause.
+##########################################################################
 
-@author:  edouard.duchesnay@cea.fr
-@license: BSD-3-Clause
+"""
+Module with helpers functions.
 """
 
 import numpy as np
@@ -18,17 +23,18 @@ def design_matrix(formula, data):
 
     Parameters
     ----------
-
     formula, str
     data, DataFrame
 
-    return
-    ------
-    X: (array) the design matrix
-    t_contrasts: (OrderedDict key=colname, val=array (P,)). Remark: len(t_contrasts) == X.shape[1]
-    f_contrasts: (OrderedDict key=term name in formula, val=array (P, P)),
+    Returns
+    -------
+    X: array
+        the design matrix
+    t_contrasts: OrderedDict key=colname, val=array (P,)
+        remark: len(t_contrasts) == X.shape[1]
+    f_contrasts: OrderedDict key=term name in formula, val=array (P, P)
+        not documented.
     """
-
     # Build design matrix
     dmat = patsy.dmatrix(formula, data=data)
 

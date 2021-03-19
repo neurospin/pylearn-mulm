@@ -1,8 +1,14 @@
 # -*- coding: utf-8 -*-
-"""
-Created on Fri Jun 14 19:38:46 2013
+##########################################################################
+# Created on Created on Thu Feb  6 15:15:14 2020
+# Copyright (c) 2013-2021, CEA/DRF/Joliot/NeuroSpin. All rights reserved.
+# @author:  Edouard Duchesnay
+# @email:   edouard.duchesnay@cea.fr
+# @license: BSD 3-clause.
+##########################################################################
 
-@author: ed203246
+"""
+The Massive Univariate Linear Model (MULM) module.
 """
 
 from .models import MUPairwiseCorr

@@ -1,4 +1,9 @@
 """
+Univariate T and F tests
+========================
+
+Credit: E Duchesnay
+
 Univariate statistics: F-test and T-test with MULM (Massive univariate linear model)
 compared with statsmodel.
 """
@@ -31,7 +36,7 @@ fstat_mulm = OrderedDict((term, mod_mulm.f_test(f_contrasts[term], pval=True)) f
 
 print(mod_mulm.coef)
 print(pd.DataFrame(tstat_mulm, index=['tstat', 'pval', 'df']).T)
-print(pd.DataFrame(fstat_mulm, index=['fstat', 'pval']).T)
+# print(pd.DataFrame(fstat_mulm, index=['fstat', 'pval']).T)
 
 
 ################################################################################

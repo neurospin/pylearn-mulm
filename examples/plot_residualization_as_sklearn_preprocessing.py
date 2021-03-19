@@ -1,4 +1,9 @@
 """
+Residualization as sklearn
+==========================
+
+Credit: E Duchesnay
+
 Residualizer as pre-processing of supervized prediction:
 
 Input: X = age + site + e, target = age

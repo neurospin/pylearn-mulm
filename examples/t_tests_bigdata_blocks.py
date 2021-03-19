@@ -1,8 +1,8 @@
-# -*- coding: utf-8 -*-
 """
-Created on Wed Feb 11 16:03:13 2015
+T tests on big data blocks
+==========================
 
-@author: cp243490
+Credit: E Duchesnay
 """
 import numpy as np
 import time

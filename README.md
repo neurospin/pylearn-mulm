@@ -5,6 +5,12 @@ Provide basic features similar to "statmodels" (like OLS) where Y is a matrix of
 many responses where many independant fit are requested.
 
 
+Important links
+---------------
+
+- `Official source code repo. <https://github.com/neurospin/pylearn-mulm>`_
+- `HTML documentation. <http://neurospin.github.io/pylearn-mulm>`_
+
 Installation
 ------------
 Unless you already have Numpy and Scipy installed, you need to install them:
