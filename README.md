@@ -8,8 +8,8 @@ many responses where many independant fit are requested.
 Important links
 ---------------
 
-- `Official source code repo <https://github.com/neurospin/pylearn-mulm>`_
-- `HTML documentation <http://neurospin.github.io/pylearn-mulm>`_
+- [Official source code repo](<https://github.com/neurospin/pylearn-mulm>)
+- [HTML documentation](<http://neurospin.github.io/pylearn-mulm>)
 
 Installation
 ------------
