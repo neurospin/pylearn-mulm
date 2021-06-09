@@ -15,6 +15,8 @@ import numpy as np
 import scipy
 from sklearn.preprocessing import scale
 from scipy import stats
+from .utils import ttest_pval
+#from mulm.utils import estimate_se_tstat_pval_ci
 
 class MUPairwiseCorr:
     """Mass-univariate pairwise correlations. Given two arrays X (n_samples x p)
@@ -27,10 +29,8 @@ class MUPairwiseCorr:
     >>> from mulm import MUPairwiseCorr
     >>> X = np.random.randn(10, 5)
     >>> Y = np.random.randn(10, 3)
-    >>> corr = MUPairwiseCorr(X, Y)
-    >>> corr.fit()
-    <mulm.models.MUPairwiseCorr instance at 0x30da878>
-    >>> f, p = corr.stats_f()
+    >>> corr = MUPairwiseCorr(X, Y).fit()
+    >>> f, p, df = corr.stats_f()
     >>> print(f.shape)
     (5, 3)
     """
@@ -254,10 +254,12 @@ class MUOLS:
             t_stats = np.dot(contrast, self.coef) / std_cbeta
             p_vals = None
             if pval is not None:
-                if two_tailed:
-                    p_vals = stats.t.sf(np.abs(t_stats), df) * 2
-                else:
-                    p_vals = stats.t.sf(t_stats, df)
+                p_vals = ttest_pval(df=df, tstat=t_stats, two_tailed=two_tailed)
+                # #
+                # if two_tailed:
+                #     p_vals = stats.t.sf(np.abs(t_stats), df) * 2
+                # else:
+                #     p_vals = stats.t.sf(t_stats, df)
             t_stats_.append(t_stats)
             p_vals_.append(p_vals)
             df_.append(df)
@@ -476,4 +478,3 @@ class MUOLS:
 
     def stats_f_coefficients(self, X, Y, contrast, pval=False):
         return self.stats_f(contrast, pval=pval)
-

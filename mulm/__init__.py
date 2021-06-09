@@ -14,7 +14,9 @@ The Massive Univariate Linear Model (MULM) module.
 from .models import MUPairwiseCorr
 from .models import MUOLS
 from .helpers import design_matrix
+from .utils import ttest_pval, ttest_ci
 
 __all__ = ['MUPairwiseCorr',
            'MUOLS',
-           'design_matrix']
+           'design_matrix',
+           'ttest_pval', 'ttest_ci']

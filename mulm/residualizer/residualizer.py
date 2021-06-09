@@ -55,11 +55,11 @@ class Residualizer:
     >>>
     >>> # Simple residualization on site
     >>> res_spl = Residualizer(data, formula_res="site")
-    >>> yres = res_spl.fit_transform(y[:, None], res_spl.get_design_mat())
+    >>> yres = res_spl.fit_transform(y[:, None], res_spl.get_design_mat(data))
     >>>
     >>> # Site residualization adjusted for age
     >>> res_adj = Residualizer(data, formula_res="site", formula_full="age + site")
-    >>> yadj = res_adj.fit_transform(y[:, None], res_adj.get_design_mat())
+    >>> yadj = res_adj.fit_transform(y[:, None], res_adj.get_design_mat(data))
     >>>
     >>> # Site residualization adjusted for age provides higher correlation,
     >>> # and lower stderr than simple residualization
@@ -67,10 +67,10 @@ class Residualizer:
     >>> lm_adj = stats.linregress(age, yadj.ravel())
     >>>
     >>> np.allclose((lm_res.slope, lm_res.rvalue, lm_res.stderr),
-    >>>             (-0.079187578, -0.623733003, 0.0100242219))
+    ...             (-0.079187578, -0.623733003, 0.0100242219))
     True
     >>> np.allclose((lm_adj.slope, lm_adj.rvalue, lm_adj.stderr),
-    >>>             (-0.110779913, -0.7909219758, 0.00865778640))
+    ...             (-0.110779913, -0.7909219758, 0.00865778640))
     True
     """
 
