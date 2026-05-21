@@ -90,11 +90,17 @@ def ttest_ci(df, estimate=None, tstat=None, se=None, mu=0, alpha=0.05,
     -------
     >>> import numpy as np
     >>> from mulm import ttest_ci
-    >>> x = [.1, .2, .3, -.1, .1, .2, .3]
+    >>> x = np.array([.1, .2, .3, -.1, .1, .2, .3])
+
     >>> estimate, se, tstat, ci = ttest_ci(df=len(x)-1, estimate=np.mean(x),
     ...                                    se=np.std(x, ddof=1)/np.sqrt(len(x)))
     >>> np.allclose((estimate, tstat, ci[0], ci[1]),
     ...             (0.15714286, 2.9755, 0.02791636, 0.28636936))
+    True
+    >>> estimate, se, tstat, ci = ttest_ci(df=len(x)-1, estimate=np.mean(x),
+    ...                                    se=np.std(x, ddof=1)/np.sqrt(len(x)), two_tailed=False)
+    >>> np.allclose((estimate, tstat, ci[0], ci[1]),
+    ...             (0.15714286, 2.9755, 0.05451946743699512, np.inf))
     True
     """
 
